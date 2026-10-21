@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New Product Launch — OG Series Pods + Versa X Battery — Benjamin Alvis</title>
+<meta name="description" content="A newsletter-to-landing-page launch for new e-commerce products: OG Series pods first, then the Versa X battery, with a scroll-triggered device reveal.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:"Inter Tight","Helvetica Neue",Arial,sans-serif;color:#111;background:#fff;line-height:1.55}
+a{color:#5c2ee8} .wrap{max-width:1100px;margin:0 auto;padding:0 clamp(20px,5vw,72px)}
+header{padding:28px 0;border-bottom:1px solid #e5e5e5} header a{text-decoration:none;color:inherit;font-weight:600}
+.hero{padding:clamp(56px,9vw,110px) 0 clamp(40px,6vw,72px)} .label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#6e6e73;margin-bottom:20px}
+h1{font-size:clamp(34px,5vw,64px);line-height:1.14;letter-spacing:-.03em;margin:0;max-width:24ch} .intro{font-size:clamp(17px,1.5vw,21px);color:#424245;max-width:62ch;margin-top:24px}
+h2{font-size:clamp(26px,3vw,38px);letter-spacing:-.02em;line-height:1.15;margin:0 0 12px} .sec{padding:clamp(48px,7vw,88px) 0} .sec p{color:#424245;max-width:62ch}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:32px} .step{background:#f4f3f0;border-radius:18px;padding:22px} .step b{display:block;font-size:12px;letter-spacing:.12em;color:#6e6e73;margin-bottom:8px} .step h3{margin:0 0 6px;font-size:19px} .step p{margin:0;font-size:14px}
+.tools{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px} .tools span{border:1px solid #e5e5e5;border-radius:999px;padding:8px 14px;font-size:14px}
+.scroll-hint{background:#12151c;color:#f5f5f7;padding:28px;border-radius:18px;margin:32px 0 0} .scroll-hint p{color:#a1a1a6;margin:6px 0 0}
+@media(max-width:800px){.steps{grid-template-columns:1fr 1fr}} @media(max-width:520px){.steps{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a href="https://dss-ben.github.io/">← Benjamin Alvis — Portfolio</a></div></header>
+<main>
+<section class="hero"><div class="wrap">
+<p class="label">Project 01 — E-commerce launch · Landing page</p>
+<h1>New products, introduced the way people actually arrive.</h1>
+<p class="intro">This launch was built to introduce new products on an e-commerce website. It starts in a newsletter — someone clicks, and lands here. The page carries them in order: the pods first, then the battery that powers them. Flavour first, hardware second, so the choice feels easy before the tech gets explained.</p>
+<p class="intro">That order is the thinking behind the whole page. A newsletter click is warm intent, not cold browsing, so the landing page should not make people hunt. Show what is new, let them pick a flavour, then reveal the device that runs it — and only then ask them to shop.</p>
+</div></section>
+
+<section class="sec"><div class="wrap">
+<h2>How it works</h2>
+<p>One click, one journey, in the order a customer actually thinks:</p>
+<div class="steps">
+<div class="step"><b>01</b><h3>Newsletter</h3><p>The email announces the new products and links straight here — no homepage detour.</p></div>
+<div class="step"><b>02</b><h3>Pods first</h3><p>The OG Series lineup, five flavours, in a drag-and-scroll carousel you can actually use.</p></div>
+<div class="step"><b>03</b><h3>Battery next</h3><p>The Versa X device, revealed by scrolling — it grows, and its power, battery and e-liquid gauges fill as you go.</p></div>
+<div class="step"><b>04</b><h3>Shop</h3><p>Only after the product story is clear does the page point to the collection.</p></div>
+</div>
+<div class="scroll-hint"><strong>Try it live, below.</strong><p>Scroll through the pods, then keep scrolling into the battery section. The device is pinned and scales with your scroll — drag the carousel, use the arrows or dots, and watch the gauges fill. It is fully responsive: on a phone the cards stack and the carousel becomes a swipe.</p></div>
+<p style="margin-top:28px"><strong>Tools:</strong></p>
+<div class="tools"><span>Photoshop</span><span>Figma</span><span>HTML · CSS · JavaScript</span><span>Scroll-triggered animation</span><span>Shopify sections</span></div>
+<p style="margin-top:16px;font-size:14px;color:#6e6e73">Product artwork and device render as supplied in the project files. Flavour card artwork is baked into the images, as in the original launch.</p>
+</div></section>
+
+<section><div style="max-width:1100px;margin:0 auto;padding:0 clamp(20px,5vw,72px)"><h2>01 — The pods: OG Series</h2><p style="color:#424245;max-width:62ch">Five flavours, one series. Drag, swipe, or use the arrows.</p></div>
+<style>
+  #og-p1 {
+    background: #1C1C1E;
+    padding: 120px 20px;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', Helvetica, Arial, sans-serif;
+  }
+  #og-p1 * { box-sizing: border-box; }
+
+  #og-p1 .og-hero {
+    max-width: 1400px;
+    margin: 0 auto;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1);
+  }
+  #og-p1 .og-hero.is-in { opacity: 1; transform: none; }
+  #og-p1 .og-hero img { width: 100%; height: auto; display: block; }
+
+  #og-p1 .og-head {
+    max-width: 1400px;
+    margin: 64px auto 48px;
+    padding: 0 20px;
+  }
+  #og-p1 .og-eyebrow {
+    font-size: 12px; text-transform: uppercase; letter-spacing: .18em;
+    color: rgba(255,255,255,.5); margin-bottom: 12px;
+  }
+  #og-p1 .og-title {
+    font-size: clamp(22px, 6vw, 40px); font-weight: 600; color: #fff;
+    letter-spacing: -.02em; margin: 0;
+  }
+
+  #og-p1 .og-carousel-wrap {
+    position: relative; max-width: 1400px; margin: 0 auto; padding: 0 20px;
+  }
+  #og-p1 .og-scroller {
+    display: flex; gap: 24px; overflow-x: auto; padding: 8px 0 24px;
+    scrollbar-width: none; -ms-overflow-style: none; cursor: grab;
+    user-select: none; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch;
+    scroll-behavior: auto;
+  }
+  #og-p1 .og-scroller::-webkit-scrollbar { display: none; }
+  #og-p1 .og-scroller.is-dragging { cursor: grabbing; }
+
+  #og-p1 .og-card {
+    flex: 0 0 auto; width: 440px;
+    opacity: 0; transform: translateY(24px);
+    transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1);
+  }
+  #og-p1 .og-card.is-in { opacity: 1; transform: none; }
+  #og-p1 .og-card-scale { will-change: transform, opacity; transform-origin: center; }
+  #og-p1 .og-card-inner {
+    border-radius: 24px; overflow: hidden; transform-origin: center;
+    transition: transform .35s cubic-bezier(.16,1,.3,1);
+  }
+  #og-p1 .og-card img {
+    width: 100%; height: auto; display: block;
+    user-select: none; -webkit-user-drag: none; pointer-events: none;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    #og-p1 .og-card:hover .og-card-inner { transform: scale(1.03); }
+  }
+  @media (max-width: 900px) { #og-p1 .og-card { width: 380px; } }
+  @media (max-width: 767px) {
+    #og-p1 { padding: 64px 20px; }
+    #og-p1 .og-card { width: 82vw; }
+    #og-p1 .og-hero { border-radius: 16px; }
+  }
+
+  #og-p1 .og-arrow {
+    position: absolute; top: 40%; transform: translateY(-50%);
+    width: 36px; height: 36px; border-radius: 50%; border: none;
+    background: rgba(255,255,255,.08); backdrop-filter: blur(12px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 2;
+  }
+  #og-p1 .og-arrow--prev { left: 2px; }
+  #og-p1 .og-arrow--next { right: 2px; }
+  @media (max-width: 480px) { #og-p1 .og-arrow { display: none; } }
+
+  #og-p1 .og-dots {
+    display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 20px;
+  }
+  #og-p1 .og-dot {
+    width: 6px; height: 6px; border-radius: 3px; background: #fff; opacity: .3;
+    border: none; padding: 0; cursor: pointer; transition: all .3s ease;
+  }
+  #og-p1 .og-dot.is-active { width: 20px; opacity: 1; }
+
+  #og-p1 .og-cta-wrap {
+    display: flex; justify-content: center; margin-top: 64px;
+    opacity: 0; transition: opacity .3s ease-out .4s;
+  }
+  #og-p1 .og-cta-wrap.is-in { opacity: 1; }
+
+  #og-p1 .btn-wrap { position: relative; display: inline-flex; align-items: center; justify-content: center; }
+  #og-p1 .btn-glow {
+    position: absolute; left: 0; right: 0; top: 50%; height: 132%; transform: translateY(-50%);
+    border-radius: 999px; pointer-events: none; filter: blur(16px); opacity: .65;
+    transition: opacity 300ms ease, filter 300ms ease;
+    background: radial-gradient(52% 50% at 50% 50%, rgba(255,140,0,.35) 0%, rgba(255,140,0,.13) 46%, rgba(255,140,0,0) 74%);
+  }
+  #og-p1 .btn {
+    position: relative; display: block; overflow: hidden; border-radius: 999px; text-decoration: none;
+    transform: scale(1); touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+    background: linear-gradient(180deg, #FFC966 0%, #FFA114 52%, #D96E00 100%);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.4) inset,
+      0 -9px 16px rgba(60,30,0,.4) inset,
+      0 0 0 1px rgba(255,140,0,.4),
+      0 8px 22px rgba(0,0,0,.7),
+      0 2px 4px rgba(0,0,0,.55),
+      0 0 26px rgba(255,140,0,.2);
+    transition: transform 220ms cubic-bezier(.22,1,.36,1), box-shadow 300ms ease;
+  }
+  #og-p1 .btn:hover, #og-p1 .btn:focus-visible {
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.55) inset,
+      0 -9px 16px rgba(60,30,0,.36) inset,
+      0 0 0 1px rgba(255,140,0,.55),
+      0 8px 22px rgba(0,0,0,.7),
+      0 2px 4px rgba(0,0,0,.55),
+      0 0 46px rgba(255,140,0,.38);
+  }
+  #og-p1 .btn.is-pressed { transform: scale(.96); transition: transform 90ms ease-out, box-shadow 300ms ease; }
+  #og-p1 .btn-label {
+    position: relative; z-index: 4; display: flex; align-items: center; gap: 11px;
+    padding: 15px 28px 16px 30px;
+    font-family: Montserrat, system-ui, sans-serif; font-size: 12.5px; font-weight: 700;
+    letter-spacing: .02em; text-transform: uppercase; color: #1A0A00; white-space: nowrap;
+  }
+  #og-p1 .btn-ico {
+    display: flex; align-items: center; justify-content: center; width: 19px; height: 19px;
+    border-radius: 999px; background: rgba(255,255,255,.18);
+    transform: translateY(0); transition: transform 260ms cubic-bezier(.22,1,.36,1);
+  }
+  #og-p1 .btn.is-pressed .btn-ico { transform: translateY(1px); transition: transform 90ms ease-out; }
+  #og-p1 .btn-sheen {
+    position: absolute; z-index: 3; left: 0; top: 50%; width: 130px; height: 300%; margin-left: -65px;
+    transform: translate3d(0,-50%,0); opacity: 0; pointer-events: none; will-change: transform;
+    transition: opacity 320ms ease;
+    background: radial-gradient(50% 50% at 50% 50%, rgba(255,255,255,.5) 0%, rgba(255,255,255,.14) 45%, rgba(255,255,255,0) 74%);
+  }
+  #og-p1 .btn-spec {
+    position: absolute; z-index: 2; left: 7%; right: 7%; top: 1.5px; height: 40%; pointer-events: none;
+    opacity: .8; transition: opacity 300ms ease;
+    border-radius: 999px 999px 60% 60% / 999px 999px 100% 100%;
+    background: linear-gradient(180deg, rgba(255,255,255,.65) 0%, rgba(255,255,255,.2) 52%, rgba(255,255,255,0) 100%);
+  }
+  #og-p1 .btn-wet {
+    position: absolute; z-index: 1; inset: 0; border-radius: 999px; pointer-events: none;
+    mix-blend-mode: screen;
+    background: radial-gradient(70% 120% at 30% 116%, rgba(255,178,90,.42) 0%, rgba(255,140,0,.1) 48%, rgba(0,0,0,0) 74%);
+  }
+  #og-p1 .btn-wrap:hover .btn-glow, #og-p1 .btn:focus-visible ~ .btn-glow { opacity: 1; filter: blur(17px); }
+  #og-p1 .btn-wrap:hover .btn-spec { opacity: 1; }
+  #og-p1 .btn-wrap:hover .btn-sheen { opacity: 1; }
+
+  @media (prefers-reduced-motion: reduce) {
+    #og-p1 .og-hero,
+    #og-p1 .og-card,
+    #og-p1 .og-cta-wrap { transition: opacity .3s ease !important; transform: none !important; }
+    #og-p1 .og-card:hover .og-card-inner { transform: none !important; }
+    #og-p1 .btn, #og-p1 .btn-ico, #og-p1 .btn.is-pressed { transition: box-shadow 300ms ease !important; transform: none !important; }
+  }
+</style>
+<section id="og-p1" data-og-carousel>
+  <div class="og-hero" data-og-reveal><img src="assets/og-hero-banner.jpg" width="1600" alt="OG Series hero banner" loading="eager"></div>
+  <div class="og-head">
+    <div class="og-eyebrow">THE FULL LINEUP</div>
+    <h2 class="og-title">Five flavours. One legendary series.</h2>
+  </div>
+  <div class="og-carousel-wrap">
+    <div class="og-scroller" data-og-scroller><div class="og-card" data-og-reveal><div class="og-card-scale"><div class="og-card-inner"><img src="assets/og-card-asap-grape.png" width="1100" alt="ASAP Grape — OG Series pod flavour card" draggable="false" loading="lazy"></div></div></div>
+<div class="og-card" data-og-reveal><div class="og-card-scale"><div class="og-card-inner"><img src="assets/og-card-bad-blood.png" width="1100" alt="Bad Blood — OG Series pod flavour card" draggable="false" loading="lazy"></div></div></div>
+<div class="og-card" data-og-reveal><div class="og-card-scale"><div class="og-card-inner"><img src="assets/og-card-cush-man.png" width="1100" alt="Cush Man — OG Series pod flavour card" draggable="false" loading="lazy"></div></div></div>
+<div class="og-card" data-og-reveal><div class="og-card-scale"><div class="og-card-inner"><img src="assets/og-card-slow-blow.png" width="1100" alt="Slow Blow — OG Series pod flavour card" draggable="false" loading="lazy"></div></div></div>
+<div class="og-card" data-og-reveal><div class="og-card-scale"><div class="og-card-inner"><img src="assets/og-card-trap-queen.png" width="1100" alt="Trap Queen — OG Series pod flavour card" draggable="false" loading="lazy"></div></div></div>
+</div>
+    <button type="button" class="og-arrow og-arrow--prev" aria-label="Previous flavour" data-og-prev><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button type="button" class="og-arrow og-arrow--next" aria-label="Next flavour" data-og-next><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 18l6-6-6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </div>
+  <div class="og-dots" data-og-dots><button type="button" class="og-dot is-active" aria-label="Go to flavour 1" data-og-dot="0"></button>
+<button type="button" class="og-dot" aria-label="Go to flavour 2" data-og-dot="1"></button>
+<button type="button" class="og-dot" aria-label="Go to flavour 3" data-og-dot="2"></button>
+<button type="button" class="og-dot" aria-label="Go to flavour 4" data-og-dot="3"></button>
+<button type="button" class="og-dot" aria-label="Go to flavour 5" data-og-dot="4"></button>
+</div>
+  <div class="og-cta-wrap" data-og-reveal>
+    <div class="btn-wrap"><div class="btn-glow"></div><a class="btn" href="#battery"><span class="btn-label">Then the battery <span class="btn-ico"><svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M5.5 0.9V7.4M5.5 7.4L2.9 4.9M5.5 7.4L8.1 4.9M1.4 9.9H9.6" stroke="#1A0A00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span><span class="btn-sheen"></span><span class="btn-spec"></span><span class="btn-wet"></span></a></div>
+  </div>
+</section>
+<script>
+(function () {
+  var root = document.getElementById('og-p1');
+  if (!root || root.dataset.ogInit) return;
+  root.dataset.ogInit = '1';
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var scroller = root.querySelector('[data-og-scroller]');
+  var cards = Array.prototype.slice.call(root.querySelectorAll('.og-card'));
+  var dots = Array.prototype.slice.call(root.querySelectorAll('[data-og-dot]'));
+  var ease = function (t) { return 1 - Math.pow(1 - t, 3); };
+
+  /* ---- entrance reveal ---- */
+  var reveals = Array.prototype.slice.call(root.querySelectorAll('[data-og-reveal]'));
+  reveals.forEach(function (el, i) {
+    if (!reduced) el.style.transitionDelay = (i * 80) + 'ms';
+  });
+  var mark = function (el) { el.classList.add('is-in'); };
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { mark(e.target); io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    reveals.forEach(function (el) { io.observe(el); });
+  }
+  // safety net: reveal anything already on screen, plus a hard fallback
+  reveals.forEach(function (el) {
+    var r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight && r.bottom > 0) mark(el);
+  });
+  setTimeout(function () { reveals.forEach(mark); }, 1200);
+
+  if (!scroller || !cards.length) return;
+  scroller.scrollLeft = 0;
+
+  var GAP = 24;
+  function step() { var f = scroller.children[0]; return f ? f.getBoundingClientRect().width + GAP : 464; }
+  function maxScroll() { return scroller.scrollWidth - scroller.clientWidth; }
+  function targets() {
+    var s = step(), m = maxScroll(), t = [];
+    for (var i = 0; i * s < m; i++) t.push(i * s);
+    t.push(m);
+    return t;
+  }
+  function nearest(pos) {
+    var t = targets(), b = 0;
+    for (var i = 1; i < t.length; i++) if (Math.abs(t[i] - pos) < Math.abs(t[b] - pos)) b = i;
+    return { t: t, i: b };
+  }
+
+  /* ---- eased scroll (single animation at a time) ---- */
+  var animId = null, animTarget = null, settle = null, dragging = false;
+  function cancelAnim() { if (animId) { cancelAnimationFrame(animId); animId = null; } }
+  function scrollTo(target) {
+    target = Math.max(0, Math.min(maxScroll(), target));
+    cancelAnim(); clearTimeout(settle);
+    if (reduced) { scroller.scrollLeft = target; return; }
+    var start = scroller.scrollLeft, delta = target - start, t0 = performance.now();
+    var dur = Math.min(700, 380 + Math.abs(delta) * 0.25);
+    animTarget = target;
+    function frame(now) {
+      var p = Math.min(1, (now - t0) / dur);
+      scroller.scrollLeft = start + delta * ease(p);
+      if (p < 1) { animId = requestAnimationFrame(frame); } else { animId = null; animTarget = null; }
+    }
+    animId = requestAnimationFrame(frame);
+  }
+  function snap(pos) {
+    var n = nearest(pos == null ? scroller.scrollLeft : pos);
+    if (Math.abs(n.t[n.i] - scroller.scrollLeft) > 1) scrollTo(n.t[n.i]);
+  }
+  function activeIndex() {
+    if (scroller.scrollLeft > 0 && scroller.scrollLeft >= maxScroll() - 2) return cards.length - 1;
+    return Math.min(cards.length - 1, Math.max(0, Math.round(scroller.scrollLeft / step())));
+  }
+
+  /* ---- center scale/opacity: direct writes in rAF, no CSS transition ---- */
+  var scales = cards.map(function (c) { return c.querySelector('.og-card-scale'); });
+  var lastActive = -1, rafPending = false;
+  function paint() {
+    var c = scroller.getBoundingClientRect(), mid = c.left + c.width / 2;
+    cards.forEach(function (card, i) {
+      var el = scales[i]; if (!el) return;
+      if (reduced) { el.style.transform = ''; el.style.opacity = ''; return; }
+      var b = card.getBoundingClientRect();
+      var d = Math.min(1, Math.abs(b.left + b.width / 2 - mid) / (c.width / 2));
+      el.style.transform = 'scale(' + (1 - d * 0.06).toFixed(4) + ')';
+      el.style.opacity = (1 - d * 0.3).toFixed(3);
+    });
+    var a = activeIndex();
+    if (a !== lastActive) {
+      lastActive = a;
+      dots.forEach(function (dot, i) { dot.classList.toggle('is-active', i === a); });
+    }
+  }
+  scroller.addEventListener('scroll', function () {
+    if (!rafPending) { rafPending = true; requestAnimationFrame(function () { rafPending = false; paint(); }); }
+    clearTimeout(settle);
+    if (!animId && !dragging) settle = setTimeout(function () { snap(); }, 140);
+  }, { passive: true });
+
+  /* ---- controls ---- */
+  var prev = root.querySelector('[data-og-prev]');
+  var next = root.querySelector('[data-og-next]');
+  function basePos() { return animId && animTarget != null ? animTarget : scroller.scrollLeft; }
+  if (prev) prev.addEventListener('click', function () { var n = nearest(basePos()); scrollTo(n.t[Math.max(0, n.i - 1)]); });
+  if (next) next.addEventListener('click', function () { var n = nearest(basePos()); scrollTo(n.t[Math.min(n.t.length - 1, n.i + 1)]); });
+  dots.forEach(function (dot) {
+    dot.addEventListener('click', function () { scrollTo(parseInt(dot.dataset.ogDot, 10) * step()); });
+  });
+
+  /* ---- mouse drag with momentum (touch uses native scrolling) ---- */
+  var moved = false, startX = 0, startLeft = 0, lastX = 0, lastT = 0, vel = 0;
+  scroller.addEventListener('pointerdown', function (e) {
+    if (e.pointerType !== 'mouse' || e.button !== 0) return;
+    cancelAnim(); clearTimeout(settle);
+    dragging = true; moved = false;
+    startX = lastX = e.clientX; startLeft = scroller.scrollLeft; lastT = performance.now(); vel = 0;
+    scroller.classList.add('is-dragging');
+    try { scroller.setPointerCapture(e.pointerId); } catch (err) {}
+  });
+  scroller.addEventListener('pointermove', function (e) {
+    if (!dragging) return;
+    var dx = e.clientX - startX;
+    if (Math.abs(dx) > 3) moved = true;
+    scroller.scrollLeft = startLeft - dx;
+    var now = performance.now(), dt = now - lastT;
+    if (dt > 0) vel = 0.8 * ((e.clientX - lastX) / dt) + 0.2 * vel;
+    lastX = e.clientX; lastT = now;
+  });
+  function release() {
+    if (!dragging) return;
+    dragging = false;
+    scroller.classList.remove('is-dragging');
+    if (moved) {
+      var fling = performance.now() - lastT > 80 ? 0 : vel * 220;
+      snap(scroller.scrollLeft - fling);
+    }
+  }
+  scroller.addEventListener('pointerup', release);
+  scroller.addEventListener('pointercancel', release);
+  scroller.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+
+  window.addEventListener('resize', paint);
+  requestAnimationFrame(paint);
+})();
+</script>
+</section>
+
+<section><div style="max-width:1100px;margin:0 auto;padding:32px clamp(20px,5vw,72px) 0"><h2>02 — The battery: Versa X</h2><p style="color:#424245;max-width:62ch">Keep scrolling. The device stays pinned while its features reveal — power 12W → 30W, battery, and e-liquid, all scrubbed to your scroll, not played on a timer. Hover or press the device for its glow.</p></div>
+<div id="battery"><style>
+/* DIGIT FONT: glow-on-monospace fallback is ACTIVE (tabular-nums system mono + a
+   #CDFA02 text-shadow). No commercial licence for a true LED display face is
+   confirmed, so that face is NOT used. To swap it in later, change the font-family
+   on [data-vx="wattageText"], [data-vx="eliquidPctText"] and the mAh readout and
+   drop the text-shadow. */
+#vx-root *{box-sizing:border-box;}
+#vx-root a{color:#CDFA02;}
+#vx-root a:hover{color:#e4ff5c;}
+@keyframes grilleA{0%,100%{opacity:0.055;}50%{opacity:0.125;}}
+@keyframes grilleB{0%,100%{opacity:0.085;}45%{opacity:0.035;}}
+@keyframes grilleC{0%,100%{opacity:0.045;}30%{opacity:0.10;}70%{opacity:0.04;}}
+@keyframes vxGlowSpin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+@keyframes vxGlowBreathe{0%,100%{transform:scale(0.97);opacity:0.6;}50%{transform:scale(1.07);opacity:1;}}
+/* RESTING SIZE IS DECLARATIVE. The <img> is laid out at its full feature-section
+   size, so "no transform yet" must not fall back to the largest extreme. These two
+   rules hold the correct hero size before — and entirely without — JS; the scroll
+   loop then eases from here toward scale(1). */
+#vx-root .pin-devicelink{transform:scale(0.4405);}
+@keyframes vxMetal{0%{background-position:0% 50%;}100%{background-position:200% 50%;}}
+@media (prefers-reduced-motion: reduce){
+  #vx-root .vx-glow-breathe,#vx-root .vx-glow-spin{animation:none !important;}
+  #vx-root .vx-glow-breathe{opacity:1 !important;}
+  #vx-root .vx-metal{animation:none !important;}
+}
+@media (max-width: 48em){
+  #vx-root .pin-devicelink{transform:scale(0.7042);}
+  #vx-root .pin-layer{align-items:flex-start !important;padding-top:6vh !important;}
+  #vx-root .pin-device{height:clamp(250px,calc(var(--vxh)*0.426),450px) !important;}
+  #vx-root .hero-block{grid-template-rows:calc(6vh + clamp(176px,calc(var(--vxh)*0.30),317px)) auto auto !important;padding-bottom:6vh !important;}
+  #vx-root .hero-logo{grid-row:2 !important;align-self:center !important;}
+  #vx-root .hero-foot{grid-row:3 !important;align-self:start !important;}
+  #vx-root .vx-stage{min-height:0 !important;}
+  #vx-root .vx-stage-sticky{position:static !important;height:auto !important;display:flex !important;flex-direction:column !important;align-items:center !important;gap:32px !important;padding-top:0 !important;padding-bottom:4vh !important;}
+  #vx-root .vx-lane{width:100% !important;max-width:34rem !important;}
+  #vx-root .vx-tail{height:86svh !important;}
+}
+
+#vx-root img{max-width:100%;}
+#vx-root .vx-cta:hover{color:#0A0A0A;transform:translateY(-2px);box-shadow:0 12px 32px rgba(205,250,2,0.28);}
+</style>
+<div id="vx-root">:
+    data-header-height="72px"          use exactly this value
+    data-header-selector=".my-header"  measure this element instead
+
+  CONTAINER: hero, cards and footer mark all share
+  max-width:1200px; margin:0 auto; padding-inline:clamp(1rem,4vw,3rem).
+  If your theme has its own page-width wrapper, add its class to those three
+  elements and delete the max-width/padding from their inline styles.
+
+  SIGN-OFF NOTES
+  1. Digit font: the glow-on-monospace fallback is ACTIVE — tabular numerals in the
+     system mono stack with a #CDFA02 text-shadow. A true LED display face is NOT
+     used; no commercial web licence is confirmed. To swap it in, change the
+     font-family on [data-vx="wattageText"], [data-vx="eliquidPctText"] and the mAh
+     readout and drop the text-shadow.
+  2. "CONNECT" relabel: intentional and confirmed. On the physical device CONNECT is
+     the Bluetooth/app pairing label; it is reused here beside the fast-charge line
+     for consistency with the product's own on-screen vocabulary, not as a literal
+     charging-status claim.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+
+<style>
+/* DIGIT FONT: glow-on-monospace fallback is ACTIVE (tabular-nums system mono + a
+   #CDFA02 text-shadow). No commercial licence for a true LED display face is
+   confirmed, so that face is NOT used. To swap it in later, change the font-family
+   on [data-vx="wattageText"], [data-vx="eliquidPctText"] and the mAh readout and
+   drop the text-shadow. */
+#vx-root *{box-sizing:border-box;}
+#vx-root a{color:#CDFA02;}
+#vx-root a:hover{color:#e4ff5c;}
+@keyframes grilleA{0%,100%{opacity:0.055;}50%{opacity:0.125;}}
+@keyframes grilleB{0%,100%{opacity:0.085;}45%{opacity:0.035;}}
+@keyframes grilleC{0%,100%{opacity:0.045;}30%{opacity:0.10;}70%{opacity:0.04;}}
+@keyframes vxGlowSpin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+@keyframes vxGlowBreathe{0%,100%{transform:scale(0.97);opacity:0.6;}50%{transform:scale(1.07);opacity:1;}}
+/* RESTING SIZE IS DECLARATIVE. The <img> is laid out at its full feature-section
+   size, so "no transform yet" must not fall back to the largest extreme. These two
+   rules hold the correct hero size before — and entirely without — JS; the scroll
+   loop then eases from here toward scale(1). */
+#vx-root .pin-devicelink{transform:scale(0.4405);}
+@keyframes vxMetal{0%{background-position:0% 50%;}100%{background-position:200% 50%;}}
+@media (prefers-reduced-motion: reduce){
+  #vx-root .vx-glow-breathe,#vx-root .vx-glow-spin{animation:none !important;}
+  #vx-root .vx-glow-breathe{opacity:1 !important;}
+  #vx-root .vx-metal{animation:none !important;}
+}
+@media (max-width: 48em){
+  #vx-root .pin-devicelink{transform:scale(0.7042);}
+  #vx-root .pin-layer{align-items:flex-start !important;padding-top:6vh !important;}
+  #vx-root .pin-device{height:clamp(250px,calc(var(--vxh)*0.426),450px) !important;}
+  #vx-root .hero-block{grid-template-rows:calc(6vh + clamp(176px,calc(var(--vxh)*0.30),317px)) auto auto !important;padding-bottom:6vh !important;}
+  #vx-root .hero-logo{grid-row:2 !important;align-self:center !important;}
+  #vx-root .hero-foot{grid-row:3 !important;align-self:start !important;}
+  #vx-root .vx-stage{min-height:0 !important;}
+  #vx-root .vx-stage-sticky{position:static !important;height:auto !important;display:flex !important;flex-direction:column !important;align-items:center !important;gap:32px !important;padding-top:0 !important;padding-bottom:4vh !important;}
+  #vx-root .vx-lane{width:100% !important;max-width:34rem !important;}
+  #vx-root .vx-tail{height:86svh !important;}
+}
+
+#vx-root img{max-width:100%;}
+#vx-root .vx-cta:hover{color:#0A0A0A;transform:translateY(-2px);box-shadow:0 12px 32px rgba(205,250,2,0.28);}
+</style>
+
+<div id="vx-root">
+<div data-vx="root" style="--vx-header-h:0px;--vxh:calc(100svh - var(--vx-header-h));background:#000;color:#F5F7F2;font-family:Montserrat,-apple-system,BlinkMacSystemFont,sans-serif;">
+
+<div data-vx="scene" style="position:relative;overflow:clip;">
+
+  <div class="pin-layer" style="position:sticky;top:var(--vx-header-h);height:var(--vxh);display:flex;align-items:center;justify-content:center;z-index:0;">
+    <div data-vx="rings" style="position:absolute;width:min(130svh,130vw);height:min(130svh,130vw);pointer-events:none;will-change:transform;-webkit-mask-image:radial-gradient(circle at center,#000 24%,rgba(0,0,0,0.5) 52%,transparent 74%);mask-image:radial-gradient(circle at center,#000 24%,rgba(0,0,0,0.5) 52%,transparent 74%);">
+      <div data-vx="grilleA" style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(205,250,2,0.85) 0.9px,transparent 1.2px);background-size:14px 14px;opacity:0.055;animation:grilleA 17s ease-in-out infinite;animation-play-state:paused;"></div>
+      <div data-vx="grilleB" style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(205,250,2,0.7) 0.8px,transparent 1.1px);background-size:14px 14px;background-position:5px 7px;opacity:0.085;animation:grilleB 23s ease-in-out infinite;animation-play-state:paused;"></div>
+      <div data-vx="grilleC" style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(205,250,2,0.9) 1.1px,transparent 1.4px);background-size:28px 28px;background-position:9px 3px;opacity:0.045;animation:grilleC 29s ease-in-out infinite;animation-play-state:paused;"></div>
+    </div>
+    <div data-vx="auraCore" style="position:absolute;width:min(70svh,90vw);height:min(70svh,90vw);border-radius:50%;background:radial-gradient(circle,rgba(205,250,2,0.10) 0%,rgba(205,250,2,0.03) 45%,rgba(0,0,0,0) 70%);pointer-events:none;will-change:transform;"></div>
+
+    <a data-vx="deviceLink" class="pin-devicelink" href="https://www.digitalsmokesupplies.com/collections/versa-smart" aria-label="Shop the Versa Smart collection" style="position:relative;display:block;line-height:0;text-decoration:none;transform-origin:center center;will-change:transform;">
+      <div data-vx="glowWrap" class="vx-glow-wrap" style="position:absolute;left:50%;top:50%;width:240%;aspect-ratio:1;transform:translate(-50%,-50%);opacity:0;transition:opacity 200ms linear;pointer-events:none;will-change:opacity;">
+        <div class="vx-glow-breathe" style="position:absolute;inset:0;animation:vxGlowBreathe 2800ms ease-in-out infinite;will-change:transform,opacity;">
+          <div class="vx-glow-spin" style="position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,#CDFA02 0%,#9BF23A 12%,#3FE3B4 28%,#4FA8FF 44%,#6E7BFF 56%,#9B5BF5 66%,#3FE3B4 82%,#9BF23A 92%,#CDFA02 100%);filter:blur(110px) saturate(150%);-webkit-mask-image:radial-gradient(circle at center,#000 28%,rgba(0,0,0,0.55) 54%,transparent 76%);mask-image:radial-gradient(circle at center,#000 28%,rgba(0,0,0,0.55) 54%,transparent 76%);animation:vxGlowSpin 14s linear infinite;will-change:transform;"></div>
+        </div>
+      </div>
+      <img data-vx="device" class="pin-device" src="assets/versa-x-device-large.png" width="900" height="1900" alt="Versa X device, Phantom Black" style="position:relative;z-index:1;display:block;height:max(281px,min(calc(var(--vxh)*0.885),1008px,calc((var(--vxh) - 300px)*2.27)));width:auto;image-rendering:auto;" />
+    </a>
+  </div>
+
+  <div style="position:relative;margin-top:calc(-100svh + var(--vx-header-h));z-index:1;pointer-events:none;">
+
+    <div class="hero-block" style="min-height:var(--vxh);display:grid;grid-template-rows:minmax(0,1fr) max(124px,min(calc(var(--vxh)*0.39),444px,calc(var(--vxh) - 300px))) auto;justify-items:center;gap:8px;width:100%;max-width:1200px;margin:0 auto;padding:clamp(0.5rem,calc(var(--vxh)*0.03),3rem) clamp(1rem,4vw,3rem);">
+      <img class="hero-logo" src="https://cdn.shopify.com/s/files/1/0727/5295/files/versa-x-logo_19fdf2f5-b5d1-44cd-9d50-6df0db6836d5.png" alt="Versa X" style="grid-row:1;align-self:center;width:clamp(16rem,36vw,32rem);height:auto;" />
+      <div class="hero-foot" style="grid-row:3;align-self:center;display:flex;flex-direction:column;align-items:center;gap:clamp(8px,1.6vh,16px);">
+        <span style="font-size:0.75rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:rgba(245,247,242,0.55);">New <span class="vx-metal" style="background-image:linear-gradient(100deg,#ffffff 0%,#d7dce0 18%,#8d959b 30%,#f2f5f7 44%,#b3bac0 56%,#ffffff 70%,#8d959b 84%,#f2f5f7 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:vxMetal 6s linear infinite;">colour</span></span>
+        <span style="font-size:clamp(1.375rem,3vw,2.5rem);font-weight:700;letter-spacing:-0.02em;color:#FFFFFF;text-align:center;text-wrap:balance;line-height:1.1;">Phantom Black / Noir Fantôme</span>
+        <a class="vx-cta" href="https://www.digitalsmokesupplies.com/collections/versa-smart" style="pointer-events:auto;display:inline-flex;align-items:center;gap:8px;margin-top:8px;background:#CDFA02;color:#0A0A0A;font-size:16px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;padding:18px 38px;border-radius:999px;transition:transform 160ms cubic-bezier(.16,.84,.28,1),box-shadow 160ms ease;">Shop the collection</a>
+        <span style="font-size:0.75rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(245,247,242,0.45);">Scroll</span>
+      </div>
+    </div>
+
+    <div data-vx="stage" class="vx-stage" style="min-height:320svh;">
+      <div class="vx-stage-sticky" style="position:sticky;top:var(--vx-header-h);height:var(--vxh);width:100%;max-width:1200px;margin:0 auto;padding:clamp(0.5rem,calc(var(--vxh)*0.03),3rem) clamp(1rem,4vw,3rem);display:grid;grid-template-columns:minmax(0,1fr) clamp(200px,calc(var(--vxh)*0.44),500px) minmax(0,1fr);grid-template-rows:auto auto;align-items:center;align-content:center;column-gap:clamp(12px,1.6vw,32px);row-gap:clamp(8px,calc(var(--vxh)*0.02),32px);">
+
+        <div class="vx-lane" style="grid-column:1;grid-row:1;position:relative;justify-self:end;width:100%;">
+          <div data-vx="auraPower" style="position:absolute;inset:-15%;border-radius:50%;background:radial-gradient(circle,rgba(205,250,2,0.2) 0%,rgba(205,250,2,0.06) 45%,rgba(0,0,0,0) 72%);opacity:0;transform:scale(0.92);pointer-events:none;"></div>
+          <div data-vx="cardPower" style="position:relative;pointer-events:auto;background:rgba(255,255,255,0.05);backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);border:1px solid rgba(205,250,2,0.18);border-top:1px solid rgba(205,250,2,0.5);border-radius:28px;padding:clamp(0.9375rem,calc(var(--vxh)*0.021),2.1875rem);box-shadow:0 24px 64px rgba(0,0,0,0.6);">
+            <span style="font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.6);display:block;margin-bottom:clamp(8px,calc(var(--vxh)*0.018),20px);">Power Scroll Wheel</span>
+            <div style="position:relative;width:100%;max-width:min(275px,calc(var(--vxh)*0.28));margin:0 auto 8px;">
+              <svg viewBox="0 0 200 112" width="100%">
+                <path d="M16 100 A84 84 0 0 1 184 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="10" stroke-linecap="round"></path>
+                <path data-vx="powerArc" d="M16 100 A84 84 0 0 1 184 100" fill="none" stroke="#CDFA02" stroke-width="10" stroke-linecap="round" style="stroke-dasharray:264;stroke-dashoffset:264;filter:drop-shadow(0 0 8px rgba(205,250,2,0.45));"></path>
+              </svg>
+              <div style="position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:center;">
+                <span data-vx="wattageText" style="font-family:'SF Mono','Menlo','Consolas',monospace;font-variant-numeric:tabular-nums;font-size:clamp(1.75rem,calc(var(--vxh)*0.082),3.5rem);font-weight:600;letter-spacing:-0.02em;color:#CDFA02;text-shadow:0 0 10px rgba(205,250,2,0.55),0 0 24px rgba(205,250,2,0.28);line-height:1;">12W</span>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-family:'SF Mono','Menlo','Consolas',monospace;font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:clamp(8px,calc(var(--vxh)*0.018),20px);">
+              <span>12W</span>
+              <span>30W</span>
+            </div>
+            <p style="font-size:17px;line-height:1.6;color:rgba(255,255,255,0.7);margin:0;">Instantly dial your vape from 12W to 30W for the perfect hit every time.</p>
+          </div>
+        </div>
+
+        <div class="vx-lane" style="grid-column:3;grid-row:1 / span 2;position:relative;justify-self:start;align-self:center;width:100%;">
+          <div data-vx="auraBattery" style="position:absolute;inset:-15%;border-radius:50%;background:radial-gradient(circle,rgba(205,250,2,0.2) 0%,rgba(205,250,2,0.06) 45%,rgba(0,0,0,0) 72%);opacity:0;transform:scale(0.92);pointer-events:none;"></div>
+          <div data-vx="cardBattery" style="position:relative;pointer-events:auto;background:rgba(255,255,255,0.05);backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);border:1px solid rgba(205,250,2,0.18);border-top:1px solid rgba(205,250,2,0.5);border-radius:28px;padding:clamp(0.9375rem,calc(var(--vxh)*0.021),2.1875rem);box-shadow:0 24px 64px rgba(0,0,0,0.6);">
+            <span style="font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.6);display:block;margin-bottom:clamp(8px,calc(var(--vxh)*0.018),20px);">Powerful Battery</span>
+            <div style="display:flex;align-items:center;gap:clamp(12px,calc(var(--vxh)*0.028),30px);">
+              <div style="position:relative;width:clamp(36px,calc(var(--vxh)*0.06),60px);height:clamp(96px,calc(var(--vxh)*0.22),200px);border-radius:30px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);overflow:hidden;flex-shrink:0;">
+                <div style="position:absolute;inset:0;background:linear-gradient(to top,#FF3B30 0%,#FF7A18 30%,#FFB020 55%,#CDFA02 100%);"></div>
+                <div data-vx="batteryMask" style="position:absolute;inset:0;background:#000;transform-origin:top;transform:scaleY(1);will-change:transform;"></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:clamp(8px,calc(var(--vxh)*0.02),20px);">
+                <span style="font-family:'SF Mono','Menlo','Consolas',monospace;font-variant-numeric:tabular-nums;font-size:clamp(1.625rem,calc(var(--vxh)*0.05),2.75rem);font-weight:600;letter-spacing:-0.02em;color:#F5F7F2;">1100mAh</span>
+                <span style="font-size:17px;font-weight:600;color:#CDFA02;">Full charge in under 30 minutes.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="vx-lane" style="grid-column:1;grid-row:2;position:relative;justify-self:end;width:100%;">
+          <div data-vx="auraEliquid" style="position:absolute;inset:-15%;border-radius:50%;background:radial-gradient(circle,rgba(205,250,2,0.2) 0%,rgba(205,250,2,0.06) 45%,rgba(0,0,0,0) 72%);opacity:0;transform:scale(0.92);pointer-events:none;"></div>
+          <div data-vx="cardEliquid" style="position:relative;pointer-events:auto;background:rgba(255,255,255,0.05);backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);border:1px solid rgba(205,250,2,0.18);border-top:1px solid rgba(205,250,2,0.5);border-radius:28px;padding:clamp(0.9375rem,calc(var(--vxh)*0.021),2.1875rem);box-shadow:0 24px 64px rgba(0,0,0,0.6);">
+            <span style="font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.6);display:block;margin-bottom:clamp(8px,calc(var(--vxh)*0.018),20px);">E-Liquid + CONNECT</span>
+            <div style="display:flex;flex-direction:column;gap:clamp(8px,calc(var(--vxh)*0.02),20px);margin-bottom:clamp(8px,calc(var(--vxh)*0.018),20px);">
+              <div style="display:flex;align-items:center;gap:clamp(8px,calc(var(--vxh)*0.02),20px);">
+                <svg width="22" height="28" viewBox="0 0 20 26" fill="none" style="flex-shrink:0;">
+                  <path d="M10 2 C14 8.5 18 12.8 18 16.4 C18 20.6 14.4 24 10 24 C5.6 24 2 20.6 2 16.4 C2 12.8 6 8.5 10 2 Z" stroke="#CDFA02" stroke-width="1.6" stroke-linejoin="round"></path>
+                </svg>
+                <div style="display:flex;align-items:flex-end;gap:7px;height:clamp(24px,calc(var(--vxh)*0.055),34px);">
+                  <span data-vx="tick0" style="display:block;width:9px;height:clamp(24px,calc(var(--vxh)*0.055),34px);border-radius:3px;background:#CDFA02;opacity:0.14;transform-origin:bottom;transform:scaleY(0.55);"></span>
+                  <span data-vx="tick1" style="display:block;width:9px;height:clamp(24px,calc(var(--vxh)*0.055),34px);border-radius:3px;background:#CDFA02;opacity:0.14;transform-origin:bottom;transform:scaleY(0.55);"></span>
+                  <span data-vx="tick2" style="display:block;width:9px;height:clamp(24px,calc(var(--vxh)*0.055),34px);border-radius:3px;background:#CDFA02;opacity:0.14;transform-origin:bottom;transform:scaleY(0.55);"></span>
+                  <span data-vx="tick3" style="display:block;width:9px;height:clamp(24px,calc(var(--vxh)*0.055),34px);border-radius:3px;background:#CDFA02;opacity:0.14;transform-origin:bottom;transform:scaleY(0.55);"></span>
+                  <span data-vx="tick4" style="display:block;width:9px;height:clamp(24px,calc(var(--vxh)*0.055),34px);border-radius:3px;background:#CDFA02;opacity:0.14;transform-origin:bottom;transform:scaleY(0.55);"></span>
+                  <span data-vx="tick5" style="display:block;width:9px;height:clamp(24px,calc(var(--vxh)*0.055),34px);border-radius:3px;background:#CDFA02;opacity:0.14;transform-origin:bottom;transform:scaleY(0.55);"></span>
+                </div>
+                <span data-vx="eliquidPctText" style="font-family:'SF Mono','Menlo','Consolas',monospace;font-variant-numeric:tabular-nums;font-size:clamp(1.25rem,calc(var(--vxh)*0.03),1.625rem);font-weight:600;letter-spacing:-0.01em;color:#CDFA02;text-shadow:0 0 10px rgba(205,250,2,0.45);margin-left:auto;">0%</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px;">
+                <svg width="32" height="20" viewBox="0 0 26 16" fill="none" style="flex-shrink:0;">
+                  <rect x="1" y="2.5" width="20" height="11" rx="3" stroke="#CDFA02" stroke-width="1.4"></rect>
+                  <path d="M23 6.5V9.5" stroke="#CDFA02" stroke-width="1.6" stroke-linecap="round"></path>
+                  <path d="M12.5 4.5L8.5 9H11.5L10.8 12.5L14.5 7.8H11.9L12.5 4.5Z" fill="#CDFA02"></path>
+                </svg>
+                <span style="border:1px solid rgba(205,250,2,0.55);border-radius:8px;padding:clamp(4px,calc(var(--vxh)*0.008),6px) 15px;font-family:'SF Mono','Menlo','Consolas',monospace;font-size:clamp(0.6875rem,calc(var(--vxh)*0.013),0.875rem);font-weight:600;letter-spacing:0.2em;color:#CDFA02;">CONNECT</span>
+              </div>
+            </div>
+            <p style="font-size:17px;font-weight:600;line-height:1.45;color:#CDFA02;margin:0 0 10px;">Full charge in under 30 minutes.</p>
+            <p style="font-size:17px;line-height:1.6;color:rgba(255,255,255,0.7);margin:0;">Live e-liquid readout on the front display, so you always know what's left.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="vx-tail" style="height:24svh;"></div>
+
+  </div>
+</div>
+
+<div style="width:100%;max-width:1200px;margin:0 auto;padding:clamp(56px,8vw,104px) clamp(1rem,4vw,3rem);display:flex;align-items:center;justify-content:center;gap:clamp(18px,2.6vw,34px);">
+  <img src="https://cdn.shopify.com/s/files/1/0727/5295/files/versa-x-logo_19fdf2f5-b5d1-44cd-9d50-6df0db6836d5.png" alt="Versa X" style="height:clamp(28px,3.3vw,42px);width:auto;opacity:0.9;" />
+  <span aria-hidden="true" style="display:block;flex-shrink:0;width:1px;height:clamp(36px,4.4vw,55px);background:rgba(255,255,255,0.18);"></span>
+  <img src="https://cdn.shopify.com/s/files/1/0727/5295/files/nasty-logo-green.svg" alt="Nasty" style="height:clamp(24px,2.8vw,35px);width:auto;opacity:0.9;" />
+</div>
+
+</div>
+</div>
+<script>
+(function(){
+  var root = document.getElementById('vx-root');
+  if(!root || root.dataset.vxInit === '1') return;
+  root.dataset.vxInit = '1';
+
+  var el = {};
+  ['root','scene','rings','grilleA','grilleB','grilleC','auraCore','glowWrap','deviceLink','device','stage',
+   'auraPower','auraBattery','auraEliquid','cardPower','cardBattery','cardEliquid',
+   'powerArc','wattageText','batteryMask','eliquidPctText',
+   'tick0','tick1','tick2','tick3','tick4','tick5'].forEach(function(k){
+    el[k] = root.querySelector('[data-vx="' + k + '"]');
+  });
+  var section = el.root || root;
+
+  var TICKS = ['tick0','tick1','tick2','tick3','tick4','tick5'];
+  var FEATURES = ['power','battery','eliquid'];
+  var SUB = { power:[0.04,0.34], battery:[0.36,0.66], eliquid:[0.68,0.98] };
+  var ARC = 264;
+  var EASE = 'cubic-bezier(.16,.84,.28,1)';
+  /* SCALE DIRECTION IS INVERTED. The <img> is laid out at its final feature-section
+     size natively (900x1900 source) and transform only ever shrinks it for the hero,
+     easing back toward scale(1) as the stage is scrolled into. Downscaling resamples
+     cleanly; the old scale(1)->scale(2.27) invented pixels past native resolution.
+     The factors are the reciprocals of the old ones, so every on-screen size — hero
+     and feature alike — is pixel-identical to the previous build. */
+  var MIN_DESKTOP = 1 / 2.27, MIN_MOBILE = 1 / 1.42;
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var ranges = {}, sceneRange = null, stageRange = null, scaleRange = null, mobile = false, headerH = 0;
+  var progress = { power:-1, battery:-1, eliquid:-1 };
+  var scrubbing = { power:false, battery:false, eliquid:false };
+  var entered = false, deviceScale = -1;
+  var scrollY = 0, raf = null, running = false;
+  var pointer = { x:0, y:0 }, lerp = { x:0, y:0 };
+
+  function cap(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+  function clamp01(v){ return v < 0 ? 0 : (v > 1 ? 1 : v); }
+  function minScale(){ return mobile ? MIN_MOBILE : MIN_DESKTOP; }
+
+  /* The theme header is MEASURED at runtime, never hardcoded, and only offsets the
+     pinned layers when it actually stays on screen (position fixed/sticky on itself
+     or an ancestor). A header that scrolls away needs no offset — the section already
+     starts below it in normal flow. Overrides on the section root:
+       data-header-height="72px"   use exactly this value
+       data-header-selector="..."  measure this element instead */
+  function measureHeader(){
+    var forced = (section.dataset.headerHeight || '').trim();
+    if(forced){ section.style.setProperty('--vx-header-h', forced); return parseFloat(forced) || 0; }
+    var sel = (section.dataset.headerSelector || '').trim();
+    var candidates = sel ? [sel] : ['[data-vx-header]','#shopify-section-header','.shopify-section-header',
+      'sticky-header','header.header','.header-wrapper','header','[role="banner"]'];
+    var node = null;
+    for(var i = 0; i < candidates.length && !node; i++){
+      var found = document.querySelector(candidates[i]);
+      if(found && found !== section && !section.contains(found)) node = found;
+    }
+    var h = 0;
+    if(node){
+      var sticks = false, cur = node, hops = 0;
+      while(cur && hops < 4){
+        var pos = getComputedStyle(cur).position;
+        if(pos === 'fixed' || pos === 'sticky'){ sticks = true; break; }
+        cur = cur.parentElement; hops++;
+      }
+      if(sticks) h = Math.round(node.getBoundingClientRect().height);
+    }
+    section.style.setProperty('--vx-header-h', h + 'px');
+    return h;
+  }
+
+  /* Siri-style bloom: hover toggles opacity only. Rotation and the breathing pulse
+     run continuously underneath, so a fade-out reverses from its live state and a
+     re-hover never restarts. The bloom fades on its own radial mask — no container
+     edge ever cuts it. */
+  var GLOW_MAX = '0.72'; /* peak opacity of the Siri bloom — ~72% of the original 1.0 */
+  var glowHandlers = null;
+  function setupGlow(){
+    if(!el.deviceLink || !el.glowWrap) return;
+    var on = function(){ el.glowWrap.style.opacity = GLOW_MAX; }; /* GLOW_MAX = 0.72 */
+    var off = function(){ el.glowWrap.style.opacity = '0'; };
+    glowHandlers = { pointerenter:on, pointerleave:off, pointercancel:off, pointerdown:on, pointerup:off, focus:on, blur:off };
+    Object.keys(glowHandlers).forEach(function(ev){ el.deviceLink.addEventListener(ev, glowHandlers[ev], { passive:true }); });
+  }
+
+  function measure(){
+    var H = headerH || 0;
+    /* all ranges are measured against the visible area BELOW the header, so the
+       gauges stay in sync with what is actually on screen */
+    var vh = Math.max(1, (window.innerHeight || 1) - H);
+    var pageY = window.scrollY || window.pageYOffset || 0;
+    mobile = !!(window.matchMedia && window.matchMedia('(max-width: 48em)').matches);
+    if(el.stage){
+      var st = el.stage.getBoundingClientRect();
+      var top = st.top + pageY - H;
+      stageRange = { start: top, span: Math.max(1, st.height - vh) };
+      scaleRange = { start: Math.max(0, top - vh), span: vh };
+    }
+    if(mobile){
+      FEATURES.forEach(function(f){
+        var node = el['card' + cap(f)];
+        if(!node) return;
+        var r = node.getBoundingClientRect();
+        var t = r.top + pageY - H;
+        ranges[f] = { start: t - vh * 0.78, span: Math.max(1, (t + r.height - vh * 0.42) - (t - vh * 0.78)) };
+      });
+    }
+    if(el.scene){
+      var sr = el.scene.getBoundingClientRect();
+      sceneRange = { start: sr.top + pageY - H, span: Math.max(1, sr.height) };
+    }
+  }
+
+  function playEntrance(f){
+    var aura = el['aura' + cap(f)], card = el['card' + cap(f)];
+    if(aura){
+      aura.style.transition = 'opacity 400ms ' + EASE + ', transform 400ms ' + EASE;
+      requestAnimationFrame(function(){ aura.style.opacity = '1'; aura.style.transform = 'scale(1)'; });
+    }
+    if(card){
+      setTimeout(function(){
+        card.style.transition = 'opacity 400ms ' + EASE + ', transform 400ms ' + EASE;
+        requestAnimationFrame(function(){ card.style.opacity = '1'; card.style.transform = 'translateY(0)'; });
+      }, 80);
+    }
+  }
+
+  function setupEntrances(){
+    if(!el.stage) return;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting && !entered){
+          entered = true;
+          FEATURES.forEach(function(f, i){ setTimeout(function(){ playEntrance(f); }, i * 90); });
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.05 });
+    io.observe(el.stage);
+  }
+
+  function setupAmbient(){
+    if(!el.scene) return;
+    var layers = ['grilleA','grilleB','grilleC'];
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        layers.forEach(function(k){ if(el[k]) el[k].style.animationPlayState = en.isIntersecting ? 'running' : 'paused'; });
+      });
+    }, { threshold: 0 });
+    io.observe(el.scene);
+  }
+
+  function setWillChange(f, active){
+    var targets = f === 'power' ? [el.powerArc] : f === 'battery' ? [el.batteryMask] : TICKS.map(function(k){ return el[k]; });
+    targets.forEach(function(t){ if(t) t.style.willChange = active ? 'transform, stroke-dashoffset' : 'auto'; });
+  }
+
+  function applyGauge(f, p){
+    if(f === 'power'){
+      if(el.powerArc) el.powerArc.style.strokeDashoffset = String(ARC * (1 - p));
+      if(el.wattageText) el.wattageText.textContent = Math.round(12 + p * 18) + 'W';
+    } else if(f === 'battery'){
+      if(el.batteryMask) el.batteryMask.style.transform = 'scaleY(' + (1 - p) + ')';
+    } else {
+      var n = TICKS.length;
+      TICKS.forEach(function(k, i){
+        var t = el[k];
+        if(!t) return;
+        var v = clamp01(p * n - i);
+        t.style.opacity = String(0.14 + 0.86 * v);
+        t.style.transform = 'scaleY(' + (0.55 + 0.45 * v).toFixed(3) + ')';
+      });
+      if(el.eliquidPctText) el.eliquidPctText.textContent = Math.round(p * 100) + '%';
+    }
+  }
+
+  function applyBackdrop(y){
+    lerp.x += (pointer.x - lerp.x) * 0.06;
+    lerp.y += (pointer.y - lerp.y) * 0.06;
+    var sp = sceneRange ? clamp01((y - sceneRange.start) / sceneRange.span) : 0;
+    if(el.rings){
+      el.rings.style.transform = 'translate3d(' + (lerp.x * -18) + 'px,' + (lerp.y * -14) + 'px,0) scale(' + (1 + sp * 0.14).toFixed(4) + ') rotate(' + (sp * 12).toFixed(2) + 'deg)';
+    }
+    if(el.auraCore){
+      el.auraCore.style.transform = 'translate3d(' + (lerp.x * -10) + 'px,' + (lerp.y * -8) + 'px,0) scale(' + (0.92 + sp * 0.18).toFixed(4) + ')';
+    }
+    if(el.deviceLink){
+      var gp = scaleRange ? clamp01((y - scaleRange.start) / scaleRange.span) : 0;
+      var s0 = minScale();
+      var s = s0 + gp * (1 - s0);
+      if(Math.abs(s - deviceScale) > 0.0004){
+        deviceScale = s;
+        el.deviceLink.style.willChange = (gp > 0.001 && gp < 0.999) ? 'transform' : 'auto';
+      }
+      el.deviceLink.style.transform = 'translate3d(' + (lerp.x * 8) + 'px,' + (lerp.y * 6) + 'px,0) scale(' + s.toFixed(4) + ')';
+    }
+  }
+
+  function frame(){
+    var y = scrollY;
+    var stageP = stageRange ? clamp01((y - stageRange.start) / stageRange.span) : 0;
+    FEATURES.forEach(function(f){
+      var p;
+      if(mobile){
+        var range = ranges[f];
+        if(!range) return;
+        p = clamp01((y - range.start) / range.span);
+      } else {
+        p = clamp01((stageP - SUB[f][0]) / (SUB[f][1] - SUB[f][0]));
+      }
+      if(Math.abs(p - progress[f]) < 0.0004) return;
+      progress[f] = p;
+      applyGauge(f, p);
+      var active = p > 0.001 && p < 0.999;
+      if(active !== scrubbing[f]){ scrubbing[f] = active; setWillChange(f, active); }
+    });
+    applyBackdrop(y);
+  }
+
+  function applyReducedFinal(){
+    ['auraPower','auraBattery','auraEliquid'].forEach(function(k){
+      if(el[k]){ el[k].style.opacity = '1'; el[k].style.transform = 'scale(1)'; }
+    });
+    ['cardPower','cardBattery','cardEliquid'].forEach(function(k){
+      if(el[k]){ el[k].style.opacity = '1'; el[k].style.transform = 'none'; }
+    });
+    if(el.powerArc) el.powerArc.style.strokeDashoffset = '0';
+    if(el.wattageText) el.wattageText.textContent = '30W';
+    if(el.batteryMask) el.batteryMask.style.transform = 'scaleY(0)';
+    TICKS.forEach(function(k){ if(el[k]){ el[k].style.opacity = '1'; el[k].style.transform = 'scaleY(1)'; } });
+    if(el.eliquidPctText) el.eliquidPctText.textContent = '100%';
+    ['grilleA','grilleB','grilleC'].forEach(function(k){ if(el[k]) el[k].style.animation = 'none'; });
+    if(el.deviceLink && el.stage){
+      mobile = !!(window.matchMedia && window.matchMedia('(max-width: 48em)').matches);
+      var set = function(big){ el.deviceLink.style.transform = 'scale(' + (big ? 1 : minScale()) + ')'; };
+      set(false);
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){ set(en.isIntersecting); });
+      }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+      io.observe(el.stage);
+    }
+  }
+
+  function onScroll(){ scrollY = window.scrollY || window.pageYOffset || 0; }
+  function onResize(){ headerH = measureHeader(); measure(); onScroll(); }
+  function onPointer(e){
+    var w = window.innerWidth || 1, h = window.innerHeight || 1;
+    pointer.x = (e.clientX / w) * 2 - 1;
+    pointer.y = (e.clientY / h) * 2 - 1;
+  }
+
+  headerH = measureHeader();
+  setupGlow();
+  if(reduced){ applyReducedFinal(); return; }
+
+  ['cardPower','cardBattery','cardEliquid'].forEach(function(k){
+    if(el[k]){ el[k].style.opacity = '0'; el[k].style.transform = 'translateY(16px)'; }
+  });
+  /* armed first, and re-armed before each frame runs, so one bad frame can never
+     silently kill every scroll-driven layer */
+  running = true;
+  function loopSafe(){
+    if(!running) return;
+    raf = requestAnimationFrame(loopSafe);
+    try { frame(); } catch(err){ /* keep scrubbing */ }
+  }
+  raf = requestAnimationFrame(loopSafe);
+  measure();
+  setupEntrances();
+  setupAmbient();
+  window.addEventListener('scroll', onScroll, { passive:true });
+  window.addEventListener('resize', onResize);
+  window.addEventListener('pointermove', onPointer, { passive:true });
+  onScroll();
+  /* headers settle late (fonts, announcement bars, sticky-header JS) */
+  setTimeout(onResize, 600);
+
+  document.addEventListener('shopify:section:unload', function(){
+    running = false;
+    if(raf) cancelAnimationFrame(raf);
+    window.removeEventListener('scroll', onScroll);
+    window.removeEventListener('resize', onResize);
+    window.removeEventListener('pointermove', onPointer);
+  });
+})();
+</script></div>
+</section>
+</main>
+<footer><div class="wrap" style="padding:32px 0 48px;color:#6e6e73;font-size:13px">Benjamin Alvis — Montreal · Project 01 · <a href="https://dss-ben.github.io/">Back to portfolio</a></div></footer>
+</body>
+</html>
