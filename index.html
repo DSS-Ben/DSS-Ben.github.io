@@ -180,7 +180,7 @@
     p.node = document.getElementById(p.el);
     p.chars = p.text.split("").map(function (c) {
       var s = document.createElement("span");
-      s.className = "ba-hero__ch";
+      s.className = "ba-logo__ch";
       s.textContent = c;
       p.node.appendChild(s);
       return s;
@@ -228,9 +228,15 @@
     for (var i = 0; i < PHRASES.length; i++) renderPhrase(PHRASES[i], t);
   }
 
-  /* ---------- Logo size: fixed, small — no full-width scaling ---------- */
+  /* ---------- Logo size: fixed, small — width locked once so the snap never moves the nav ---------- */
   function fit() {
     var size = window.innerWidth <= 600 ? 15 : 17;
+    var probe = document.createElement("span");
+    probe.style.cssText = "position:absolute;visibility:hidden;left:0;top:0;font-family:\"Archivo\",\"Helvetica Neue\",Arial,sans-serif;font-size:" + size + "px;font-weight:720;letter-spacing:-0.045em;white-space:pre;padding:0.12em;";
+    probe.textContent = "Graphic Design";
+    document.body.appendChild(probe);
+    root.style.width = (probe.getBoundingClientRect().width + 2) + "px";
+    document.body.removeChild(probe);
     PHRASES.forEach(function (p) { p.node.style.fontSize = size + "px"; });
   }
 
