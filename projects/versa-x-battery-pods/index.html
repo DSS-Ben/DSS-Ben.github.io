@@ -1,0 +1,1288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Project 03 — Versa X battery + pods picker — Benjamin Alvis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* DIGIT FONT: glow-on-monospace fallback is ACTIVE (tabular-nums system mono + a
+   #CDFA02 text-shadow). No commercial licence for a true LED display face is
+   confirmed, so that face is NOT used. To swap it in later, change the font-family
+   on [data-vx="wattageText"], [data-vx="eliquidPctText"] and the mAh readout and
+   drop the text-shadow. */
+#vx-root *{box-sizing:border-box;}
+#vx-root a{color:#CDFA02;}
+#vx-root a:hover{color:#e4ff5c;}
+@keyframes grilleA{0%,100%{opacity:0.055;}50%{opacity:0.125;}}
+@keyframes grilleB{0%,100%{opacity:0.085;}45%{opacity:0.035;}}
+@keyframes grilleC{0%,100%{opacity:0.045;}30%{opacity:0.10;}70%{opacity:0.04;}}
+@keyframes vxGlowSpin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+@keyframes vxGlowBreathe{0%,100%{transform:scale(0.97);opacity:0.6;}50%{transform:scale(1.07);opacity:1;}}
+/* RESTING SIZE IS DECLARATIVE. The <img> is laid out at its full feature-section
+   size, so "no transform yet" must not fall back to the largest extreme. These two
+   rules hold the correct hero size before — and entirely without — JS; the scroll
+   loop then eases from here toward scale(1). */
+#vx-root .pin-devicelink{transform:scale(0.4405);}
+@keyframes vxMetal{0%{background-position:0% 50%;}100%{background-position:200% 50%;}}
+@media (prefers-reduced-motion: reduce){
+  #vx-root .vx-glow-breathe,#vx-root .vx-glow-spin{animation:none !important;}
+  #vx-root .vx-glow-breathe{opacity:1 !important;}
+  #vx-root .vx-metal{animation:none !important;}
+}
+@media (max-width: 48em){
+  #vx-root .pin-devicelink{transform:scale(0.7042);}
+  #vx-root .pin-layer{align-items:flex-start !important;padding-top:6vh !important;}
+  #vx-root .pin-device{height:clamp(250px,calc(var(--vxh)*0.426),450px) !important;}
+  #vx-root .hero-block{grid-template-rows:calc(6vh + clamp(176px,calc(var(--vxh)*0.30),317px)) auto auto !important;padding-bottom:6vh !important;}
+  #vx-root .hero-logo{grid-row:2 !important;align-self:center !important;}
+  #vx-root .hero-foot{grid-row:3 !important;align-self:start !important;}
+  #vx-root .vx-stage{min-height:0 !important;}
+  #vx-root .vx-stage-sticky{position:static !important;height:auto !important;display:flex !important;flex-direction:column !important;align-items:center !important;gap:32px !important;padding-top:0 !important;padding-bottom:4vh !important;}
+  #vx-root .vx-lane{width:100% !important;max-width:34rem !important;}
+  #vx-root .vx-tail{height:86svh !important;}
+}
+
+#vx-root img{max-width:100%;}
+#vx-root .vx-cta:hover{color:#0A0A0A;transform:translateY(-2px);box-shadow:0 12px 32px rgba(205,250,2,0.28);}
+</style>
+<style>
+.nvx {
+  /* 8-point spacing scale — every gap in this section references one of these. */
+  --sp-8: 8px;  --sp-16: 16px; --sp-24: 24px; --sp-32: 32px;
+  --sp-40: 40px; --sp-56: 56px; --sp-72: 72px; --sp-80: 80px;
+
+  --nvx-grad: linear-gradient(96deg,#CDFA02 0%,#9BF23A 34%,#3FE3B4 68%,#4FA8FF 100%);
+  --nvx-accent: #CDFA02;
+  --nvx-t1: #FFFFFF;
+  --nvx-t2: rgba(255,255,255,.7);
+  --nvx-t3: rgba(255,255,255,.42);
+  --nvx-hair: rgba(255,255,255,.09);
+  --nvx-panel: linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012));
+  --nvx-ease: cubic-bezier(.16,.84,.28,1);
+  --nvx-ease-h: cubic-bezier(.2,.8,.2,1);
+  --nvx-hover-ms: 180ms;
+  --nvx-thumb: 68px;
+  background: #000;
+  color: var(--nvx-t1);
+  font-family: Montserrat, system-ui, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  display: block;
+  padding: var(--sp-80) clamp(40px, 7vw, 132px);
+  overflow: hidden;
+}
+.nvx *, .nvx *::before, .nvx *::after { box-sizing: border-box; }
+.nvx-wrap { width: 100%; max-width: 1200px; margin: 0 auto; }
+
+.nvx-eyebrow {
+  font-size: 12px; font-weight: 600; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--nvx-t3); margin: 0 0 var(--sp-16);
+}
+/* Explicit colours on every text element a host theme could target by tag name
+   (h2, h3, p, a). Inheriting white from .nvx loses to a theme's own h2 { color }
+   because a direct type-selector match beats an inherited value at any specificity. */
+.nvx-h2 {
+  margin: 0 0 var(--sp-56); font-size: 44px; line-height: 1.02;
+  font-weight: 700; letter-spacing: -.03em; color: #FFFFFF;
+}
+@keyframes nvx-grad-drift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.nvx-grad-text {
+  background: var(--nvx-grad);
+  background-size: 220% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: nvx-grad-drift 14s ease-in-out infinite;
+}
+.nvx-h2 .nvx-grad-text { display: inline-block; }
+
+/* Hero "NEW" kicker — same motif as the headline and the grid marker, at a third scale.
+   This is the only one of the three whose gradient drifts; background-position is the
+   only animated property. */
+@keyframes nvx-tag-drift {
+  from { background-position: 0% 0%; }
+  to   { background-position: -100% 0%; }
+}
+.nvx-newtag {
+  display: inline-block; margin-bottom: var(--sp-8);
+  font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  background: linear-gradient(100deg,#CDFA02,#9BF23A,#3FE3B4,#4FA8FF,#3FE3B4,#9BF23A,#CDFA02);
+  background-size: 300% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: nvx-tag-drift 6s linear infinite;
+}
+.nvx-newtag[hidden] { display: none; }
+
+.nvx-caption {
+  font-size: 12px; font-weight: 600; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--nvx-t3);
+}
+
+/* ---------- detail panel ---------- */
+.nvx-detail {
+  display: grid; grid-template-columns: minmax(0,40fr) minmax(0,60fr);
+  gap: var(--sp-40); align-items: center;
+  margin-bottom: var(--sp-72);
+}
+/* The pod renders are 320x900 (1:2.81). A hero ~340-380px WIDE would need ~1000px of
+   height, which cannot fit one 1440x900 viewport alongside the name, bars and copy.
+   So the hero is sized height-first at the largest height the viewport allows. */
+.nvx-hero {
+  position: relative; display: flex; align-items: center; justify-content: center;
+  height: 560px;
+}
+.nvx-hero img {
+  max-height: 560px; width: auto;
+  object-fit: contain; position: relative; z-index: 1;
+  filter: drop-shadow(0 34px 52px rgba(0,0,0,.72));
+}
+/* Wide, soft key light behind the hero — larger and gentler than the grid glow. */
+.nvx-hero-glow {
+  position: absolute; left: 50%; top: 50%; width: 620px; height: 620px;
+  margin: -310px 0 0 -310px; border-radius: 50%; pointer-events: none; z-index: 0;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(63,227,180,.30) 0%, rgba(63,227,180,.10) 44%, rgba(63,227,180,0) 74%);
+}
+/* Two stacked layers so a flavour change cross-dissolves with no blank frame. */
+.nvx-hero-layer {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.nvx-hero-ph {
+  width: 200px; height: 520px; border: 1px solid var(--nvx-hair); border-radius: 20px;
+}
+.nvx-info { display: flex; flex-direction: column; gap: var(--sp-24); min-width: 0; }
+.nvx-name { margin: 0; font-size: 34px; font-weight: 700; letter-spacing: -.03em; line-height: 1.08; color: #FFFFFF; }
+.nvx-name-fr { font-size: 15px; font-weight: 400; color: var(--nvx-t3); letter-spacing: -.005em; margin-top: var(--sp-8); }
+
+.nvx-profile-label { margin-bottom: var(--sp-16); }
+.nvx-panel {
+  background: var(--nvx-panel); border: 1px solid var(--nvx-hair);
+  border-radius: 22px; padding: var(--sp-32);
+  display: flex; flex-direction: column; gap: var(--sp-24);
+}
+.nvx-metric { display: grid; grid-template-columns: 104px minmax(0,1fr) 40px; gap: var(--sp-16); align-items: center; }
+.nvx-metric-label { font-size: 15px; font-weight: 500; letter-spacing: -.005em; color: var(--nvx-t2); }
+.nvx-metric-val {
+  font-size: 15px; font-weight: 500; letter-spacing: .01em; color: var(--nvx-t2);
+  text-align: right; font-variant-numeric: tabular-nums;
+}
+
+.nvx-bar { position: relative; height: 16px; }
+.nvx-track {
+  position: absolute; inset: 0; overflow: hidden;
+  border-radius: 99px; background: rgba(255,255,255,.06);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.6);
+}
+/* Reveal window travels; the gradient inside counter-translates by the same amount,
+   so the gradient stays anchored to the TRACK (always #CDFA02 → #4FA8FF end to end)
+   while the window's rounded right edge supplies the travelling cap.
+   Two composited transforms — no width, filter or box-shadow animation. */
+.nvx-reveal, .nvx-glow {
+  position: absolute; inset: 0; width: 100%;
+  border-radius: 99px; overflow: hidden;
+  transform: translateX(-100%);
+}
+.nvx-fill, .nvx-gfill {
+  position: absolute; inset: 0; width: 100%;
+  border-radius: 99px; background: var(--nvx-grad);
+  transform: translateX(100%);
+}
+.nvx-fill::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 1px; height: 5px;
+  border-radius: 99px;
+  background: linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,0));
+}
+.nvx-glow-layer {
+  position: absolute; inset: 0; border-radius: 99px; pointer-events: none;
+  clip-path: inset(-16px -18px -16px 0);
+}
+/* Static mask: only the leading ~88px of the glow is ever painted, so the bloom
+   hugs the travelling cap instead of dragging a blurred slab into the labels. */
+.nvx-glow {
+  filter: blur(9px); opacity: 0; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, transparent calc(100% - 88px), #000 100%);
+  mask-image: linear-gradient(90deg, transparent 0, transparent calc(100% - 88px), #000 100%);
+}
+
+.nvx-desc {
+  margin: 0; font-size: 17px; line-height: 1.5; color: var(--nvx-t2);
+  max-width: 64ch; text-wrap: pretty;
+}
+
+/* ---------- lineup ---------- */
+.nvx-lineup-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: var(--sp-16);
+  border-top: 1px solid var(--nvx-hair);
+  padding-top: var(--sp-40);
+  margin-bottom: var(--sp-32);
+}
+.nvx-lineup-title {
+  font-size: 12px; font-weight: 600; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--nvx-t2);
+}
+.nvx-lineup-count { font-size: 12px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--nvx-t3); }
+
+/* Compact index, not a grid of cards: 18 thumbnails in two rows at desktop width,
+   one continuous alphabetical run with NEW pinned first. The gradient "New" marker
+   is the only grouping cue — no divider, no second block. */
+.nvx-grid {
+  display: grid; grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(2, auto auto auto);
+  gap: var(--sp-16);
+  border-top: 1px solid var(--nvx-hair);
+  padding-top: var(--sp-24);
+}
+@media (max-width: 1199px) {
+  .nvx-grid { grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(3, auto auto auto); }
+}
+@media (max-width: 899px) {
+  .nvx-grid { grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(4, auto auto auto); }
+}
+@media (max-width: 599px) {
+  .nvx-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(6, auto auto auto); }
+  .nvx { --nvx-thumb: 76px; }
+  .nvx-cell-pod { height: 220px; }
+}
+/* Cells are not boxes: no persistent border, no drawn square. Just pod, marker, title
+   on the black field. Fill appears on hover (.03) and selection (.05). */
+.nvx-cell {
+  grid-row: span 3; display: grid; grid-template-rows: subgrid;
+  position: relative; isolation: isolate;
+  border: 0; margin: 0; padding: var(--sp-8) 4px;
+  border-radius: 12px;
+  background: transparent; font: inherit; color: inherit;
+  text-align: center; cursor: pointer;
+  transition: background-color var(--nvx-hover-ms) var(--nvx-ease-h),
+              box-shadow var(--nvx-hover-ms) var(--nvx-ease-h),
+              opacity var(--nvx-hover-ms) var(--nvx-ease-h);
+}
+@supports not (grid-template-rows: subgrid) {
+  .nvx-cell { grid-row: auto; display: flex; flex-direction: column; }
+  .nvx-cell-title { min-height: 2.6em; }
+}
+
+/* ---------- pod render normalisation ----------
+   VERIFIED against the alpha channel of the shipped PNGs: all 18 are 320x900 straight-on
+   transparent cutouts, framed near-identically (content bbox ~94-96% of width, ~98% of
+   height, ~4px bottom gap, zero corner alpha — no white plate, no baked-in floor shadow).
+   So no per-render correction is needed: every pod renders at one width on one baseline
+   with one uniform CSS drop shadow. The earlier 1.12 upscale on the classics was written
+   for the pre-normalised print artwork and is removed — it made them 12% larger than the
+   new eight and reintroduced the very seam it was meant to close.
+   The .nvx-cell--classic hook is kept for future assets but carries no sizing. */
+/* Thumbs are sized WIDTH-first: capping height on a 1:2.81 render collapsed the pod
+   to ~33px wide, thinner than its own title. --nvx-thumb sets the pod width and the
+   slot height follows the aspect. Dial --nvx-thumb to trade pod size against the
+   height of the two-row index. */
+.nvx-cell-pod {
+  height: 196px; display: flex; align-items: flex-end; justify-content: center;
+  position: relative;
+}
+.nvx-cell-pod img {
+  --pod-s: 1;
+  width: clamp(44px, 62%, var(--nvx-thumb)); height: auto;
+  max-height: 100%; max-width: none;
+  opacity: .48; position: relative; z-index: 1;
+  transform: scale(var(--pod-s));
+  transform-origin: bottom center;
+  filter: drop-shadow(0 6px 9px rgba(0,0,0,.5));
+  transition: opacity var(--nvx-hover-ms) var(--nvx-ease-h), transform var(--nvx-hover-ms) var(--nvx-ease-h);
+}
+.nvx-cell-ph {
+  width: 56px; height: 158px; border: 1px solid var(--nvx-hair); border-radius: 8px; opacity: .6;
+}
+/* Soft, wide glow behind the pod — the green end of the signature gradient, opacity only. */
+.nvx-bloom {
+  position: absolute; left: 50%; bottom: -10px; width: 124px; height: 56px;
+  margin-left: -62px; border-radius: 50%; pointer-events: none; z-index: 0;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(63,227,180,.40) 0%, rgba(63,227,180,.14) 48%, rgba(63,227,180,0) 78%);
+  opacity: 0; transform: scale(.92);
+  transition: opacity var(--nvx-hover-ms) var(--nvx-ease-h), transform var(--nvx-hover-ms) var(--nvx-ease-h);
+}
+.nvx-cell-marker {
+  display: flex; align-items: center; justify-content: center;
+  padding: 6px 0 4px; min-height: 16px;
+}
+.nvx-marker {
+  font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  background: linear-gradient(96deg,#CDFA02,#3FE3B4 55%,#4FA8FF);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+.nvx-cell-title {
+  display: flex; align-items: flex-start; justify-content: center;
+  font-size: 13px; font-weight: 500; line-height: 1.25; letter-spacing: .005em;
+  /* Held at .58: the selected cell lost its outline, so the white title is one of the
+     three cues carrying selection. Brighter than this and selected stops reading. */
+  color: rgba(255,255,255,.58); text-wrap: balance;
+  transition: color var(--nvx-hover-ms) var(--nvx-ease-h);
+}
+
+/* Selected: no border. Four cues carry it — a lighter fill, the pod at full opacity
+   against .48 neighbours, the white title, and the bloom. #CDFA02 stays reserved for
+   the focus ring so keyboard focus remains unmistakable. */
+.nvx-cell[aria-pressed="true"] {
+  background-color: rgba(255,255,255,.07);
+}
+.nvx-cell[aria-pressed="true"] .nvx-cell-pod img { opacity: 1; }
+.nvx-cell[aria-pressed="true"] .nvx-cell-title { color: var(--nvx-t1); }
+.nvx-cell[aria-pressed="true"] .nvx-bloom { opacity: 1; transform: scale(1); }
+
+.nvx-cell:hover { background-color: rgba(255,255,255,.03); }
+.nvx-cell:hover .nvx-cell-pod img,
+.nvx-cell:focus-visible .nvx-cell-pod img {
+  opacity: 1; transform: scale(calc(var(--pod-s) * 1.06)) translateY(-4px);
+}
+.nvx-cell:hover .nvx-bloom,
+.nvx-cell:focus-visible .nvx-bloom { opacity: 1; transform: scale(1); }
+.nvx-cell:hover .nvx-cell-title,
+.nvx-cell:focus-visible .nvx-cell-title { color: var(--nvx-t1); }
+/* Neighbours step back so the focused pod advances. */
+.nvx-grid:hover .nvx-cell:not(:hover) { opacity: .85; }
+.nvx-cell:focus-visible { outline: 2px solid var(--nvx-accent); outline-offset: -2px; }
+
+.nvx a { color: var(--nvx-accent); text-decoration: none; }
+.nvx a:hover { color: var(--nvx-t1); }
+
+@media (max-width: 1100px) {
+  .nvx { padding: var(--sp-56) clamp(24px, 5vw, 48px); }
+  .nvx-h2 { font-size: 38px; }
+}
+@media (max-width: 860px) {
+  .nvx-detail { grid-template-columns: 1fr; gap: var(--sp-32); margin-bottom: var(--sp-56); }
+  .nvx-hero { height: 420px; }
+  .nvx-hero img { max-height: 420px; }
+  .nvx-hero-glow { width: 460px; height: 460px; margin: -230px 0 0 -230px; }
+}
+@media (max-width: 700px) {
+  .nvx { padding: var(--sp-40) 20px; }
+  .nvx-h2 { font-size: 32px; margin-bottom: var(--sp-32); }
+  .nvx-panel { padding: var(--sp-24); }
+  .nvx-metric { grid-template-columns: 84px minmax(0,1fr) 36px; gap: var(--sp-16); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nvx *, .nvx *::before, .nvx *::after { animation: none !important; transition: none !important; }
+  .nvx-reveal, .nvx-glow { transition: opacity 120ms linear !important; }
+}
+</style>
+<style>body{margin:0;background:#000} .p3-footer{background:#fff;padding:32px 40px 48px;font-family:'Inter Tight',system-ui,sans-serif} .p3-footer a{color:#5c2ee8;font-weight:600}</style>
+</head>
+<body>
+<section style="background:#ffffff;color:#111111;font-family:'Inter Tight',system-ui,-apple-system,sans-serif;padding:48px 40px 8px">
+  <p><a href="https://dss-ben.github.io/" style="color:#5c2ee8;font-weight:600">← Back to portfolio</a></p>
+  <p style="font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:#6e6e73;margin:28px 0 8px">Project 03 — Versa X battery + pods picker</p>
+  <h1 style="font-size:clamp(32px,4vw,52px);line-height:1.05;letter-spacing:-0.03em;margin:0">A battery first, then the pods to go with it.</h1>
+  <p style="font-size:16px;line-height:1.6;color:#424245;max-width:62ch;margin:18px 0 0">The thinking is simple: the battery goes first — scroll through the device, its power, battery and e-liquid, all scrubbed to the scroll. Then, right after, the pods picker: choose a flavour and the pod, its taste profile and its meters change with it. Battery first, picker right after — in that order.</p>
+  <p style="font-size:14px;line-height:1.6;color:#6e6e73;margin:18px 0 0"><strong style="color:#111">Pipeline:</strong> 01 Battery reveal → 02 Pods picker &nbsp;·&nbsp; <strong style="color:#111">Tools:</strong> Photoshop · Figma · Claude design · HTML / CSS / JavaScript · Shopify sections</p>
+</section>
+<!-- PROJECT 03 PART 1: BATTERY -->
+<div id="vx-root">
+<div data-vx="root" style="--vx-header-h:0px;--vxh:calc(100svh - var(--vx-header-h));background:#000;color:#F5F7F2;font-family:Montserrat,-apple-system,BlinkMacSystemFont,sans-serif;">
+
+<div data-vx="scene" style="position:relative;overflow:clip;">
+
+  <div class="pin-layer" style="position:sticky;top:var(--vx-header-h);height:var(--vxh);display:flex;align-items:center;justify-content:center;z-index:0;">
+    <div data-vx="rings" style="position:absolute;width:min(130svh,130vw);height:min(130svh,130vw);pointer-events:none;will-change:transform;-webkit-mask-image:radial-gradient(circle at center,#000 24%,rgba(0,0,0,0.5) 52%,transparent 74%);mask-image:radial-gradient(circle at center,#000 24%,rgba(0,0,0,0.5) 52%,transparent 74%);">
+      <div data-vx="grilleA" style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(205,250,2,0.85) 0.9px,transparent 1.2px);background-size:14px 14px;opacity:0.055;animation:grilleA 17s ease-in-out infinite;animation-play-state:paused;"></div>
+      <div data-vx="grilleB" style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(205,250,2,0.7) 0.8px,transparent 1.1px);background-size:14px 14px;background-position:5px 7px;opacity:0.085;animation:grilleB 23s ease-in-out infinite;animation-play-state:paused;"></div>
+      <div data-vx="grilleC" style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(205,250,2,0.9) 1.1px,transparent 1.4px);background-size:28px 28px;background-position:9px 3px;opacity:0.045;animation:grilleC 29s ease-in-out infinite;animation-play-state:paused;"></div>
+    </div>
+    <div data-vx="auraCore" style="position:absolute;width:min(70svh,90vw);height:min(70svh,90vw);border-radius:50%;background:radial-gradient(circle,rgba(205,250,2,0.10) 0%,rgba(205,250,2,0.03) 45%,rgba(0,0,0,0) 70%);pointer-events:none;will-change:transform;"></div>
+
+    <div data-vx="deviceLink" class="pin-devicelink" aria-label="Versa X device" style="position:relative;display:block;line-height:0;text-decoration:none;transform-origin:center center;will-change:transform;">
+      <div data-vx="glowWrap" class="vx-glow-wrap" style="position:absolute;left:50%;top:50%;width:240%;aspect-ratio:1;transform:translate(-50%,-50%);opacity:0;transition:opacity 200ms linear;pointer-events:none;will-change:opacity;">
+        <div class="vx-glow-breathe" style="position:absolute;inset:0;animation:vxGlowBreathe 2800ms ease-in-out infinite;will-change:transform,opacity;">
+          <div class="vx-glow-spin" style="position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,#CDFA02 0%,#9BF23A 12%,#3FE3B4 28%,#4FA8FF 44%,#6E7BFF 56%,#9B5BF5 66%,#3FE3B4 82%,#9BF23A 92%,#CDFA02 100%);filter:blur(110px) saturate(150%);-webkit-mask-image:radial-gradient(circle at center,#000 28%,rgba(0,0,0,0.55) 54%,transparent 76%);mask-image:radial-gradient(circle at center,#000 28%,rgba(0,0,0,0.55) 54%,transparent 76%);animation:vxGlowSpin 14s linear infinite;will-change:transform;"></div>
+        </div>
+      </div>
+      <img data-vx="device" class="pin-device" src="assets/versa-x-device-large.png" width="900" height="1900" alt="Versa X device, Phantom Black" style="position:relative;z-index:1;display:block;height:max(281px,min(calc(var(--vxh)*0.885),1008px,calc((var(--vxh) - 300px)*2.27)));width:auto;image-rendering:auto;" />
+    </div>
+  </div>
+
+  <div style="position:relative;margin-top:calc(-100svh + var(--vx-header-h));z-index:1;pointer-events:none;">
+
+    <div class="hero-block" style="min-height:var(--vxh);display:grid;grid-template-rows:minmax(0,1fr) max(124px,min(calc(var(--vxh)*0.39),444px,calc(var(--vxh) - 300px))) auto;justify-items:center;gap:8px;width:100%;max-width:1200px;margin:0 auto;padding:clamp(0.5rem,calc(var(--vxh)*0.03),3rem) clamp(1rem,4vw,3rem);">
+      <img class="hero-logo" src="assets/versa-x-logo.png" alt="Versa X" style="grid-row:1;align-self:center;width:clamp(16rem,36vw,32rem);height:auto;" />
+      <div class="hero-foot" style="grid-row:3;align-self:center;display:flex;flex-direction:column;align-items:center;gap:clamp(8px,1.6vh,16px);">
+        <span style="font-size:0.75rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:rgba(245,247,242,0.55);">New <span class="vx-metal" style="background-image:linear-gradient(100deg,#ffffff 0%,#d7dce0 18%,#8d959b 30%,#f2f5f7 44%,#b3bac0 56%,#ffffff 70%,#8d959b 84%,#f2f5f7 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:vxMetal 6s linear infinite;">colour</span></span>
+        <span style="font-size:clamp(1.375rem,3vw,2.5rem);font-weight:700;letter-spacing:-0.02em;color:#FFFFFF;text-align:center;text-wrap:balance;line-height:1.1;">Phantom Black / Noir Fantôme</span>
+        <a class="vx-cta" href="#" onclick="return false;" style="pointer-events:auto;display:inline-flex;align-items:center;gap:8px;margin-top:8px;background:#CDFA02;color:#0A0A0A;font-size:16px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;padding:18px 38px;border-radius:999px;transition:transform 160ms cubic-bezier(.16,.84,.28,1),box-shadow 160ms ease;">Shop the collection</a><p style="margin:12px 0 0;font-size:13px;color:#9a9a9e;text-align:center">This call to action brings you to the Shopify shop.</p>
+        <span style="font-size:0.75rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(245,247,242,0.45);">Scroll</span>
+      </div>
+    </div>
+
+    <div data-vx="stage" class="vx-stage" style="min-height:320svh;">
+      <div class="vx-stage-sticky" style="position:sticky;top:var(--vx-header-h);height:var(--vxh);width:100%;max-width:1200px;margin:0 auto;padding:clamp(0.5rem,calc(var(--vxh)*0.03),3rem) clamp(1rem,4vw,3rem);display:grid;grid-template-columns:minmax(0,1fr) clamp(200px,calc(var(--vxh)*0.44),500px) minmax(0,1fr);grid-template-rows:auto auto;align-items:center;align-content:center;column-gap:clamp(12px,1.6vw,32px);row-gap:clamp(8px,calc(var(--vxh)*0.02),32px);">
+
+        <div class="vx-lane" style="grid-column:1;grid-row:1;position:relative;justify-self:end;width:100%;">
+          <div data-vx="auraPower" style="position:absolute;inset:-15%;border-radius:50%;background:radial-gradient(circle,rgba(205,250,2,0.2) 0%,rgba(205,250,2,0.06) 45%,rgba(0,0,0,0) 72%);opacity:0;transform:scale(0.92);pointer-events:none;"></div>
+          <div data-vx="cardPower" style="position:relative;pointer-events:auto;background:rgba(255,255,255,0.05);backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);border:1px solid rgba(205,250,2,0.18);border-top:1px solid rgba(205,250,2,0.5);border-radius:28px;padding:clamp(0.9375rem,calc(var(--vxh)*0.021),2.1875rem);box-shadow:0 24px 64px rgba(0,0,0,0.6);">
+            <span style="font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.6);display:block;margin-bottom:clamp(8px,calc(var(--vxh)*0.018),20px);">Power Scroll Wheel</span>
+            <div style="position:relative;width:100%;max-width:min(275px,calc(var(--vxh)*0.28));margin:0 auto 8px;">
+              <svg viewBox="0 0 200 112" width="100%">
+                <path d="M16 100 A84 84 0 0 1 184 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="10" stroke-linecap="round"></path>
+                <path data-vx="powerArc" d="M16 100 A84 84 0 0 1 184 100" fill="none" stroke="#CDFA02" stroke-width="10" stroke-linecap="round" style="stroke-dasharray:264;stroke-dashoffset:264;filter:drop-shadow(0 0 8px rgba(205,250,2,0.45));"></path>
+              </svg>
+              <div style="position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:center;">
+                <span data-vx="wattageText" style="font-family:'SF Mono','Menlo','Consolas',monospace;font-variant-numeric:tabular-nums;font-size:clamp(1.75rem,calc(var(--vxh)*0.082),3.5rem);font-weight:600;letter-spacing:-0.02em;color:#CDFA02;text-shadow:0 0 10px rgba(205,250,2,0.55),0 0 24px rgba(205,250,2,0.28);line-height:1;">12W</span>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-family:'SF Mono','Menlo','Consolas',monospace;font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:clamp(8px,calc(var(--vxh)*0.018),20px);">
+              <span>12W</span>
+              <span>30W</span>
+            </div>
+            <p style="font-size:17px;line-height:1.6;color:rgba(255,255,255,0.7);margin:0;">Instantly dial your vape from 12W to 30W for the perfect hit every time.</p>
+          </div>
+        </div>
+
+        <div class="vx-lane" style="grid-column:3;grid-row:1 / span 2;position:relative;justify-self:start;align-self:center;width:100%;">
+          <div data-vx="auraBattery" style="position:absolute;inset:-15%;border-radius:50%;background:radial-gradient(circle,rgba(205,250,2,0.2) 0%,rgba(205,250,2,0.06) 45%,rgba(0,0,0,0) 72%);opacity:0;transform:scale(0.92);pointer-events:none;"></div>
+          <div data-vx="cardBattery" style="position:relative;pointer-events:auto;background:rgba(255,255,255,0.05);backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);border:1px solid rgba(205,250,2,0.18);border-top:1px solid rgba(205,250,2,0.5);border-radius:28px;padding:clamp(0.9375rem,calc(var(--vxh)*0.021),2.1875rem);box-shadow:0 24px 64px rgba(0,0,0,0.6);">
+            <span style="font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.6);display:block;margin-bottom:clamp(8px,calc(var(--vxh)*0.018),20px);">Powerful Battery</span>
+            <div style="display:flex;align-items:center;gap:clamp(12px,calc(var(--vxh)*0.028),30px);">
+              <div style="position:relative;width:clamp(36px,calc(var(--vxh)*0.06),60px);height:clamp(96px,calc(var(--vxh)*0.22),200px);border-radius:30px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);overflow:hidden;flex-shrink:0;">
+                <div style="position:absolute;inset:0;background:linear-gradient(to top,#FF3B30 0%,#FF7A18 30%,#FFB020 55%,#CDFA02 100%);"></div>
+                <div data-vx="batteryMask" style="position:absolute;inset:0;background:#000;transform-origin:top;transform:scaleY(1);will-change:transform;"></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:clamp(8px,calc(var(--vxh)*0.02),20px);">
+                <span style="font-family:'SF Mono','Menlo','Consolas',monospace;font-variant-numeric:tabular-nums;font-size:clamp(1.625rem,calc(var(--vxh)*0.05),2.75rem);font-weight:600;letter-spacing:-0.02em;color:#F5F7F2;">1100mAh</span>
+                <span style="font-size:17px;font-weight:600;color:#CDFA02;">Full charge in under 30 minutes.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="vx-lane" style="grid-column:1;grid-row:2;position:relative;justify-self:end;width:100%;">
+          <div data-vx="auraEliquid" style="position:absolute;inset:-15%;border-radius:50%;background:radial-gradient(circle,rgba(205,250,2,0.2) 0%,rgba(205,250,2,0.06) 45%,rgba(0,0,0,0) 72%);opacity:0;transform:scale(0.92);pointer-events:none;"></div>
+          <div data-vx="cardEliquid" style="position:relative;pointer-events:auto;background:rgba(255,255,255,0.05);backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);border:1px solid rgba(205,250,2,0.18);border-top:1px solid rgba(205,250,2,0.5);border-radius:28px;padding:clamp(0.9375rem,calc(var(--vxh)*0.021),2.1875rem);box-shadow:0 24px 64px rgba(0,0,0,0.6);">
+            <span style="font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.6);display:block;margin-bottom:clamp(8px,calc(var(--vxh)*0.018),20px);">E-Liquid + CONNECT</span>
+            <div style="display:flex;flex-direction:column;gap:clamp(8px,calc(var(--vxh)*0.02),20px);margin-bottom:clamp(8px,calc(var(--vxh)*0.018),20px);">
+              <div style="display:flex;align-items:center;gap:clamp(8px,calc(var(--vxh)*0.02),20px);">
+                <svg width="22" height="28" viewBox="0 0 20 26" fill="none" style="flex-shrink:0;">
+                  <path d="M10 2 C14 8.5 18 12.8 18 16.4 C18 20.6 14.4 24 10 24 C5.6 24 2 20.6 2 16.4 C2 12.8 6 8.5 10 2 Z" stroke="#CDFA02" stroke-width="1.6" stroke-linejoin="round"></path>
+                </svg>
+                <div style="display:flex;align-items:flex-end;gap:7px;height:clamp(24px,calc(var(--vxh)*0.055),34px);">
+                  <span data-vx="tick0" style="display:block;width:9px;height:clamp(24px,calc(var(--vxh)*0.055),34px);border-radius:3px;background:#CDFA02;opacity:0.14;transform-origin:bottom;transform:scaleY(0.55);"></span>
+                  <span data-vx="tick1" style="display:block;width:9px;height:clamp(24px,calc(var(--vxh)*0.055),34px);border-radius:3px;background:#CDFA02;opacity:0.14;transform-origin:bottom;transform:scaleY(0.55);"></span>
+                  <span data-vx="tick2" style="display:block;width:9px;height:clamp(24px,calc(var(--vxh)*0.055),34px);border-radius:3px;background:#CDFA02;opacity:0.14;transform-origin:bottom;transform:scaleY(0.55);"></span>
+                  <span data-vx="tick3" style="display:block;width:9px;height:clamp(24px,calc(var(--vxh)*0.055),34px);border-radius:3px;background:#CDFA02;opacity:0.14;transform-origin:bottom;transform:scaleY(0.55);"></span>
+                  <span data-vx="tick4" style="display:block;width:9px;height:clamp(24px,calc(var(--vxh)*0.055),34px);border-radius:3px;background:#CDFA02;opacity:0.14;transform-origin:bottom;transform:scaleY(0.55);"></span>
+                  <span data-vx="tick5" style="display:block;width:9px;height:clamp(24px,calc(var(--vxh)*0.055),34px);border-radius:3px;background:#CDFA02;opacity:0.14;transform-origin:bottom;transform:scaleY(0.55);"></span>
+                </div>
+                <span data-vx="eliquidPctText" style="font-family:'SF Mono','Menlo','Consolas',monospace;font-variant-numeric:tabular-nums;font-size:clamp(1.25rem,calc(var(--vxh)*0.03),1.625rem);font-weight:600;letter-spacing:-0.01em;color:#CDFA02;text-shadow:0 0 10px rgba(205,250,2,0.45);margin-left:auto;">0%</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px;">
+                <svg width="32" height="20" viewBox="0 0 26 16" fill="none" style="flex-shrink:0;">
+                  <rect x="1" y="2.5" width="20" height="11" rx="3" stroke="#CDFA02" stroke-width="1.4"></rect>
+                  <path d="M23 6.5V9.5" stroke="#CDFA02" stroke-width="1.6" stroke-linecap="round"></path>
+                  <path d="M12.5 4.5L8.5 9H11.5L10.8 12.5L14.5 7.8H11.9L12.5 4.5Z" fill="#CDFA02"></path>
+                </svg>
+                <span style="border:1px solid rgba(205,250,2,0.55);border-radius:8px;padding:clamp(4px,calc(var(--vxh)*0.008),6px) 15px;font-family:'SF Mono','Menlo','Consolas',monospace;font-size:clamp(0.6875rem,calc(var(--vxh)*0.013),0.875rem);font-weight:600;letter-spacing:0.2em;color:#CDFA02;">CONNECT</span>
+              </div>
+            </div>
+            <p style="font-size:17px;font-weight:600;line-height:1.45;color:#CDFA02;margin:0 0 10px;">Full charge in under 30 minutes.</p>
+            <p style="font-size:17px;line-height:1.6;color:rgba(255,255,255,0.7);margin:0;">Live e-liquid readout on the front display, so you always know what's left.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="vx-tail" style="height:24svh;"></div>
+
+  </div>
+</div>
+
+<div style="width:100%;max-width:1200px;margin:0 auto;padding:clamp(56px,8vw,104px) clamp(1rem,4vw,3rem);display:flex;align-items:center;justify-content:center;gap:clamp(18px,2.6vw,34px);">
+  <img src="assets/versa-x-logo.png" alt="Versa X" style="height:clamp(28px,3.3vw,42px);width:auto;opacity:0.9;" />
+  <span aria-hidden="true" style="display:block;flex-shrink:0;width:1px;height:clamp(36px,4.4vw,55px);background:rgba(255,255,255,0.18);"></span>
+  <img src="assets/nasty-logo-green.svg" alt="Nasty" style="height:clamp(24px,2.8vw,35px);width:auto;opacity:0.9;" />
+</div>
+
+</div>
+</div>
+<!-- PROJECT 03 PART 2: PODS PICKER -->
+<section class="nvx" id="nvx-root" aria-label="Versa pod lineup">
+  <div class="nvx-wrap">
+
+    <p class="nvx-eyebrow">Nasty Versa · VPOD ClearTech</p>
+    <h2 class="nvx-h2">World's tastiest <span class="nvx-grad-text">new flavours.</span></h2>
+
+    <div class="nvx-detail" id="nvx-detail">
+      <div class="nvx-hero" id="nvx-hero"><div class="nvx-hero-glow"></div></div>
+      <div class="nvx-info">
+        <div>
+          <div class="nvx-newtag" id="nvx-newtag" hidden>New</div>
+          <h3 class="nvx-name" id="nvx-name">Arctic Mint</h3>
+          <div class="nvx-name-fr" id="nvx-name-fr">Menthe Arctique</div>
+        </div>
+        <p class="nvx-desc" id="nvx-desc"></p>
+        <div>
+          <div class="nvx-caption nvx-profile-label">Taste profile</div>
+          <div class="nvx-panel" id="nvx-panel"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nvx-lineup-head">
+      <div class="nvx-lineup-title">Versa pod lineup</div>
+      <div class="nvx-lineup-count">18 flavours</div>
+    </div>
+
+    <div class="nvx-grid" id="nvx-grid" role="group" aria-label="Choose a flavour"></div>
+
+  </div>
+</section>
+<footer class="p3-footer"><p><a href="https://dss-ben.github.io/">← Back to portfolio</a></p></footer>
+<script>
+(function(){
+  var root = document.getElementById('vx-root');
+  if(!root || root.dataset.vxInit === '1') return;
+  root.dataset.vxInit = '1';
+
+  var el = {};
+  ['root','scene','rings','grilleA','grilleB','grilleC','auraCore','glowWrap','deviceLink','device','stage',
+   'auraPower','auraBattery','auraEliquid','cardPower','cardBattery','cardEliquid',
+   'powerArc','wattageText','batteryMask','eliquidPctText',
+   'tick0','tick1','tick2','tick3','tick4','tick5'].forEach(function(k){
+    el[k] = root.querySelector('[data-vx="' + k + '"]');
+  });
+  var section = el.root || root;
+
+  var TICKS = ['tick0','tick1','tick2','tick3','tick4','tick5'];
+  var FEATURES = ['power','battery','eliquid'];
+  var SUB = { power:[0.04,0.34], battery:[0.36,0.66], eliquid:[0.68,0.98] };
+  var ARC = 264;
+  var EASE = 'cubic-bezier(.16,.84,.28,1)';
+  /* SCALE DIRECTION IS INVERTED. The <img> is laid out at its final feature-section
+     size natively (900x1900 source) and transform only ever shrinks it for the hero,
+     easing back toward scale(1) as the stage is scrolled into. Downscaling resamples
+     cleanly; the old scale(1)->scale(2.27) invented pixels past native resolution.
+     The factors are the reciprocals of the old ones, so every on-screen size — hero
+     and feature alike — is pixel-identical to the previous build. */
+  var MIN_DESKTOP = 1 / 2.27, MIN_MOBILE = 1 / 1.42;
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var ranges = {}, sceneRange = null, stageRange = null, scaleRange = null, mobile = false, headerH = 0;
+  var progress = { power:-1, battery:-1, eliquid:-1 };
+  var scrubbing = { power:false, battery:false, eliquid:false };
+  var entered = false, deviceScale = -1;
+  var scrollY = 0, raf = null, running = false;
+  var pointer = { x:0, y:0 }, lerp = { x:0, y:0 };
+
+  function cap(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+  function clamp01(v){ return v < 0 ? 0 : (v > 1 ? 1 : v); }
+  function minScale(){ return mobile ? MIN_MOBILE : MIN_DESKTOP; }
+
+  /* The theme header is MEASURED at runtime, never hardcoded, and only offsets the
+     pinned layers when it actually stays on screen (position fixed/sticky on itself
+     or an ancestor). A header that scrolls away needs no offset — the section already
+     starts below it in normal flow. Overrides on the section root:
+       data-header-height="72px"   use exactly this value
+       data-header-selector="..."  measure this element instead */
+  function measureHeader(){
+    var forced = (section.dataset.headerHeight || '').trim();
+    if(forced){ section.style.setProperty('--vx-header-h', forced); return parseFloat(forced) || 0; }
+    var sel = (section.dataset.headerSelector || '').trim();
+    var candidates = sel ? [sel] : ['[data-vx-header]','#shopify-section-header','.shopify-section-header',
+      'sticky-header','header.header','.header-wrapper','header','[role="banner"]'];
+    var node = null;
+    for(var i = 0; i < candidates.length && !node; i++){
+      var found = document.querySelector(candidates[i]);
+      if(found && found !== section && !section.contains(found)) node = found;
+    }
+    var h = 0;
+    if(node){
+      var sticks = false, cur = node, hops = 0;
+      while(cur && hops < 4){
+        var pos = getComputedStyle(cur).position;
+        if(pos === 'fixed' || pos === 'sticky'){ sticks = true; break; }
+        cur = cur.parentElement; hops++;
+      }
+      if(sticks) h = Math.round(node.getBoundingClientRect().height);
+    }
+    section.style.setProperty('--vx-header-h', h + 'px');
+    return h;
+  }
+
+  /* Siri-style bloom: hover toggles opacity only. Rotation and the breathing pulse
+     run continuously underneath, so a fade-out reverses from its live state and a
+     re-hover never restarts. The bloom fades on its own radial mask — no container
+     edge ever cuts it. */
+  var GLOW_MAX = '0.72'; /* peak opacity of the Siri bloom — ~72% of the original 1.0 */
+  var glowHandlers = null;
+  function setupGlow(){
+    if(!el.deviceLink || !el.glowWrap) return;
+    var on = function(){ el.glowWrap.style.opacity = GLOW_MAX; }; /* GLOW_MAX = 0.72 */
+    var off = function(){ el.glowWrap.style.opacity = '0'; };
+    glowHandlers = { pointerenter:on, pointerleave:off, pointercancel:off, pointerdown:on, pointerup:off, focus:on, blur:off };
+    Object.keys(glowHandlers).forEach(function(ev){ el.deviceLink.addEventListener(ev, glowHandlers[ev], { passive:true }); });
+  }
+
+  function measure(){
+    var H = headerH || 0;
+    /* all ranges are measured against the visible area BELOW the header, so the
+       gauges stay in sync with what is actually on screen */
+    var vh = Math.max(1, (window.innerHeight || 1) - H);
+    var pageY = window.scrollY || window.pageYOffset || 0;
+    mobile = !!(window.matchMedia && window.matchMedia('(max-width: 48em)').matches);
+    if(el.stage){
+      var st = el.stage.getBoundingClientRect();
+      var top = st.top + pageY - H;
+      stageRange = { start: top, span: Math.max(1, st.height - vh) };
+      scaleRange = { start: Math.max(0, top - vh), span: vh };
+    }
+    if(mobile){
+      FEATURES.forEach(function(f){
+        var node = el['card' + cap(f)];
+        if(!node) return;
+        var r = node.getBoundingClientRect();
+        var t = r.top + pageY - H;
+        ranges[f] = { start: t - vh * 0.78, span: Math.max(1, (t + r.height - vh * 0.42) - (t - vh * 0.78)) };
+      });
+    }
+    if(el.scene){
+      var sr = el.scene.getBoundingClientRect();
+      sceneRange = { start: sr.top + pageY - H, span: Math.max(1, sr.height) };
+    }
+  }
+
+  function playEntrance(f){
+    var aura = el['aura' + cap(f)], card = el['card' + cap(f)];
+    if(aura){
+      aura.style.transition = 'opacity 400ms ' + EASE + ', transform 400ms ' + EASE;
+      requestAnimationFrame(function(){ aura.style.opacity = '1'; aura.style.transform = 'scale(1)'; });
+    }
+    if(card){
+      setTimeout(function(){
+        card.style.transition = 'opacity 400ms ' + EASE + ', transform 400ms ' + EASE;
+        requestAnimationFrame(function(){ card.style.opacity = '1'; card.style.transform = 'translateY(0)'; });
+      }, 80);
+    }
+  }
+
+  function setupEntrances(){
+    if(!el.stage) return;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting && !entered){
+          entered = true;
+          FEATURES.forEach(function(f, i){ setTimeout(function(){ playEntrance(f); }, i * 90); });
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.05 });
+    io.observe(el.stage);
+  }
+
+  function setupAmbient(){
+    if(!el.scene) return;
+    var layers = ['grilleA','grilleB','grilleC'];
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        layers.forEach(function(k){ if(el[k]) el[k].style.animationPlayState = en.isIntersecting ? 'running' : 'paused'; });
+      });
+    }, { threshold: 0 });
+    io.observe(el.scene);
+  }
+
+  function setWillChange(f, active){
+    var targets = f === 'power' ? [el.powerArc] : f === 'battery' ? [el.batteryMask] : TICKS.map(function(k){ return el[k]; });
+    targets.forEach(function(t){ if(t) t.style.willChange = active ? 'transform, stroke-dashoffset' : 'auto'; });
+  }
+
+  function applyGauge(f, p){
+    if(f === 'power'){
+      if(el.powerArc) el.powerArc.style.strokeDashoffset = String(ARC * (1 - p));
+      if(el.wattageText) el.wattageText.textContent = Math.round(12 + p * 18) + 'W';
+    } else if(f === 'battery'){
+      if(el.batteryMask) el.batteryMask.style.transform = 'scaleY(' + (1 - p) + ')';
+    } else {
+      var n = TICKS.length;
+      TICKS.forEach(function(k, i){
+        var t = el[k];
+        if(!t) return;
+        var v = clamp01(p * n - i);
+        t.style.opacity = String(0.14 + 0.86 * v);
+        t.style.transform = 'scaleY(' + (0.55 + 0.45 * v).toFixed(3) + ')';
+      });
+      if(el.eliquidPctText) el.eliquidPctText.textContent = Math.round(p * 100) + '%';
+    }
+  }
+
+  function applyBackdrop(y){
+    lerp.x += (pointer.x - lerp.x) * 0.06;
+    lerp.y += (pointer.y - lerp.y) * 0.06;
+    var sp = sceneRange ? clamp01((y - sceneRange.start) / sceneRange.span) : 0;
+    if(el.rings){
+      el.rings.style.transform = 'translate3d(' + (lerp.x * -18) + 'px,' + (lerp.y * -14) + 'px,0) scale(' + (1 + sp * 0.14).toFixed(4) + ') rotate(' + (sp * 12).toFixed(2) + 'deg)';
+    }
+    if(el.auraCore){
+      el.auraCore.style.transform = 'translate3d(' + (lerp.x * -10) + 'px,' + (lerp.y * -8) + 'px,0) scale(' + (0.92 + sp * 0.18).toFixed(4) + ')';
+    }
+    if(el.deviceLink){
+      var gp = scaleRange ? clamp01((y - scaleRange.start) / scaleRange.span) : 0;
+      var s0 = minScale();
+      var s = s0 + gp * (1 - s0);
+      if(Math.abs(s - deviceScale) > 0.0004){
+        deviceScale = s;
+        el.deviceLink.style.willChange = (gp > 0.001 && gp < 0.999) ? 'transform' : 'auto';
+      }
+      el.deviceLink.style.transform = 'translate3d(' + (lerp.x * 8) + 'px,' + (lerp.y * 6) + 'px,0) scale(' + s.toFixed(4) + ')';
+    }
+  }
+
+  function frame(){
+    var y = scrollY;
+    var stageP = stageRange ? clamp01((y - stageRange.start) / stageRange.span) : 0;
+    FEATURES.forEach(function(f){
+      var p;
+      if(mobile){
+        var range = ranges[f];
+        if(!range) return;
+        p = clamp01((y - range.start) / range.span);
+      } else {
+        p = clamp01((stageP - SUB[f][0]) / (SUB[f][1] - SUB[f][0]));
+      }
+      if(Math.abs(p - progress[f]) < 0.0004) return;
+      progress[f] = p;
+      applyGauge(f, p);
+      var active = p > 0.001 && p < 0.999;
+      if(active !== scrubbing[f]){ scrubbing[f] = active; setWillChange(f, active); }
+    });
+    applyBackdrop(y);
+  }
+
+  function applyReducedFinal(){
+    ['auraPower','auraBattery','auraEliquid'].forEach(function(k){
+      if(el[k]){ el[k].style.opacity = '1'; el[k].style.transform = 'scale(1)'; }
+    });
+    ['cardPower','cardBattery','cardEliquid'].forEach(function(k){
+      if(el[k]){ el[k].style.opacity = '1'; el[k].style.transform = 'none'; }
+    });
+    if(el.powerArc) el.powerArc.style.strokeDashoffset = '0';
+    if(el.wattageText) el.wattageText.textContent = '30W';
+    if(el.batteryMask) el.batteryMask.style.transform = 'scaleY(0)';
+    TICKS.forEach(function(k){ if(el[k]){ el[k].style.opacity = '1'; el[k].style.transform = 'scaleY(1)'; } });
+    if(el.eliquidPctText) el.eliquidPctText.textContent = '100%';
+    ['grilleA','grilleB','grilleC'].forEach(function(k){ if(el[k]) el[k].style.animation = 'none'; });
+    if(el.deviceLink && el.stage){
+      mobile = !!(window.matchMedia && window.matchMedia('(max-width: 48em)').matches);
+      var set = function(big){ el.deviceLink.style.transform = 'scale(' + (big ? 1 : minScale()) + ')'; };
+      set(false);
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){ set(en.isIntersecting); });
+      }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+      io.observe(el.stage);
+    }
+  }
+
+  function onScroll(){ scrollY = window.scrollY || window.pageYOffset || 0; }
+  function onResize(){ headerH = measureHeader(); measure(); onScroll(); }
+  function onPointer(e){
+    var w = window.innerWidth || 1, h = window.innerHeight || 1;
+    pointer.x = (e.clientX / w) * 2 - 1;
+    pointer.y = (e.clientY / h) * 2 - 1;
+  }
+
+  headerH = measureHeader();
+  setupGlow();
+  if(reduced){ applyReducedFinal(); return; }
+
+  ['cardPower','cardBattery','cardEliquid'].forEach(function(k){
+    if(el[k]){ el[k].style.opacity = '0'; el[k].style.transform = 'translateY(16px)'; }
+  });
+  /* armed first, and re-armed before each frame runs, so one bad frame can never
+     silently kill every scroll-driven layer */
+  running = true;
+  function loopSafe(){
+    if(!running) return;
+    raf = requestAnimationFrame(loopSafe);
+    try { frame(); } catch(err){ /* keep scrubbing */ }
+  }
+  raf = requestAnimationFrame(loopSafe);
+  measure();
+  setupEntrances();
+  setupAmbient();
+  window.addEventListener('scroll', onScroll, { passive:true });
+  window.addEventListener('resize', onResize);
+  window.addEventListener('pointermove', onPointer, { passive:true });
+  onScroll();
+  /* headers settle late (fonts, announcement bars, sticky-header JS) */
+  setTimeout(onResize, 600);
+
+  document.addEventListener('shopify:section:unload', function(){
+    running = false;
+    if(raf) cancelAnimationFrame(raf);
+    window.removeEventListener('scroll', onScroll);
+    window.removeEventListener('resize', onResize);
+    window.removeEventListener('pointermove', onPointer);
+  });
+})();
+</script>
+<script>
+(function () {
+  /* Bars are [Sweetness, Coolness, Boldness, Throat hit], each out of 5.
+     DATA NOTE — Throat hit is retained for all 18, but the values on the ten CLASSIC
+     flavours are assumed, not sourced: that metric is not printed on Nasty packaging.
+     Every entry with sourced:false carries a Throat-hit value PENDING SIGN-OFF; do not
+     treat it as verified data. (Also known: across the classics, Coolness and Boldness
+     barely vary, so those two bars discriminate weakly — a content decision for later.) */
+  var METRICS = ['Sweetness', 'Coolness', 'Boldness', 'Throat hit'];
+
+  /* Order: NEW band first, alphabetical within each band. Shoppers scan by name. */
+  var DATA = [
+    { slug: 'arctic-mint', name: 'Arctic Mint', fr: 'Menthe Arctique', isNew: true, bars: [3,4,5,2], throatSourced: false,
+      desc: 'Arctic Mint blends peppermint and spearmint for an intensely cool, crisp menthol flavour.' },
+    { slug: 'berry-cherry', name: 'Berry Cherry', fr: 'Baies et Cerise', isNew: true, bars: [3,3,5,2], throatSourced: false,
+      desc: 'Berry Cherry blends blueberry, raspberry and cherry for a layered profile that balances sweet berry notes with rich cherry depth.' },
+    { slug: 'blue-razz', name: 'Blue Razz', fr: 'Framboise Bleue', isNew: true, bars: [3,3,5,2], throatSourced: false,
+      desc: 'Blue Razz combines the smooth sweetness of blueberry with the tangy character of raspberry for a layered, refreshing flavour.' },
+    { slug: 'cherry-raspberry-lime', name: 'Cherry Raspberry Lime', fr: 'Cerise Framboise Lime', isNew: true, bars: [3,3,5,2], throatSourced: false,
+      desc: 'Cherry Raspberry Lime combines sweet cherry, tangy raspberry and bright lime for a refreshing, balanced flavour.' },
+    { slug: 'dragon-fruit-lemon', name: 'Dragon Fruit Lemon', fr: 'Fruit du Dragon Citron', isNew: true, bars: [3,3,4,2], throatSourced: false,
+      desc: 'Dragon Fruit Lemon combines the exotic sweetness of dragon fruit with a bright lemon twist for a smooth, vibrant and refreshing flavour.' },
+    { slug: 'mango-peach', name: 'Mango Peach', fr: 'Mangue Pêche', isNew: true, bars: [3,3,5,2], throatSourced: false,
+      desc: 'Mango Peach blends the tropical sweetness of ripe mango with the juicy richness of peach for a refreshing fruit flavour.' },
+    { slug: 'strawberry-blue-razz', name: 'Strawberry Blue Razz', fr: 'Fraise Framboise Bleue', isNew: true, bars: [3,3,5,2], throatSourced: false,
+      desc: 'Strawberry Blue Razz pairs sweet strawberry with tangy blue raspberry for a bright, fruit-forward flavour.' },
+    { slug: 'white-peach', name: 'White Peach', fr: 'Pêche Blanche', isNew: true, bars: [3,3,4,2], throatSourced: false,
+      desc: 'White Peach captures the delicate sweetness of white peaches, delivering a smooth, juicy and refreshingly refined flavour.' },
+
+    { slug: 'apple-ice', name: 'Apple Ice', fr: 'Pomme Glacée', isNew: false, bars: [3,5,5,2], throatSourced: false,
+      desc: 'Blends crisp green apple with cooling mint for a refreshing, smooth, icy hit.' },
+    { slug: 'blueberry-ice', name: 'Blueberry Ice', fr: 'Bleuet Glacé', isNew: false, bars: [4,5,5,2], throatSourced: false,
+      desc: 'Blends juicy blueberries with a refreshing mint blast for a tangy, sweet chill.' },
+    { slug: 'grape-ice', name: 'Grape Ice', fr: 'Raisin Glacé', isNew: false, bars: [4,5,5,2], throatSourced: false,
+      desc: 'Delivers bold, juicy grape flavour with an exhilarating wave of icy, refreshing coolness.' },
+    { slug: 'kiwi-passion-fruit-guava', name: 'Kiwi Passion Fruit Guava', fr: 'Kiwi Fruit de la Passion Goyave', isNew: false, bars: [3,3,5,2], throatSourced: false,
+      desc: 'Blends sweet kiwi, tangy passion fruit, and refreshing tropical guava flavour.' },
+    { slug: 'mango-ice', name: 'Mango Ice', fr: 'Mangue Glacée', isNew: false, bars: [3,5,5,2], throatSourced: false,
+      desc: 'Blends tangy green mango and sweet tropical mango with a refreshing icy finish.' },
+    { slug: 'mix-berry', name: 'Mix Berry', fr: 'Mélange de Baies', isNew: false, bars: [3,5,5,2], throatSourced: false,
+      desc: 'Delivers a refreshing blend of summer berries with an exhilarating burst of tangy sweetness.' },
+    { slug: 'peach-ice', name: 'Peach Ice', fr: 'Pêche Glacée', isNew: false, bars: [3,5,5,2], throatSourced: false,
+      desc: 'Blends ripe juicy peaches with icy menthol for a smooth, refreshing flavour burst.' },
+    { slug: 'raspberry-watermelon', name: 'Raspberry Watermelon', fr: "Framboise Melon d'Eau", isNew: false, bars: [3,3,5,2], throatSourced: false,
+      desc: 'Blends juicy watermelon sweetness with a refreshing raspberry tang to excite your taste buds.' },
+    { slug: 'strawberry-ice', name: 'Strawberry Ice', fr: 'Fraise Glacée', isNew: false, bars: [4,5,5,2], throatSourced: false,
+      desc: 'Blends ripe, juicy strawberries with a refreshing icy coolness and delicate sweetness.' },
+    { slug: 'strawberry-kiwi', name: 'Strawberry Kiwi', fr: 'Fraise Kiwi', isNew: false, bars: [3,5,5,2], throatSourced: false,
+      desc: 'Blends sweet strawberries and tangy kiwis for a vibrant, juicy burst of flavour.' }
+  ];
+
+  var RESET_MS = 140, FILL_MS = 520, STAGGER = 70, COUNT_EXTRA = 40;
+
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // cubic-bezier(.16,.84,.28,1) solved by bisection — matches the CSS reveal easing.
+  function bezier(t) {
+    var x1 = 0.16, y1 = 0.84, x2 = 0.28, y2 = 1;
+    var lo = 0, hi = 1, u = t, i, x;
+    for (i = 0; i < 18; i++) {
+      u = (lo + hi) / 2;
+      var mu = 1 - u;
+      x = 3 * mu * mu * u * x1 + 3 * mu * u * u * x2 + u * u * u;
+      if (x < t) { lo = u; } else { hi = u; }
+    }
+    var m = 1 - u;
+    return 3 * m * m * u * y1 + 3 * m * u * u * y2 + u * u * u;
+  }
+
+  var hero = document.getElementById('nvx-hero');
+  var nameEl = document.getElementById('nvx-name');
+  var frEl = document.getElementById('nvx-name-fr');
+  var descEl = document.getElementById('nvx-desc');
+  var tagEl = document.getElementById('nvx-newtag');
+  var panel = document.getElementById('nvx-panel');
+  var grid = document.getElementById('nvx-grid');
+  var heroGlow = hero.querySelector('.nvx-hero-glow');
+  var cells = [];
+
+  var bars = METRICS.map(function (label) {
+    var row = document.createElement('div');
+    row.className = 'nvx-metric';
+
+    var l = document.createElement('div');
+    l.className = 'nvx-metric-label';
+    l.textContent = label;
+
+    var bar = document.createElement('div');
+    bar.className = 'nvx-bar';
+    var glowLayer = document.createElement('div');
+    glowLayer.className = 'nvx-glow-layer';
+    var glow = document.createElement('div');
+    glow.className = 'nvx-glow';
+    var gfill = document.createElement('div');
+    gfill.className = 'nvx-gfill';
+    glow.appendChild(gfill);
+    glowLayer.appendChild(glow);
+    var track = document.createElement('div');
+    track.className = 'nvx-track';
+    var reveal = document.createElement('div');
+    reveal.className = 'nvx-reveal';
+    var fill = document.createElement('div');
+    fill.className = 'nvx-fill';
+    reveal.appendChild(fill);
+    track.appendChild(reveal);
+    bar.appendChild(glowLayer);
+    bar.appendChild(track);
+
+    var val = document.createElement('div');
+    val.className = 'nvx-metric-val';
+    val.textContent = '0/5';
+
+    row.appendChild(l);
+    row.appendChild(bar);
+    row.appendChild(val);
+    panel.appendChild(row);
+
+    return { reveal: reveal, fill: fill, glow: glow, gfill: gfill, val: val, raf: 0, timers: [] };
+  });
+
+  // window slides right to expose `pct`; gradient slides left by the same amount to stay put
+  function shift(b, pct) {
+    var win = 'translateX(calc(-100% + ' + pct + '%))';
+    var inner = 'translateX(calc(100% - ' + pct + '%))';
+    b.reveal.style.transform = win;
+    b.fill.style.transform = inner;
+    b.glow.style.transform = win;
+    b.gfill.style.transform = inner;
+  }
+
+  function setTransition(b, t, glowT) {
+    b.reveal.style.transition = t;
+    b.fill.style.transition = t;
+    b.glow.style.transition = glowT;
+    b.gfill.style.transition = t;
+  }
+
+  function setWillChange(b, v) {
+    b.reveal.style.willChange = v;
+    b.fill.style.willChange = v;
+    b.glow.style.willChange = v;
+    b.gfill.style.willChange = v;
+  }
+
+  function count(b, target, delay, dur) {
+    cancelAnimationFrame(b.raf);
+    if (reduced || dur <= 0) { b.val.textContent = target + '/5'; return; }
+    var start = 0;
+    function step(now) {
+      if (!start) { start = now; }
+      var t = (now - start - delay) / dur;
+      if (t < 0) { b.raf = requestAnimationFrame(step); return; }
+      if (t >= 1) { b.val.textContent = target + '/5'; return; }
+      b.val.textContent = Math.round(bezier(t) * target) + '/5';
+      b.raf = requestAnimationFrame(step);
+    }
+    b.val.textContent = '0/5';
+    b.raf = requestAnimationFrame(step);
+  }
+
+  function clearTimers(b) {
+    b.timers.forEach(clearTimeout);
+    b.timers = [];
+  }
+
+  function paintBars(values, animate) {
+    bars.forEach(function (b, i) {
+      clearTimers(b);
+      var pct = values[i] / 5 * 100;
+
+      if (!animate || reduced) {
+        setTransition(b, 'none', 'none');
+        shift(b, pct);
+        b.glow.style.opacity = reduced ? '.4' : '.5';
+        b.val.textContent = values[i] + '/5';
+        return;
+      }
+
+      setWillChange(b, 'transform');
+
+      setTransition(b, 'transform ' + RESET_MS + 'ms linear',
+        'transform ' + RESET_MS + 'ms linear, opacity ' + RESET_MS + 'ms linear');
+      shift(b, 0);
+      b.glow.style.opacity = '0';
+
+      b.timers.push(setTimeout(function () {
+        var d = i * STAGGER;
+        setTransition(b, 'transform ' + FILL_MS + 'ms var(--nvx-ease) ' + d + 'ms',
+          'transform ' + FILL_MS + 'ms var(--nvx-ease) ' + d + 'ms, opacity ' + FILL_MS + 'ms var(--nvx-ease) ' + d + 'ms');
+        shift(b, pct);
+        b.glow.style.opacity = '.5';
+        count(b, values[i], d, FILL_MS + COUNT_EXTRA);
+        b.timers.push(setTimeout(function () {
+          setWillChange(b, 'auto');
+        }, d + FILL_MS + 60));
+      }, RESET_MS));
+    });
+  }
+
+  // Shopify supplies a slug → CDN url map on window.NVX_IMG; standalone falls back to flat filenames.
+  function podSrc(slug) {
+    var map = window.NVX_IMG;
+    return (map && map[slug]) ? map[slug] : 'assets/' + slug + '-front.png';
+  }
+
+  function podNode(slug, cls) {
+    var img = document.createElement('img');
+    img.src = podSrc(slug);
+    img.alt = '';
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.onerror = function () {
+      var ph = document.createElement('div');
+      ph.className = cls;
+      if (img.parentNode) { img.parentNode.replaceChild(ph, img); }
+    };
+    return img;
+  }
+
+  /* ---------- detail-panel transition ----------
+     Pod cross-dissolve (400ms) → copy trails by 40ms (260ms) → bars at 120ms.
+     Only opacity and transform animate; nothing here touches width, filter or
+     box-shadow. Two stacked layers rather than a src swap, so there is never a
+     blank frame, and a rapid re-click interrupts from the current rendered state
+     instead of queueing. */
+  var EASE_JS = 'cubic-bezier(.16,.84,.28,1)';
+  var POD_MS = 400, TEXT_MS = 260, TEXT_DELAY = 40, BARS_DELAY = 120, FADE_MS = 140, DRIFT = 10;
+  var heroLayer = null, heroTimer = 0;
+
+  function stop(node) {
+    if (node.getAnimations) { node.getAnimations().forEach(function (a) { a.cancel(); }); }
+  }
+
+  function drop(node) {
+    if (node && node.parentNode) { node.parentNode.removeChild(node); }
+  }
+
+  function fadeOut(layer, dx) {
+    var cs = window.getComputedStyle(layer);
+    var from = { opacity: cs.opacity, transform: cs.transform === 'none' ? 'none' : cs.transform };
+    stop(layer);
+    var to = reduced
+      ? { opacity: 0 }
+      : { opacity: 0, transform: 'translate(' + (-dx) + 'px, 12px) scale(.96)' };
+    var a = layer.animate([from, to], {
+      duration: reduced ? FADE_MS : POD_MS,
+      easing: reduced ? 'linear' : EASE_JS,
+      fill: 'both'
+    });
+    a.onfinish = a.oncancel = function () { drop(layer); };
+  }
+
+  function heroSwap(f, dir, animate, cascade) {
+    var dx = (reduced || !animate) ? 0 : dir * DRIFT;
+    var layer = document.createElement('div');
+    layer.className = 'nvx-hero-layer';
+    var img = podNode(f.slug, 'nvx-hero-ph');
+    img.alt = 'Nasty Versa pod, ' + f.name;
+    img.loading = 'eager';
+    img.removeAttribute('loading');
+    layer.appendChild(img);
+    if (animate) { layer.style.opacity = '0'; }
+
+    var prev = heroLayer;
+    heroLayer = layer;
+
+    var committed = false;
+    function commit() {
+      if (committed || heroLayer !== layer) { return; }
+      committed = true;
+      clearTimeout(gate);
+      // any layer older than the outgoing one leaves immediately — no stacking
+      Array.prototype.slice.call(hero.children).forEach(function (n) {
+        if (n !== prev && n !== layer && n.className === 'nvx-hero-layer') { drop(n); }
+      });
+      hero.appendChild(layer);
+
+      if (!animate) { layer.style.opacity = ''; drop(prev); cascade(); return; }
+
+      if (reduced) {
+        layer.style.opacity = '';
+        layer.animate([{ opacity: 0 }, { opacity: 1 }], { duration: FADE_MS, easing: 'linear', fill: 'both' });
+      } else {
+        layer.style.willChange = 'transform, opacity';
+        layer.style.opacity = '';
+        var a = layer.animate([
+          { opacity: 0, transform: 'translate(' + dx + 'px, -8px) scale(1.04)' },
+          { opacity: 1, transform: 'translate(0, 0) scale(1)' }
+        ], { duration: POD_MS, easing: EASE_JS, fill: 'both' });
+        a.onfinish = function () { layer.style.willChange = 'auto'; };
+        if (heroGlow) {
+          stop(heroGlow);
+          heroGlow.animate([{ opacity: .45 }, { opacity: 1 }], { duration: POD_MS, easing: EASE_JS, fill: 'both' });
+        }
+      }
+      if (prev) { fadeOut(prev, dx); }
+      cascade();
+    }
+
+    // Wait for the incoming pod so it never fades in empty — but cap the wait, so a
+    // slow image can never stall the cascade behind it.
+    var gate = 0;
+    if (img.complete) {
+      commit();
+    } else {
+      img.addEventListener('load', commit);
+      img.addEventListener('error', commit);
+      gate = setTimeout(commit, 80);
+    }
+  }
+
+  /* The tag sits inside the name block, so its entrance rides the block's rise+fade.
+     Only the exit needs its own animation: leaving a tagged flavour fades it out. */
+  function setTag(isNew, animate) {
+    if (isNew) { stop(tagEl); tagEl.style.opacity = ''; tagEl.hidden = false; return; }
+    if (tagEl.hidden) { return; }
+    if (!animate || reduced) { tagEl.hidden = true; return; }
+    stop(tagEl);
+    var a = tagEl.animate([{ opacity: 1 }, { opacity: 0 }], { duration: FADE_MS, easing: 'linear', fill: 'both' });
+    a.onfinish = a.oncancel = function () { stop(tagEl); tagEl.style.opacity = ''; tagEl.hidden = true; };
+  }
+
+  function textIn(animate) {
+    var nodes = [nameEl.parentNode, descEl];
+    nodes.forEach(function (n) {
+      stop(n);
+      if (!animate) { return; }
+      if (reduced) {
+        n.animate([{ opacity: 0 }, { opacity: 1 }], { duration: FADE_MS, easing: 'linear', fill: 'both' });
+      } else {
+        n.animate([
+          { opacity: 0, transform: 'translateY(6px)' },
+          { opacity: 1, transform: 'translateY(0)' }
+        ], { duration: TEXT_MS, delay: TEXT_DELAY, easing: EASE_JS, fill: 'both' });
+      }
+    });
+  }
+
+  var current = null;
+
+  /* Sticky/fixed theme headers are measured at runtime, not hardcoded: sample what the
+     browser reports at the very top of the viewport and take the lowest sticky edge.
+     scrollIntoView ignores sticky chrome, so the target is computed and scrolled manually. */
+  var detail = document.getElementById('nvx-detail');
+
+  function headerOffset() {
+    if (!document.elementsFromPoint) { return 0; }
+    var stack = document.elementsFromPoint(Math.round(window.innerWidth / 2), 2) || [];
+    var off = 0;
+    for (var i = 0; i < stack.length; i++) {
+      var el = stack[i];
+      if (el === document.body || el === document.documentElement) { continue; }
+      var pos = getComputedStyle(el).position;
+      if (pos !== 'fixed' && pos !== 'sticky') { continue; }
+      var b = el.getBoundingClientRect().bottom;
+      if (b > off && b < window.innerHeight * 0.4) { off = b; }
+    }
+    return off;
+  }
+
+  // No scroll while the customer is already comparing flavours with the panel in view.
+  function revealDetail() {
+    if (!detail) { return; }
+    var r = detail.getBoundingClientRect();
+    var off = headerOffset();
+    var frame = Math.max(1, Math.min(r.height, window.innerHeight - off));
+    var shown = Math.max(0, Math.min(r.bottom, window.innerHeight) - Math.max(r.top, off));
+    if (shown / frame >= 0.6) { return; }
+    var top = window.pageYOffset + r.top - off - 16;
+    window.scrollTo({ top: Math.max(0, top), behavior: reduced ? 'auto' : 'smooth' });
+  }
+
+  function select(slug, animate) {
+    var f = DATA.filter(function (x) { return x.slug === slug; })[0];
+    if (!f || (current && current.slug === slug && animate)) { return; }
+    var prevIndex = current ? DATA.indexOf(current) : -1;
+    current = f;
+
+    var dir = prevIndex < 0 ? 0 : (DATA.indexOf(f) > prevIndex ? 1 : -1);
+
+    // The whole cascade is driven from the moment the dissolve actually starts —
+    // never from click time, or image-decode latency would let the copy swap ahead
+    // of the pod and land the bars on top of it.
+    heroSwap(f, dir, animate, function () {
+      nameEl.textContent = f.name;
+      frEl.textContent = f.fr;
+      descEl.textContent = f.desc;
+      setTag(f.isNew, animate);
+      textIn(animate);
+
+      clearTimeout(heroTimer);
+      if (animate && !reduced) {
+        heroTimer = setTimeout(function () { paintBars(f.bars, true); }, BARS_DELAY);
+      } else {
+        paintBars(f.bars, animate);
+      }
+    });
+
+    cells.forEach(function (cell) {
+      cell.setAttribute('aria-pressed', String(cell.dataset.slug === slug));
+    });
+  }
+
+  DATA.forEach(function (f) {
+    var cell = document.createElement('button');
+    cell.type = 'button';
+    cell.className = 'nvx-cell' + (f.isNew ? '' : ' nvx-cell--classic');
+    cell.dataset.slug = f.slug;
+    cell.setAttribute('aria-pressed', 'false');
+    cell.setAttribute('aria-label', f.name);
+
+    var pod = document.createElement('div');
+    pod.className = 'nvx-cell-pod';
+    var bloom = document.createElement('div');
+    bloom.className = 'nvx-bloom';
+    pod.appendChild(bloom);
+    pod.appendChild(podNode(f.slug, 'nvx-cell-ph'));
+
+    var marker = document.createElement('div');
+    marker.className = 'nvx-cell-marker';
+    if (f.isNew) {
+      var m = document.createElement('span');
+      m.className = 'nvx-marker';
+      m.textContent = 'New';
+      marker.appendChild(m);
+    }
+
+    var title = document.createElement('div');
+    title.className = 'nvx-cell-title';
+    title.textContent = f.name;
+
+    cell.appendChild(pod);
+    cell.appendChild(marker);
+    cell.appendChild(title);
+
+    cell.addEventListener('click', function () {
+      select(f.slug, true);
+      revealDetail();
+    });
+
+    grid.appendChild(cell);
+    cells.push(cell);
+  });
+
+  var DEFAULT_SLUG = (window.NVX_DEFAULT && window.NVX_DEFAULT) || 'arctic-mint';
+  select(DEFAULT_SLUG, false);
+  if (!reduced) {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { paintBars(current.bars, true); });
+    });
+  }
+})();
+</script>
+</body>
+</html>
