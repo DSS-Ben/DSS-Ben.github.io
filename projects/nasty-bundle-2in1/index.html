@@ -701,8 +701,8 @@
     cmpDisposable:   'assets/cmp-disposable.png',  /* 20ml disposable, transparent PNG */
     cmpKit:          'assets/box-clean-v2.png',    /* Nasty Bundle 2 in 1 box */
     cmpPod:          'assets/cmp-pod.png',         /* Versa V-POD, transparent PNG */
-    ctaUrl:          'https://www.digitalsmokesupplies.com/collections/nasty-bundle',
-    accountUrl:      'https://www.digitalsmokesupplies.com/collections/nasty-bundle'
+    ctaUrl:          '#',
+    accountUrl:      '#'
   };
 
   /* ===== PRICING — authoritative trade figures. Everything derives from these. ===== */
@@ -1402,5 +1402,26 @@
 html,body{overflow-x:hidden}
 .nb2-root{width:100% !important;margin-left:0 !important}
 </style>
+<script>
+/* Portfolio demo: no shop links. CTAs stay put and show where they would go, same as Project 01. */
+(function(){
+  document.querySelectorAll('[data-nb2-link]').forEach(function(a){
+    a.setAttribute('href', '#');
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var wrap = a.closest('.nb2-ctawrap, .nb2-addwrap, .nb2-cartwrap') || a.parentNode;
+      var note = wrap.parentNode.querySelector('.nb2-cta-note');
+      if (!note) {
+        note = document.createElement('p');
+        note.className = 'nb2-cta-note';
+        note.textContent = 'This call to action brings you to the Shopify shop.';
+        note.style.cssText = 'font-size:13px;color:#9a9a9e;margin:12px 0 0;text-align:center';
+        wrap.parentNode.insertBefore(note, wrap.nextSibling);
+      }
+      note.style.opacity = '1';
+    });
+  });
+})();
+</script>
 </body>
 </html>
