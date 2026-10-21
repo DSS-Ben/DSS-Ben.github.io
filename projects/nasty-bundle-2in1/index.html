@@ -1397,5 +1397,10 @@
   });
 })();
 </script>
+<style>
+/* Global overflow fix: 100vw + calc margin caused a horizontal scrollbar on every screen. 100% is the same width here (body margin is 0) without the overflow. */
+html,body{overflow-x:hidden}
+.nb2-root{width:100% !important;margin-left:0 !important}
+</style>
 </body>
 </html>
