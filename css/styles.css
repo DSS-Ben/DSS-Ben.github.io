@@ -92,10 +92,11 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
 .label { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--grey); margin-bottom: 28px; }
 .hero h1 {
   font-size: clamp(32px, 5.2vw, 72px); font-weight: 500;
-  letter-spacing: -.035em; line-height: 1.06; max-width: 22ch;
+  letter-spacing: -.035em; line-height: 1.14; max-width: 22ch;
+  padding-bottom: .14em;
   text-wrap: balance;
 }
-.hero h1 .w { display: inline-block; }
+.hero h1 .w { display: inline-block; padding-bottom: .12em; margin-bottom: -.12em; overflow: visible; }
 .hero-intro { margin-top: 32px; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.5; color: var(--ink-2); max-width: 58ch; letter-spacing: -.005em; }
 .hero-links { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
 .hero-links .sep { color: #c7c7cc; }
@@ -125,9 +126,9 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
 .btn:active { transform: scale(.96); transition-duration: .1s; }
 
 /* ---------- Sections ---------- */
-.section { padding: clamp(56px, 8vw, 104px) 0; }
+.section { padding: clamp(56px, 8vw, 104px) 0; scroll-margin-top: 84px; }
 .section-head { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; flex-wrap: wrap; margin-bottom: clamp(28px, 4vw, 48px); }
-.section-head h2 { font-size: clamp(30px, 3.6vw, 48px); font-weight: 600; letter-spacing: -.03em; line-height: 1.05; }
+.section-head h2 { font-size: clamp(30px, 3.6vw, 48px); font-weight: 600; letter-spacing: -.03em; line-height: 1.12; padding-bottom: .08em; }
 .section-head p { color: var(--grey); font-size: 15px; }
 
 /* Scroll reveal */
@@ -262,7 +263,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
 .contact-card .section-head h2 { color: #f5f5f7; }
 .contact-email { margin-top: 4px; }
 .contact-email a {
-  display: inline-block; font-size: clamp(28px, 5.4vw, 64px); font-weight: 500; letter-spacing: -.035em; line-height: 1.05;
+  display: inline-block; font-size: clamp(28px, 5.4vw, 64px); font-weight: 500; letter-spacing: -.035em; line-height: 1.18; padding-bottom: .14em;
   background: linear-gradient(100deg, #ffffff 0%, #c9dcff 45%, #b9a3ff 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
   text-decoration: none !important; overflow-wrap: anywhere;
