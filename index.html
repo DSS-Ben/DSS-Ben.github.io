@@ -2,113 +2,176 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Benjamin Alvis — Graphic Designer, Montreal</title>
-<meta name="description" content="Benjamin Alvis is a graphic designer in Montreal working in brand identity, packaging, motion and e-commerce.">
+<meta name="description" content="I'm Benjamin Alvis, a graphic designer in Montreal working in brand identity, packaging, motion and e-commerce.">
+<meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
+
+<!-- Icon sprite: drawn once, referenced with <use>. Decorative only. -->
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M14.5 4.5l5 5L9 20H4v-5L14.5 4.5z"/><path d="M12.5 6.5l5 5"/></symbol>
+  <symbol id="i-snow" viewBox="0 0 24 24"><path d="M12 2v20M3.3 7l17.4 10M20.7 7L3.3 17"/><path d="M9.5 3.5L12 6l2.5-2.5M9.5 20.5L12 18l2.5 2.5M4 10.6l3.4-.9-.9-3.4M20 13.4l-3.4.9.9 3.4M4 13.4l3.4.9-.9 3.4M20 10.6l-3.4-.9.9-3.4"/></symbol>
+  <symbol id="i-type" viewBox="0 0 24 24"><path d="M4 7V5h16v2M12 5v14M9 19h6"/><path d="M18 14l2.5 2.5L18 19"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6.5a3 3 0 016 0V8"/></symbol>
+  <symbol id="i-ear" viewBox="0 0 24 24"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/></symbol>
+  <symbol id="i-sketch" viewBox="0 0 24 24"><path d="M3 17c3-6 5-6 6-3s3 3 5-1 4-5 7-3"/><path d="M4 21h16"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M3.5 7.5L12 3l8.5 4.5v9L12 21l-8.5-4.5v-9z"/><path d="M3.5 7.5L12 12l8.5-4.5M12 12v9"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.5 3.5h3l1.5 4-2 1.3a11 11 0 006.2 6.2l1.3-2 4 1.5v3a2 2 0 01-2 2A16.5 16.5 0 014.5 5.5a2 2 0 012-2z"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0113 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M9.5 6l6 6-6 6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9.5l6 6 6-6"/></symbol>
+</svg>
+
 <header class="site-header">
-  <a class="brand" href="#top">Benjamin Alvis</a>
-  <nav aria-label="Primary">
-    <a href="#work">Work</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <span class="header-meta">Montreal, QC</span>
+  <div class="header-inner">
+    <a class="brand" href="#top">Benjamin Alvis</a>
+    <nav aria-label="Primary">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <span class="header-meta"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>Montreal, QC</span>
+  </div>
+  <span class="scroll-progress" aria-hidden="true"></span>
 </header>
 
 <main id="top">
   <section class="hero">
-    <p class="label">Graphic Designer — Brand, Packaging, Motion, E-commerce</p>
-    <h1>Benjamin Alvis is a graphic designer based in Montreal. He builds brand systems, packaging and digital campaigns from concept through production.</h1>
-    <p class="hero-intro">Nearly ten years across agency, corporate and e-commerce work. Identity, dielines and print production, motion, and Shopify — end to end, with an AI-assisted production pipeline that cuts campaign time by roughly 40%.</p>
-    <p class="hero-links"><a href="#work">Selected work</a> · <a href="mailto:benjalvis@gmail.com">benjalvis@gmail.com</a></p>
+    <div class="hero-glow" aria-hidden="true"><span></span><span></span><span></span></div>
+    <p class="label" data-hero="1">Graphic Designer — Brand, Packaging, Motion, E-commerce</p>
+    <h1 data-split>Hi, I'm Benjamin Alvis. I'm a graphic designer in Montreal, and I build brand systems, packaging and digital campaigns from concept through production.</h1>
+    <p class="hero-intro" data-hero="2">Welcome in — I've spent nearly ten years across agency, corporate and e-commerce work. I do identity, dielines and print production, motion, and Shopify, end to end, with an AI-assisted pipeline that cuts my campaign time by roughly 40%.</p>
+    <p class="hero-links" data-hero="3"><a class="btn btn-primary" href="#work">Selected work<svg class="ico" aria-hidden="true"><use href="#i-down"/></svg></a> <span class="sep">·</span> <a class="btn btn-link" href="mailto:benjalvis@gmail.com"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg>benjalvis@gmail.com</a></p>
   </section>
 
   <section id="work" class="section">
-    <div class="section-head">
+    <div class="section-head" data-reveal>
       <h2>Selected work</h2>
-      <p>Four projects. More work and experiments on Behance.</p>
+      <p>A few of my favourite projects. You'll find more of my work and experiments on Behance.</p>
     </div>
 
     <div class="work-grid">
-      <article class="project">
-        <div class="image" role="img" aria-label="INKD marketplace prototype — image to be added"></div>
-        <div class="project-meta">
-          <h3>INKD — Marketplace prototype</h3>
-          <p>UX, Identity</p>
+      <article class="project" data-reveal data-tilt style="--hue-a:#2c2c2e;--hue-b:#0b0b0c;--glyph:#ffffff;--orb:rgba(120,120,255,.55)">
+        <div class="tilt-card">
+          <div class="image" role="img" aria-label="INKD marketplace prototype — image to be added">
+            <span class="art" aria-hidden="true"><span class="orb"></span><svg class="glyph"><use href="#i-pen"/></svg></span>
+          </div>
+          <div class="card-body">
+            <div class="project-meta">
+              <h3>INKD — Marketplace prototype</h3>
+              <p>UX, Identity</p>
+            </div>
+            <p class="project-desc">I built a marketplace for booking tattoo and creative services: client discovery, artist portfolios, booking and deposits. For me, the product thinking is the case study — discovery, profile, booking flow, confirmation and map — not a template demo.</p>
+          </div>
+          <span class="card-glare" aria-hidden="true"></span>
         </div>
-        <p class="project-desc">A marketplace for booking tattoo and creative services: client discovery, artist portfolios, booking and deposits. The product thinking is the case study — discovery, profile, booking flow, confirmation and map — not a template demo.</p>
       </article>
 
-      <article class="project">
-        <div class="image" role="img" aria-label="FRIMAS skincare brand — image to be added"></div>
-        <div class="project-meta">
-          <h3>FRIMAS — Skincare brand world</h3>
-          <p>Identity, Packaging</p>
+      <article class="project" data-reveal data-tilt style="--hue-a:#eef5fd;--hue-b:#bcd6f2;--glyph:#2f6fb3;--orb:rgba(255,255,255,.9)">
+        <div class="tilt-card">
+          <div class="image" role="img" aria-label="FRIMAS skincare brand — image to be added">
+            <span class="art" aria-hidden="true"><span class="orb"></span><svg class="glyph"><use href="#i-snow"/></svg></span>
+          </div>
+          <div class="card-body">
+            <div class="project-meta">
+              <h3>FRIMAS — Skincare brand world</h3>
+              <p>Identity, Packaging</p>
+            </div>
+            <p class="project-desc">I built this Montreal winter-skincare brand from scratch. One bottle system across three SKUs — cleanser, barrier serum, rich cream — with bilingual labels, dielines and a launch campaign. Skincare engineered for −30°.</p>
+          </div>
+          <span class="card-glare" aria-hidden="true"></span>
         </div>
-        <p class="project-desc">An original Montreal winter-skincare brand, built from scratch. One bottle system across three SKUs — cleanser, barrier serum, rich cream — with bilingual labels, dielines and a launch campaign. Skincare engineered for −30°.</p>
       </article>
 
-      <article class="project">
-        <div class="image" role="img" aria-label="Kinetic typography — image to be added"></div>
-        <div class="project-meta">
-          <h3>Kinetic typography</h3>
-          <p>Motion, Type</p>
+      <article class="project" data-reveal data-tilt style="--hue-a:#f6efff;--hue-b:#d6c4fb;--glyph:#6a3fc9;--orb:rgba(255,190,240,.8)">
+        <div class="tilt-card">
+          <div class="image" role="img" aria-label="Kinetic typography — image to be added">
+            <span class="art" aria-hidden="true"><span class="orb"></span><svg class="glyph"><use href="#i-type"/></svg></span>
+          </div>
+          <div class="card-body">
+            <div class="project-meta">
+              <h3>Kinetic typography</h3>
+              <p>Motion, Type</p>
+            </div>
+            <p class="project-desc">I build brand animation in code. For me, type carries the piece: clear hierarchy, precise timing, no decorative effects competing with the message.</p>
+          </div>
+          <span class="card-glare" aria-hidden="true"></span>
         </div>
-        <p class="project-desc">Brand animation built in code. Type carries the piece: clear hierarchy, precise timing, no decorative effects competing with the message.</p>
       </article>
 
-      <article class="project">
-        <div class="image" role="img" aria-label="E-commerce launch kit — image to be added"></div>
-        <div class="project-meta">
-          <h3>E-commerce launch kit</h3>
-          <p>Shopify, Landing, Email</p>
+      <article class="project" data-reveal data-tilt style="--hue-a:#fff4ea;--hue-b:#ffd3b0;--glyph:#c4581a;--orb:rgba(255,240,170,.85)">
+        <div class="tilt-card">
+          <div class="image" role="img" aria-label="E-commerce launch kit — image to be added">
+            <span class="art" aria-hidden="true"><span class="orb"></span><svg class="glyph"><use href="#i-bag"/></svg></span>
+          </div>
+          <div class="card-body">
+            <div class="project-meta">
+              <h3>E-commerce launch kit</h3>
+              <p>Shopify, Landing, Email</p>
+            </div>
+            <p class="project-desc">I put together one launch system: landing page, social assets and email/CRM, from announcement to checkout to inbox.</p>
+          </div>
+          <span class="card-glare" aria-hidden="true"></span>
         </div>
-        <p class="project-desc">One launch, one system: landing page, social assets and email/CRM, from announcement to checkout to inbox.</p>
       </article>
     </div>
-    <p class="image-note">Images: replace each grey block with project work. Put an &lt;img&gt; inside the .image div — no other change needed.</p>
-  </section>
+      </section>
 
   <section class="section">
-    <div class="section-head"><h2>Process</h2></div>
+    <div class="section-head" data-reveal><h2>Process</h2></div>
     <ol class="process">
-      <li><span>01</span><h3>Listen</h3><p>Audience, shelf and competitors first — before a file is opened.</p></li>
-      <li><span>02</span><h3>Sketch</h3><p>Many directions on paper, narrowed to the two worth building.</p></li>
-      <li><span>03</span><h3>Refine</h3><p>Grid, type and colour locked. Margins checked at real size, on screen and in print.</p></li>
-      <li><span>04</span><h3>Deliver</h3><p>Press-ready files, a usage guide, and a press check when it goes to print.</p></li>
+      <li data-reveal><i class="step-ico" aria-hidden="true"><svg><use href="#i-ear"/></svg></i><span>01</span><h3>Listen</h3><p>I start with your audience, your shelf and your competitors — before I open a file.</p></li>
+      <li data-reveal><i class="step-ico" aria-hidden="true"><svg><use href="#i-sketch"/></svg></i><span>02</span><h3>Sketch</h3><p>I sketch on paper first — many directions, narrowed down to the two worth building.</p></li>
+      <li data-reveal><i class="step-ico" aria-hidden="true"><svg><use href="#i-sliders"/></svg></i><span>03</span><h3>Refine</h3><p>I lock grid, type and colour, and I check every margin at real size, on screen and in print.</p></li>
+      <li data-reveal><i class="step-ico" aria-hidden="true"><svg><use href="#i-box"/></svg></i><span>04</span><h3>Deliver</h3><p>I deliver press-ready files, a usage guide, and a press check when it goes to print.</p></li>
     </ol>
   </section>
 
   <section id="about" class="section about">
-    <div class="section-head"><h2>About</h2></div>
-    <p class="about-lead">Graphic designer with nearly ten years across agency, corporate and e-commerce environments, taking projects from creative concept through production and final delivery.</p>
-    <table class="experience">
-      <tr><td>2023 — Present</td><td>Graphic / Marketing Designer, DSS Distribution, Montreal</td></tr>
-      <tr><td>2019 — 2023</td><td>Graphic Designer, LP3, Medisca Network Partner, Montreal</td></tr>
-      <tr><td>2018 — 2019</td><td>Graphic Designer, Diseño Grafico Studio, Montreal</td></tr>
-      <tr><td>2016 — 2018</td><td>Graphic Designer, Agency MAC Media, Montreal</td></tr>
-    </table>
-    <p class="small">Education: DEP, Graphic Design, Rosemount Technology Centre, Montreal. No client work-for-hire is shown here — this site is original work.</p>
-    <p class="small"><strong>Tools:</strong> Photoshop, Illustrator, InDesign, Figma, After Effects, Premiere Pro, Lightroom. <strong>AI:</strong> Claude, Midjourney, Adobe Firefly, Nano Banana, Seedance. <strong>3D:</strong> Blender, Prusa Core One. <strong>E-commerce:</strong> Shopify, landing pages, email/CRM.</p>
+    <div class="section-head" data-reveal><h2>About</h2></div>
+    <p class="about-lead" data-scrub>I'm a graphic designer with nearly ten years across agency, corporate and e-commerce. I take my projects from creative concept through production and final delivery — and I love that whole arc, not just the finished piece.</p>
+    <div class="about-card" data-reveal>
+      <table class="experience">
+        <tr><td>2023 — Present</td><td>Graphic / Marketing Designer, DSS Distribution, Montreal</td></tr>
+        <tr><td>2019 — 2023</td><td>Graphic Designer, LP3, Medisca Network Partner, Montreal</td></tr>
+        <tr><td>2018 — 2019</td><td>Graphic Designer, Diseño Grafico Studio, Montreal</td></tr>
+        <tr><td>2016 — 2018</td><td>Graphic Designer, Agency MAC Media, Montreal</td></tr>
+      </table>
+    </div>
+    <div class="about-notes" data-reveal>
+      <p class="small"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Education: DEP, Graphic Design, Rosemount Technology Centre, Montreal. What you see here is my own original work — no client work-for-hire.</p>
+      <p class="small"><svg class="ico" aria-hidden="true"><use href="#i-grid"/></svg><strong>What I use:</strong> Photoshop, Illustrator, InDesign, Figma, After Effects, Premiere Pro, Lightroom. <strong>AI:</strong> Claude, Midjourney, Adobe Firefly, Nano Banana, Seedance. <strong>3D:</strong> Blender, Prusa Core One. <strong>E-commerce:</strong> Shopify, landing pages, email/CRM.</p>
+    </div>
   </section>
 
   <section id="contact" class="section contact">
-    <div class="section-head"><h2>Contact</h2></div>
-    <p class="contact-email"><a href="mailto:benjalvis@gmail.com">benjalvis@gmail.com</a></p>
-    <p><a href="tel:+15142139991">514-213-9991</a> · Montreal, QC</p>
-    <p><a href="https://www.behance.net/benjalvis">Behance — more work and experiments</a></p>
-    <p class="small">Open to a design test or trial assignment.</p>
+    <div class="contact-card" data-reveal>
+      <span class="spot" aria-hidden="true"></span>
+      <div class="section-head"><h2>Contact</h2></div>
+      <p class="contact-intro">Welcome to my design world — if you like what you see here, I'd love to hear from you. Let's make something together.</p>
+      <p class="contact-email"><a href="mailto:benjalvis@gmail.com">benjalvis@gmail.com</a></p>
+      <div class="contact-rows">
+        <p><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg><a href="tel:+15142139991">514-213-9991</a> · Montreal, QC</p>
+        <p><svg class="ico" aria-hidden="true"><use href="#i-grid"/></svg><a href="https://www.behance.net/benjalvis">Behance — more work and experiments</a></p>
+      </div>
+      <p class="small"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Open to a design test or trial assignment.</p>
+    </div>
   </section>
 </main>
 
 <footer class="site-footer">
-  <p>© 2026 Benjamin Alvis — Montreal</p>
+  <p>Thanks for stopping by — Benjamin Alvis, Montreal</p>
 </footer>
 <script src="js/main.js"></script>
 </body>
