@@ -1373,5 +1373,29 @@
 <!-- ================================ PASTE BLOCK END ================================ -->
 
 <footer style="background:#050505;color:rgba(255,255,255,.6);font-family:'Montserrat',system-ui,sans-serif;font-size:13px;padding:28px 20px 40px;text-align:center"><a href="https://dss-ben.github.io/" style="color:#fff">← Back to portfolio — Benjamin Alvis, Montreal</a></footer>
+<!-- iOS / touch static-mode fix: GSAP + ScrollTrigger + tilt + parallax + ticker + blur/mix-blend layers flicker on iPad/iPhone. On touch devices, kill the motion and show everything at rest. Prices/toggles still work. -->
+<style>
+.nb2-static{width:100% !important;margin-left:0 !important}
+.nb2-static *{animation:none !important;transition:none !important;will-change:auto !important}
+.nb2-static .nb2-anim,.nb2-static [data-nb2-reveal],.nb2-static [data-nb2-tier]{opacity:1 !important;transform:none !important}
+.nb2-static .nb2-ctaglow,.nb2-static .nb2-ctasheen,.nb2-static .nb2-cartwet,.nb2-static .nb2-ctawet,.nb2-static .nb2-cartsheen{display:none !important}
+</style>
+<script>
+(function(){
+  var isTouch = window.matchMedia && (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(hover: none)').matches);
+  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  if (!isTouch && !isIOS) { return; }
+  var root = document.getElementById('nb2-root');
+  if (!root) { return; }
+  root.classList.add('nb2-static');
+  root.classList.remove('nb2-ready');
+  try { if (window.gsap) { window.gsap.killTweensOf('*'); } } catch (e) {}
+  try { if (window.NB2_GAUGE_RESET) { window.NB2_GAUGE_RESET(); } } catch (e) {}
+  root.querySelectorAll('.nb2-anim, [data-nb2-reveal], [data-nb2-tier]').forEach(function(el){
+    el.style.setProperty('opacity', '1', 'important');
+    el.style.setProperty('transform', 'none', 'important');
+  });
+})();
+</script>
 </body>
 </html>
