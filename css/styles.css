@@ -331,3 +331,20 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
 
 /* Humble personal edit, Oct 21: welcome line in the dark contact card */
 .contact-intro { color: #a1a1a6; font-size: 16px; margin-bottom: 28px; max-width: 52ch; }
+
+/* ---------- Header logo loop (adapted from ben-alvis-hero, small + left-top) ---------- */
+.ba-logo {
+  display: inline-grid;
+  position: relative;
+  font-family: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1;
+  color: var(--ink);
+  white-space: pre;
+  user-select: none;
+}
+@media (max-width: 600px) { .ba-logo { font-size: 15px; } }
+.ba-logo__ph { grid-area: 1 / 1; position: relative; overflow: hidden; padding: 0.1em 0.12em 0.24em; }
+.ba-logo__ch { display: inline-block; will-change: transform; transform: translateY(1.4em); }
+.ba-logo__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.brand .ba-logo { vertical-align: middle; }
