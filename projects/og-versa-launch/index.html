@@ -474,10 +474,22 @@ document.getElementById('og-cta-btn').addEventListener('click', function(e){
 </script>
 
 <style>
-/* Mobile fix (Oct 22, 2026): the flavour strip was absolutely positioned with
-   left:400px, wider than a phone screen, so it collided with the headline.
-   On phones it now flows in normal order below the intro text. */
+/* Mobile fix, corrected (Oct 22, 2026): the hero is a flex column whose
+   children are ALL absolute on desktop — the copy block (headline) and the
+   flavour strip. Fix #1 only un-stuck the strip, so it became a flex item
+   landing on top of the still-absolute headline. On phones both blocks now
+   join the normal flow, stacked copy-then-flavours, graphic untouched. */
 @media (max-width: 767px) {
+  .nasty-hero {
+    justify-content: flex-start !important;
+    padding: 24px 20px !important;
+  }
+  [data-copy] {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    max-width: none !important;
+  }
   [data-flavlist] {
     position: static !important;
     top: auto !important;
