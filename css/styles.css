@@ -175,13 +175,17 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
 .project:hover .glyph { scale: 1.06; }
 
 .card-body { padding: 22px 26px 28px; }
-.project-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
-.project-meta h3 { font-size: 21px; font-weight: 600; letter-spacing: -.02em; line-height: 1.2; }
+.project-meta { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.project-meta h3 { font-size: 21px; font-weight: 600; letter-spacing: -.02em; line-height: 1.25; max-width: 100%; }
 .project-meta p {
-  color: var(--grey); font-size: 13px; white-space: nowrap;
+  align-self: flex-start; max-width: 100%;
+  color: var(--grey); font-size: 13px; line-height: 1.4; white-space: normal;
   padding: 4px 10px; border-radius: 999px; background: rgba(0, 0, 0, .045);
 }
-.project-desc { margin-top: 10px; color: var(--ink-2); font-size: 15px; max-width: 58ch; }
+.project-desc { margin-top: 12px; color: var(--ink-2); font-size: 15px; line-height: 1.55; max-width: 58ch; }
+/* Tall portrait thumbnails (e.g. the Versa X device) must not be cropped into a close-up */
+.image--contain { background: #000; }
+.image--contain img { object-fit: contain; }
 
 .card-glare { display: none;
   position: absolute; inset: 0; pointer-events: none; border-radius: inherit; z-index: 3;
