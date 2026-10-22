@@ -472,5 +472,25 @@ document.getElementById('og-cta-btn').addEventListener('click', function(e){
   setTimeout(function(){ btn.classList.remove('is-pressed'); }, 300);
 });
 </script>
+
+<style>
+/* Mobile fix (Oct 22, 2026): the flavour strip was absolutely positioned with
+   left:400px, wider than a phone screen, so it collided with the headline.
+   On phones it now flows in normal order below the intro text. */
+@media (max-width: 767px) {
+  [data-flavlist] {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+    align-items: flex-start !important;
+    margin-top: 24px !important;
+  }
+  [data-flavours] {
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
+  }
+}
+</style>
 </body>
 </html>
