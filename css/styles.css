@@ -506,3 +506,158 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
   .btn-animated-wrap::after { animation: none !important; }
   .btn-animated .ico { transition: none; }
 }
+
+/* ===== My Take on AI note ===== */
+@property --ai-note-ink {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+.ai-note {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 46rem;
+  margin: clamp(3rem, 6vw, 5rem) 0;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  color: #1d1d1f;
+  font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Title: ink black at rest ---------- */
+.ai-note-title {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 0 1.5rem;
+  font-family: inherit;
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: #1d1d1f;
+}
+
+/* ---------- Body ---------- */
+.ai-note-body {
+  max-width: 100%;
+}
+
+.ai-note-text {
+  margin: 0 0 1em;
+  font-family: inherit;
+  font-size: clamp(1.1875rem, 1.1rem + 0.5vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: #1d1d1f;
+  overflow-wrap: break-word;
+}
+
+.ai-note-text:last-child {
+  margin-bottom: 0;
+}
+
+.ai-note-accent {
+  font-weight: 700;
+  color: #5c2ee8;
+}
+
+.ai-note-strong {
+  font-weight: 700;
+  color: #1d1d1f;
+}
+
+/* ---------- Title gradient (only where text clipping is supported) ---------- */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .ai-note-title {
+    --ai-note-ink: 0;
+    background-image:
+      linear-gradient(rgba(29, 29, 31, var(--ai-note-ink)), rgba(29, 29, 31, var(--ai-note-ink))),
+      linear-gradient(90deg,
+        #0090ff 0%,
+        #5c2ee8 25%,
+        #9d7bff 40%,
+        #1d1d1f 55%,
+        #1d1d1f 100%);
+    background-size: 100% 100%, 240% 100%;
+    background-position: 0 0, 100% 0;
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: background-position 0.9s cubic-bezier(0.45, 0, 0.25, 1);
+  }
+
+  /* Desktop: sweeps in while the note is hovered, returns to black after */
+  @media (hover: hover) and (pointer: fine) {
+    .ai-note:hover .ai-note-title {
+      background-position: 0 0, 0 0;
+    }
+  }
+
+  /* Phone: plays once on scroll into view (class added by the JS snippet) */
+  .ai-note-title.ai-note-play {
+    animation: ai-note-sweep 2.6s 1;
+  }
+
+  @keyframes ai-note-sweep {
+    0%   { background-position: 0 0, 100% 0; --ai-note-ink: 0; animation-timing-function: cubic-bezier(0.45, 0, 0.25, 1); }
+    42%  { background-position: 0 0, 0 0;    --ai-note-ink: 0; }
+    62%  { background-position: 0 0, 0 0;    --ai-note-ink: 0; animation-timing-function: ease-in-out; }
+    100% { background-position: 0 0, 0 0;    --ai-note-ink: 1; }
+  }
+
+  /* Reduced motion: colour cross-fade instead of a sweep */
+  @media (prefers-reduced-motion: reduce) {
+    .ai-note-title {
+      --ai-note-ink: 1;
+      background-position: 0 0, 0 0;
+      transition: --ai-note-ink 0.4s ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .ai-note:hover .ai-note-title {
+        --ai-note-ink: 0;
+      }
+    }
+    .ai-note-title.ai-note-play {
+      animation: ai-note-fade 2s ease-in-out 1;
+    }
+    @keyframes ai-note-fade {
+      0%, 100% { --ai-note-ink: 1; }
+      25%, 60% { --ai-note-ink: 0; }
+    }
+  }
+
+  /* High contrast / forced colours: plain system text */
+  @media (forced-colors: active) {
+    .ai-note-title {
+      background: none;
+      -webkit-text-fill-color: CanvasText;
+      color: CanvasText;
+    }
+  }
+}
+
+
+/* ---------- Header AI link: gradient shine, scrolls to the AI note ---------- */
+.site-header nav a.nav-ai {
+  background: linear-gradient(90deg, #0090ff, #5c2ee8, #9d7bff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: 700;
+}
+.site-header nav a.nav-ai:hover,
+.site-header nav a.nav-ai.is-active {
+  background: linear-gradient(90deg, #0090ff, #5c2ee8, #9d7bff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
