@@ -219,7 +219,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
 .step-ico svg { width: 22px; height: 22px; fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .process span { display: block; font-size: 12px; letter-spacing: .12em; color: var(--grey); }
 .process h3 { font-size: 21px; font-weight: 600; letter-spacing: -.02em; margin: 6px 0 8px; }
-.process p { font-size: 14px; color: var(--ink-2); }
+.process p { font-size: 15px; color: var(--ink-2); }
 
 /* ---------- About ---------- */
 .about-lead { font-size: clamp(24px, 3vw, 40px); font-weight: 500; line-height: 1.3; padding-bottom: .1em; letter-spacing: -.025em; max-width: 30ch; margin-bottom: clamp(36px, 5vw, 56px); }
@@ -334,7 +334,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
 }
 
 /* Humble personal edit, Oct 21: welcome line in the dark contact card */
-.contact-intro { color: #a1a1a6; font-size: 16px; margin-bottom: 28px; max-width: 52ch; }
+.contact-intro { color: #a1a1a6; font-size: 15px; margin-bottom: 28px; max-width: 52ch; }
 
 /* ---------- Header logo loop (adapted from ben-alvis-hero, small + left-top) ---------- */
 .ba-logo {
@@ -518,7 +518,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
   box-sizing: border-box;
   width: 100%;
   max-width: 46rem;
-  margin: clamp(3rem, 6vw, 5rem) 0;
+  margin: clamp(2.25rem, 4vw, 3.5rem) 0;
   padding: 0;
   background: transparent;
   border-radius: 0;
@@ -534,7 +534,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
   max-width: 100%;
   margin: 0 0 1.5rem;
   font-family: inherit;
-  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-size: clamp(30px, 3.6vw, 48px);
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: -0.02em;
