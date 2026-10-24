@@ -662,16 +662,17 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
   color: transparent;
 }
 
-/* ---------- Mobile: static hero CTA (fixes iOS scroll ghosting, Oct 24, 2026) ----------
-   The purple button runs three infinite loops (float, gradient shift, glow pulse)
-   plus a blurred pulsing floor shadow below it. On phones those layers repaint
-   every frame, and during fast momentum scroll iOS Safari smears them into a
-   ghost image right after the button. On phones the button keeps its violet
-   gradient and a static glow but nothing animates, so scrolling past it stays
-   clean. Desktop unchanged. */
+/* ---------- Mobile: hero CTA keeps its float (iOS scroll ghosting fix v2, Oct 24, 2026) ----------
+   The ghost came from the layers that repaint every frame: the shifting
+   gradient, the pulsing box-shadow glow, and the blurred pulsing floor shadow
+   below the button — iOS Safari smears those during fast momentum scroll.
+   The float itself is transform-only, which the compositor handles cheaply, so
+   on phones the button keeps floating while the repaint loops stop. Static
+   violet gradient + static glow + static floor shadow preserve the look.
+   Desktop unchanged (all three loops still run). */
 @media (max-width: 768px) {
   .btn-animated {
-    animation: none;
+    animation: btnFloat 3s ease-in-out infinite;
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,.3),
       0 0 18px rgba(92, 46, 232, .4),
