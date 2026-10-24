@@ -729,7 +729,7 @@
   if (!root) { return; }
 
   var money = function(v){ return '$' + v.toFixed(2); };
-  var reduced = function(){ return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; };
+  var reduced = function(){ var mm = window.matchMedia; if (!mm) { return false; } var touch = mm('(pointer: coarse)').matches || mm('(hover: none)').matches; var ios = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); return mm('(prefers-reduced-motion: reduce)').matches || touch || ios; };
 
   /* ---------- assets, links (runs with or without GSAP) ---------- */
   root.querySelectorAll('[data-nb2-asset]').forEach(function(img){
@@ -1186,7 +1186,7 @@
   var G = window.gsap, ST = window.ScrollTrigger;
   var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (!(G && ST) || RM) { return; }   /* fail-safe: markup already reads correctly */
+  if (!(G && ST) || reduced()) { return; }   /* fail-safe: markup already reads correctly — and static on touch/iOS, where GSAP scroll motion glitches */
 
   G.registerPlugin(ST);
   ST.config({ ignoreMobileResize: true });
@@ -1391,6 +1391,7 @@
   root.classList.add('nb2-static');
   root.classList.remove('nb2-ready');
   try { if (window.gsap) { window.gsap.killTweensOf('*'); } } catch (e) {}
+  try { if (window.ScrollTrigger) { window.ScrollTrigger.getAll().forEach(function(t){ t.kill(); }); } } catch (e) {}
   try { if (window.NB2_GAUGE_RESET) { window.NB2_GAUGE_RESET(); } } catch (e) {}
   root.querySelectorAll('.nb2-anim, [data-nb2-reveal], [data-nb2-tier]').forEach(function(el){
     el.style.setProperty('opacity', '1', 'important');
