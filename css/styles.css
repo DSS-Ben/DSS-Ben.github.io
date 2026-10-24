@@ -681,3 +681,16 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
   .btn-animated-wrap::after { animation: none; opacity: .7; }
   .btn-animated__sheen { animation: none !important; }
 }
+
+/* ---------- Mobile: no reveal jump in Selected work + room under the hero (ghosting fix v3, Oct 24, 2026) ----------
+   v2 killed the button's repaint loops but the jump survived, so the button
+   was not the whole story. The real motion right after the button is the
+   scroll-reveal: the Selected work heading and cards start 28px low, scaled
+   down and faded, then slide up as they enter the viewport — on a fast scroll
+   that reads as a jump right under the button. On phones the whole work block
+   now renders statically, and the hero gets extra bottom room so the heading
+   is not crowded against the button. Desktop unchanged. */
+@media (max-width: 768px) {
+  #work [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .hero { padding-bottom: 96px; }
+}
