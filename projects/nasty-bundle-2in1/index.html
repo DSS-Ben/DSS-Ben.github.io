@@ -1400,8 +1400,8 @@
 })();
 </script>
 <style>
-/* Global overflow fix: 100vw + calc margin caused a horizontal scrollbar on every screen. 100% is the same width here (body margin is 0) without the overflow. */
-html,body{overflow-x:hidden}
+/* Horizontal containment that preserves native scroll: overflow-x:hidden on html/body creates a scroll container on iOS and smears content during momentum scrolling; clip contains overflow without creating one. */
+html,body{overflow-x:clip}
 .nb2-root{width:100% !important;margin-left:0 !important}
 </style>
 <script>
