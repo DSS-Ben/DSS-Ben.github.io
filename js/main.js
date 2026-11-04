@@ -205,3 +205,30 @@
 
   io.observe(note);
 })();
+
+/* ---------- 7. Work filters (Burbano guide, Nov 4, 2026) ---------- */
+(function () {
+  var buttons = document.querySelectorAll('.filter-btn');
+  var projects = document.querySelectorAll('#work .project[data-discipline]');
+  var note = document.getElementById('work-filter-note');
+  if (!buttons.length || !projects.length) return;
+  function apply(filter) {
+    var shown = 0;
+    projects.forEach(function (p) {
+      var match = filter === 'all' || p.getAttribute('data-discipline') === filter;
+      p.style.display = match ? '' : 'none';
+      if (match) shown++;
+    });
+    buttons.forEach(function (b) {
+      b.setAttribute('aria-pressed', b.getAttribute('data-filter') === filter ? 'true' : 'false');
+    });
+    if (note) {
+      note.textContent = filter === 'all'
+        ? 'Showing all 7 projects.'
+        : 'Showing ' + shown + ' project' + (shown === 1 ? '' : 's') + '.';
+    }
+  }
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () { apply(b.getAttribute('data-filter')); });
+  });
+})();

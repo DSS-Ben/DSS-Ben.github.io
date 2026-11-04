@@ -63,8 +63,47 @@
       <p>Real work, Projects 01 to 07 — and more work and experiments on Behance.</p>
     </div>
 
+    <div class="work-guide" data-reveal>
+      <p class="work-guide-title">In a hurry? Start here</p>
+      <p class="work-guide-text">Pick the kind of work you are hiring for, and start with the project that shows it best.</p>
+      <ul class="work-guide-links">
+        <li><a href="#featured-brand">Brand &rarr;</a></li>
+        <li><a href="#featured-motion">Motion &rarr;</a></li>
+        <li><a href="#featured-digital">Digital &amp; e-commerce &rarr;</a></li>
+      </ul>
+    </div>
+
+    <div class="work-featured" aria-label="Start here: highlighted projects">
+      <article class="featured-card" id="featured-brand" data-reveal>
+        <p class="chip">Brand</p>
+        <h3>Project 05 — Gündem, fragrance brand identity</h3>
+        <p>A full fragrance identity built from nothing: bottle, label and a golden-hour world that feels real.</p>
+        <p><a href="projects/gundem-golden-hour/">View the project &rarr;</a></p>
+      </article>
+      <article class="featured-card" id="featured-motion" data-reveal>
+        <p class="chip">Motion</p>
+        <h3>Project 07 — Glās, motion graphics &amp; animation</h3>
+        <p>Hand-animated spots, no AI: classic animation fundamentals, timed and moved by hand.</p>
+        <p><a href="projects/glas-motion/">View the project &rarr;</a></p>
+      </article>
+      <article class="featured-card" id="featured-digital" data-reveal>
+        <p class="chip">Digital &amp; e-commerce</p>
+        <h3>Project 03 — Versa X battery + pods picker</h3>
+        <p>A scroll-reveal device followed by an 18-flavour picker: e-commerce landing page and interaction in one piece.</p>
+        <p><a href="projects/versa-x-battery-pods/">View the project &rarr;</a></p>
+      </article>
+    </div>
+
+    <div class="work-filters" role="group" aria-label="Filter all projects">
+      <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" class="filter-btn" data-filter="brand" aria-pressed="false">Brand</button>
+      <button type="button" class="filter-btn" data-filter="motion" aria-pressed="false">Motion</button>
+      <button type="button" class="filter-btn" data-filter="digital" aria-pressed="false">Digital</button>
+    </div>
+    <p class="work-filter-note" id="work-filter-note" aria-live="polite">Showing all 7 projects.</p>
+
     <div class="work-grid">
-      <article class="project" data-reveal data-tilt>
+      <article class="project" data-discipline="digital" data-reveal data-tilt>
         <div class="tilt-card">
           <div class="image" role="img" aria-label="OG Series new liquid launch">
             <img src="projects/og-versa-launch/assets/og-hero-banner.jpg" alt="OG Series launch hero banner">
@@ -81,7 +120,7 @@
           <span class="card-glare" aria-hidden="true"></span>
         </div>
       </article>
-      <article class="project" data-reveal data-tilt>
+      <article class="project" data-discipline="digital" data-reveal data-tilt>
         <div class="tilt-card">
           <div class="image" role="img" aria-label="Nasty Bundle 2 in 1 wholesale promotion">
             <img src="projects/nasty-bundle-2in1/assets/bundle-thumbnail.jpg" alt="Nasty Bundle 2 in 1 box, glowing">
@@ -98,13 +137,13 @@
           <span class="card-glare" aria-hidden="true"></span>
         </div>
       </article>
-      <article class="project" data-reveal data-tilt>
+      <article class="project is-featured" data-discipline="digital" id="project-versa-x" data-reveal data-tilt>
         <div class="tilt-card">
           <div class="image" role="img" aria-label="Versa X battery and pods picker">
             <img src="projects/versa-x-battery-pods/assets/versa-x-thumbnail.jpg" alt="Versa X device beside a red Cherry Raspberry Lime pod">
             <span class="art" aria-hidden="true"><span class="orb"></span><svg class="glyph"><use href="#i-bag"/></svg></span>
           </div>
-          <div class="card-body">
+          <div class="card-body"><p class="start-badge">Start here</p>
             <div class="project-meta">
               <h3>Project 03 — Versa X battery + pods picker</h3>
               <p>E-commerce, Landing page, Scroll animation</p>
@@ -115,7 +154,7 @@
           <span class="card-glare" aria-hidden="true"></span>
         </div>
       </article>
-      <article class="project" data-reveal data-tilt>
+      <article class="project" data-discipline="brand" data-reveal data-tilt>
         <div class="tilt-card">
           <div class="image" role="img" aria-label="Versa flavour menu print design">
             <img src="projects/versa-flavour-menu-print/assets/versa-thumbnail.jpg" alt="Versa flavour menu print design">
@@ -132,13 +171,13 @@
           <span class="card-glare" aria-hidden="true"></span>
         </div>
       </article>
-      <article class="project" data-reveal data-tilt>
+      <article class="project is-featured" data-discipline="brand" id="project-gundem" data-reveal data-tilt>
         <div class="tilt-card">
           <div class="image" role="img" aria-label="Gündem fragrance brand identity">
             <img src="projects/gundem-golden-hour/gundem-straight-hero.png" alt="Gündem perfume bottle in golden light">
             <span class="art" aria-hidden="true"><span class="orb"></span><svg class="glyph"><use href="#i-bag"/></svg></span>
           </div>
-          <div class="card-body">
+          <div class="card-body"><p class="start-badge">Start here</p>
             <div class="project-meta">
               <h3>Project 05 — Gündem, fragrance brand identity</h3>
               <p>Brand identity, AI-assisted visuals</p>
@@ -149,7 +188,7 @@
           <span class="card-glare" aria-hidden="true"></span>
         </div>
       </article>
-      <article class="project" data-reveal data-tilt>
+      <article class="project" data-discipline="motion" data-reveal data-tilt>
         <div class="tilt-card">
           <div class="image" role="img" aria-label="AI Product Video, editing and motion">
             <video autoplay muted loop playsinline preload="metadata" src="projects/ai-product-video/ai-product-video-720.mp4" style="display:block;width:100%;height:100%;object-fit:cover"></video>
@@ -166,13 +205,13 @@
           <span class="card-glare" aria-hidden="true"></span>
         </div>
       </article>
-      <article class="project" data-reveal data-tilt>
+      <article class="project is-featured" data-discipline="motion" id="project-glas" data-reveal data-tilt>
         <div class="tilt-card">
           <div class="image" role="img" aria-label="Glās motion graphics and animation">
             <video autoplay muted loop playsinline preload="metadata" src="projects/glas-motion/glas-logo-sting.mp4" style="display:block;width:100%;height:100%;object-fit:cover"></video>
             <span class="art" aria-hidden="true"><span class="orb"></span><svg class="glyph"><use href="#i-sketch"/></svg></span>
           </div>
-          <div class="card-body">
+          <div class="card-body"><p class="start-badge">Start here</p>
             <div class="project-meta">
               <h3>Project 07 — Glās, motion graphics &amp; animation</h3>
               <p>Motion graphics, Animation</p>
