@@ -13,6 +13,10 @@
   --line: rgba(0, 0, 0, .08);
   --accent: #5c2ee8;           /* deep violet — links + primary button only */
   --accent-deep: #4318b8;
+  /* Pastel discipline colours (Burbano colour-coding, pastel tones) */
+  --brand: #fff3c7; --brand-ink: #6b4e00; --brand-line: #e9c46a;
+  --motion: #ddeaff; --motion-ink: #1f4e79; --motion-line: #8ab6e8;
+  --digital: #ddf2e3; --digital-ink: #1f6b3a; --digital-line: #7cc79a;
   --image-bg: #f2f2f2;
   --pad: clamp(20px, 5vw, 72px);
   --r-xl: 30px;                /* large tiles */
@@ -736,6 +740,12 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
   background: var(--accent); color: #fff !important; font-weight: 600; font-size: 14px;
 }
 .work-guide-links a:hover { background: var(--accent-deep); }
+.work-guide-links a[data-discipline="brand"] { background: var(--brand); color: var(--brand-ink) !important; }
+.work-guide-links a[data-discipline="brand"]:hover { background: var(--brand-line); }
+.work-guide-links a[data-discipline="motion"] { background: var(--motion); color: var(--motion-ink) !important; }
+.work-guide-links a[data-discipline="motion"]:hover { background: var(--motion-line); }
+.work-guide-links a[data-discipline="digital"] { background: var(--digital); color: var(--digital-ink) !important; }
+.work-guide-links a[data-discipline="digital"]:hover { background: var(--digital-line); }
 .work-featured { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 32px; }
 .featured-card {
   background: var(--surface); border-radius: var(--r-xl); padding: 22px 24px 24px;
@@ -745,6 +755,16 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
 .featured-card p { color: var(--ink-2); font-size: 14px; line-height: 1.55; }
 .featured-card p:last-child { margin-top: 12px; }
 .featured-card a { color: var(--accent); font-weight: 600; }
+.featured-card[data-discipline="brand"] { background: var(--brand); }
+.featured-card[data-discipline="brand"] a { color: var(--brand-ink); }
+.featured-card[data-discipline="motion"] { background: var(--motion); }
+.featured-card[data-discipline="motion"] a { color: var(--motion-ink); }
+.featured-card[data-discipline="digital"] { background: var(--digital); }
+.featured-card[data-discipline="digital"] a { color: var(--digital-ink); }
+.featured-card[data-discipline] .chip { background: rgba(255, 255, 255, .7); }
+.featured-card[data-discipline="brand"] .chip { color: var(--brand-ink); }
+.featured-card[data-discipline="motion"] .chip { color: var(--motion-ink); }
+.featured-card[data-discipline="digital"] .chip { color: var(--digital-ink); }
 .chip {
   display: inline-block; padding: 4px 10px; border-radius: 999px;
   background: rgba(92, 46, 232, .12); color: var(--accent-deep);
@@ -756,13 +776,22 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
   background: #fff; color: var(--ink); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
 }
 .filter-btn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.filter-btn[data-filter="brand"][aria-pressed="true"] { background: var(--brand); border-color: var(--brand-line); color: var(--brand-ink); }
+.filter-btn[data-filter="motion"][aria-pressed="true"] { background: var(--motion); border-color: var(--motion-line); color: var(--motion-ink); }
+.filter-btn[data-filter="digital"][aria-pressed="true"] { background: var(--digital); border-color: var(--digital-line); color: var(--digital-ink); }
 .work-filter-note { color: var(--grey); font-size: 14px; margin-bottom: 24px; }
 .project.is-featured .tilt-card { outline: 2px solid rgba(92, 46, 232, .35); }
+.project.is-featured[data-discipline="brand"] .tilt-card { outline-color: var(--brand-line); }
+.project.is-featured[data-discipline="motion"] .tilt-card { outline-color: var(--motion-line); }
+.project.is-featured[data-discipline="digital"] .tilt-card { outline-color: var(--digital-line); }
 .start-badge {
   display: inline-block; margin-bottom: 10px; padding: 4px 10px; border-radius: 999px;
   background: rgba(92, 46, 232, .12); color: var(--accent-deep);
   font-size: 12px; font-weight: 600; letter-spacing: .02em;
 }
+.project[data-discipline="brand"] .start-badge { background: var(--brand); color: var(--brand-ink); }
+.project[data-discipline="motion"] .start-badge { background: var(--motion); color: var(--motion-ink); }
+.project[data-discipline="digital"] .start-badge { background: var(--digital); color: var(--digital-ink); }
 @media (max-width: 768px) {
   .work-featured { grid-template-columns: 1fr; }
   .work-guide { padding: 20px; }
