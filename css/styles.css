@@ -780,10 +780,6 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
 .filter-btn[data-filter="motion"][aria-pressed="true"] { background: var(--motion); border-color: var(--motion-line); color: var(--motion-ink); }
 .filter-btn[data-filter="digital"][aria-pressed="true"] { background: var(--digital); border-color: var(--digital-line); color: var(--digital-ink); }
 .work-filter-note { color: var(--grey); font-size: 14px; margin-bottom: 24px; }
-.project.is-featured .tilt-card { outline: 2px solid rgba(92, 46, 232, .35); }
-.project.is-featured[data-discipline="brand"] .tilt-card { outline-color: var(--brand-line); }
-.project.is-featured[data-discipline="motion"] .tilt-card { outline-color: var(--motion-line); }
-.project.is-featured[data-discipline="digital"] .tilt-card { outline-color: var(--digital-line); }
 .start-badge {
   display: inline-block; margin-bottom: 10px; padding: 4px 10px; border-radius: 999px;
   background: rgba(92, 46, 232, .12); color: var(--accent-deep);
