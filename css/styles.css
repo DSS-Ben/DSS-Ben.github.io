@@ -11,8 +11,8 @@
   --ink-2: #424245;
   --grey: #6e6e73;
   --line: rgba(0, 0, 0, .08);
-  --accent: #5c2ee8;           /* deep violet — links + primary button only */
-  --accent-deep: #4318b8;
+  --accent: #007AFF;           /* deep blue — links + primary button only */
+  --accent-deep: #0066CC;
   /* Pastel discipline colours (Burbano colour-coding, pastel tones) */
   --brand: #fff3c7; --brand-ink: #6b4e00; --brand-line: #e9c46a;
   --motion: #ddeaff; --motion-ink: #1f4e79; --motion-line: #8ab6e8;
@@ -64,7 +64,7 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .brand { font-weight: 600; letter-spacing: -.01em; }
 .site-header nav { display: flex; gap: 4px; }
 .site-header nav a {
-  position: relative; padding: 6px 12px; border-radius: 999px; color: var(--ink-2);
+  position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 6px 14px; border-radius: 999px; color: var(--ink-2);
   transition: color .25s ease, background-color .25s ease;
 }
 .site-header nav a:hover { color: var(--ink); background: rgba(0, 0, 0, .05); }
@@ -119,8 +119,8 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
   -webkit-tap-highlight-color: transparent;
 }
 .btn .ico { font-size: 16px; transition: transform .45s var(--ease-out); }
-.btn-primary { background: var(--accent); color: #fff !important; box-shadow: 0 6px 18px -8px rgba(92, 46, 232, .45); }
-.btn-primary:hover { background: var(--accent-deep); box-shadow: 0 10px 26px -10px rgba(92, 46, 232, .5); }
+.btn-primary { background: var(--accent); color: #fff !important; box-shadow: 0 6px 18px -8px rgba(0, 122, 255, .45); }
+.btn-primary:hover { background: var(--accent-deep); box-shadow: 0 10px 26px -10px rgba(0, 122, 255, .5); }
 .btn-primary:hover .ico { transform: translateY(2px); }
 .btn-link { color: var(--accent) !important; padding-left: 4px; padding-right: 4px; }
 .btn-link:hover { color: var(--accent-deep) !important; }
@@ -161,7 +161,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
 .image img { position: relative; z-index: 2; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.2s var(--ease-out); }
 .project:hover .image img { transform: scale(1.04); }
 .art { position: absolute; inset: 0; display: grid; place-items: center; }
-.image img ~ .art, .image:has(img) .art { display: none; }
+.image img ~ .art, .image:has(img) .art, .image:has(video) .art { display: none; }
 .art .orb { display: none;
   position: absolute; width: 70%; aspect-ratio: 1; border-radius: 50%;
   filter: blur(10px); opacity: .7;
@@ -238,7 +238,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
   content: ""; position: absolute; left: 0; top: 50%; width: 8px; height: 8px; margin-top: -4px; border-radius: 50%;
   background: #d2d2d7; transition: background-color .3s ease, box-shadow .3s ease;
 }
-.experience tr:first-child td:first-child::before { background: var(--accent); box-shadow: 0 0 0 4px rgba(92, 46, 232, .18); }
+.experience tr:first-child td:first-child::before { background: var(--accent); box-shadow: 0 0 0 4px rgba(0, 122, 255, .18); }
 .experience td:last-child { font-weight: 500; letter-spacing: -.005em; }
 .experience tr:hover { transform: translateX(4px); }
 .experience tr:hover td:first-child::before { background: var(--accent); }
@@ -280,9 +280,9 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
 }
 .contact-rows p:hover { background: rgba(255, 255, 255, .14); transform: translateY(-2px); }
 .contact-rows p a { color: #fff; }
-.contact-rows .ico { color: #c4b5fd; font-size: 17px; margin-right: 8px; vertical-align: -0.2em; }
+.contact-rows .ico { color: #7AB8FF; font-size: 17px; margin-right: 8px; vertical-align: -0.2em; }
 .contact-card .small { color: #a1a1a6; margin-top: 28px; }
-.contact-card .small > .ico { color: #c4b5fd; }
+.contact-card .small > .ico { color: #7AB8FF; }
 
 .site-footer { max-width: 1240px; margin: 0 auto; padding: 8px var(--pad) 48px; font-size: 13px; color: var(--grey); }
 
@@ -358,14 +358,14 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
 .brand .ba-logo { vertical-align: middle; }
 
 /* ===== Animated hero CTA (adapted from the Animated Button demo, Oct 22, 2026)
-   Portfolio palette: accent #5c2ee8 family. Namespaced so the existing
+   Portfolio palette: accent #007AFF family. Namespaced so the existing
    .btn / .btn-primary system is untouched. */
 .btn-animated {
-  --btn-c1: #9D7BFF;
-  --btn-c2: #5c2ee8;
-  --btn-c3: #4318b8;
-  --btn-ring: #C4A7FF;
-  --btn-glow: 92, 46, 232;
+  --btn-c1: #7AB8FF;
+  --btn-c2: #007AFF;
+  --btn-c3: #0066CC;
+  --btn-ring: #A8D0FF;
+  --btn-glow: 0, 122, 255;
   --btn-boost: 1;
   position: relative;
   isolation: isolate;
@@ -460,7 +460,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
   bottom: -26px;
   height: 18px;
   border-radius: 50%;
-  background: rgba(92, 46, 232, .55);
+  background: rgba(0, 122, 255, .55);
   filter: blur(16px);
   pointer-events: none;
   animation: btnFloor 3s ease-in-out infinite;
@@ -568,7 +568,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
 
 .ai-note-accent {
   font-weight: 700;
-  color: #5c2ee8;
+  color: #007AFF;
 }
 
 .ai-note-strong {
@@ -584,8 +584,8 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
       linear-gradient(rgba(29, 29, 31, var(--ai-note-ink)), rgba(29, 29, 31, var(--ai-note-ink))),
       linear-gradient(90deg,
         #0090ff 0%,
-        #5c2ee8 25%,
-        #9d7bff 40%,
+        #007AFF 25%,
+        #7AB8FF 40%,
         #1d1d1f 55%,
         #1d1d1f 100%);
     background-size: 100% 100%, 240% 100%;
@@ -650,7 +650,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
 
 /* ---------- Header AI link: gradient shine, scrolls to the AI note ---------- */
 .site-header nav a.nav-ai {
-  background: linear-gradient(90deg, #0090ff, #5c2ee8, #9d7bff);
+  background: linear-gradient(90deg, #0090ff, #007AFF, #7AB8FF);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -659,7 +659,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
 }
 .site-header nav a.nav-ai:hover,
 .site-header nav a.nav-ai.is-active {
-  background: linear-gradient(90deg, #0090ff, #5c2ee8, #9d7bff);
+  background: linear-gradient(90deg, #0090ff, #007AFF, #7AB8FF);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -672,15 +672,15 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
    below the button — iOS Safari smears those during fast momentum scroll.
    The float itself is transform-only, which the compositor handles cheaply, so
    on phones the button keeps floating while the repaint loops stop. Static
-   violet gradient + static glow + static floor shadow preserve the look.
+   blue gradient + static glow + static floor shadow preserve the look.
    Desktop unchanged (all three loops still run). */
 @media (max-width: 768px) {
   .btn-animated {
     animation: btnFloat 3s ease-in-out infinite;
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,.3),
-      0 0 18px rgba(92, 46, 232, .4),
-      0 0 40px rgba(92, 46, 232, .15);
+      0 0 18px rgba(0, 122, 255, .4),
+      0 0 40px rgba(0, 122, 255, .15);
   }
   .btn-animated-wrap::after { animation: none; opacity: .7; }
   .btn-animated__sheen { animation: none !important; }
@@ -704,7 +704,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
    toned down here. Mobile keeps its approved static glow untouched, and
    the float + gradient loops are unchanged. */
 @media (min-width: 769px) {
-  .btn-animated-wrap::after { background: rgba(92, 46, 232, .35); }
+  .btn-animated-wrap::after { background: rgba(0, 122, 255, .35); }
   @keyframes btnAura {
     0%, 100% {
       box-shadow:
@@ -726,7 +726,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
 }
 
 /* ---------- Recruiter guide: Burbano mockup applied to live homepage, Nov 4, 2026 ----------
-   Guide strip + highlighted picks + filterable index. Single violet accent only,
+   Guide strip + highlighted picks + filterable index. Single blue accent only,
    same font and title scale as the rest of the page; discipline is text, not a new colour. */
 .work-guide {
   background: var(--surface); border-radius: var(--r-xl);
@@ -736,7 +736,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
 .work-guide-text { margin-top: 8px; color: var(--ink-2); font-size: 15px; line-height: 1.55; }
 .work-guide-links { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
 .work-guide-links a {
-  display: inline-block; padding: 8px 14px; border-radius: 999px;
+  display: inline-flex; align-items: center; min-height: 44px; padding: 8px 14px; border-radius: 999px;
   background: var(--accent); color: #fff !important; font-weight: 600; font-size: 14px;
 }
 .work-guide-links a:hover { background: var(--accent-deep); }
@@ -767,11 +767,12 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
 .featured-card[data-discipline="digital"] .chip { color: var(--digital-ink); }
 .chip {
   display: inline-block; padding: 4px 10px; border-radius: 999px;
-  background: rgba(92, 46, 232, .12); color: var(--accent-deep);
+  background: rgba(0, 122, 255, .12); color: var(--accent-deep);
   font-size: 12px; font-weight: 600; letter-spacing: .02em;
 }
 .work-filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
 .filter-btn {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 44px;
   padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line);
   background: #fff; color: var(--ink); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
 }
@@ -782,7 +783,7 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
 .work-filter-note { color: var(--grey); font-size: 14px; margin-bottom: 24px; }
 .start-badge {
   display: inline-block; margin-bottom: 10px; padding: 4px 10px; border-radius: 999px;
-  background: rgba(92, 46, 232, .12); color: var(--accent-deep);
+  background: rgba(0, 122, 255, .12); color: var(--accent-deep);
   font-size: 12px; font-weight: 600; letter-spacing: .02em;
 }
 .project[data-discipline="brand"] .start-badge { background: var(--brand); color: var(--brand-ink); }
