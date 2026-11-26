@@ -224,7 +224,7 @@
     });
     if (note) {
       note.textContent = filter === 'all'
-        ? 'Showing all 9 projects.'
+        ? 'Showing all 10 projects.'
         : 'Showing ' + shown + ' project' + (shown === 1 ? '' : 's') + '.';
     }
   }
