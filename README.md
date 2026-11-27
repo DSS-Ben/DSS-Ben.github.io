@@ -1,4 +1,11 @@
-# Benjamin Alvis — Portfolio v3 (Swiss foundation, Apple-style surface)
+# Benjamin Alvis — Portfolio
+
+## v5 (Nov 27, 2026) — kinetic-type hero, reorganised homepage
+See AUDIT.md for the full audit and what changed. Files: index.html, css/styles.css, js/hero.js (hero motion), js/main.js (page behaviour), js/logo.js (header logo loop).
+
+---
+
+# Earlier notes — v3 (Swiss foundation, Apple-style surface)
 
 Same typeface (Inter Tight 400/500/600) and the exact same copy as v2. Only the design and motion layer changed.
 
@@ -23,3 +30,6 @@ Put an `<img>` inside each `.image` div. The gradient art hides automatically on
 - Homepage work section now shows only Project 01: OG Series + Versa X new product launch, with a live link to projects/og-versa-launch/.
 - INKD, FRIMAS, kinetic typography and e-commerce launch kit are removed from the homepage, per Ben's call.
 - Project page: newsletter → landing page, pods carousel live, Versa X scroll reveal live, responsive.
+
+## v5.2 (Nov 27, 2026) — Apple HIG pass
+Swatches removed, hero lens now caches letter positions (one layout read per frame instead of one per letter). Fonts verified: Archivo variable + Inter Tight 400/500/600, one request. See AUDIT.md.
