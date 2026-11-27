@@ -33,3 +33,6 @@ Put an `<img>` inside each `.image` div. The gradient art hides automatically on
 
 ## v5.2 (Nov 27, 2026) — Apple HIG pass
 Swatches removed, hero lens now caches letter positions (one layout read per frame instead of one per letter). Fonts verified: Archivo variable + Inter Tight 400/500/600, one request. See AUDIT.md.
+
+## v5.3 (Nov 27, 2026) — Apple HIG audit applied
+Inter Tight throughout (Archivo gone), AI gradient title restored, 44pt touch targets, audit copy fixes. See AUDIT.md.

@@ -1,7 +1,7 @@
 /* ==========================================================================
-   Benjamin Alvis — Portfolio v5
-   White, Swiss grid, kinetic type. Archivo (variable wdth + wght) for display,
-   Inter Tight for text. One accent: #007AFF.
+   Benjamin Alvis — Portfolio v5.3
+   White, Swiss grid, kinetic type. Inter Tight throughout (variable wght),
+   one accent: #007AFF.
    1. Tokens   2. Base   3. Header   4. Hero   5. Intro   6. Work
    7. Process  8. About  9. Contact  10. Footer  11. Motion & a11y
    ========================================================================== */
@@ -22,7 +22,7 @@
   --digital: #ddf2e3; --digital-ink: #1f6b3a; --digital-line: #7cc79a;
   --ai-video: #ebe3fb; --ai-video-ink: #4c1d95; --ai-video-line: #b7a3e8;
 
-  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --display: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
   --text: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
 
   --pad: clamp(20px, 5vw, 72px);
@@ -75,13 +75,13 @@ img, video { display: block; max-width: 100%; }
 .nav { display: flex; gap: 4px; margin-left: auto; }
 .nav a {
   font-size: 14px; font-weight: 500; color: var(--ink-2);
-  padding: 7px 13px; border-radius: 999px; transition: background-color .25s, color .25s;
+  min-height: 44px; padding: 10px 14px; border-radius: 999px; transition: background-color .25s, color .25s;
 }
 .nav a:hover { background: rgba(0, 0, 0, .05); color: var(--ink); }
 .nav a.is-active { background: var(--ink); color: #fff; }
 .header-cv {
   display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600;
-  padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); transition: border-color .25s, background-color .25s;
+  min-height: 44px; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--line); transition: border-color .25s, background-color .25s;
 }
 .header-cv:hover { border-color: var(--ink); }
 .scroll-progress {
@@ -157,8 +157,8 @@ img, video { display: block; max-width: 100%; }
 .kt-line { display: block; width: max-content; white-space: nowrap; }
 .kt-line + .kt-line { padding-left: .06em; }
 .kt-clip { display: inline-block; overflow: hidden; vertical-align: top; padding: .04em 0 .02em; margin: -.04em 0 -.02em; }
-.kt-ch { display: inline-block; will-change: transform, font-variation-settings; transform: translateY(110%); font-variation-settings: "wdth" 62, "wght" 100; }
-html:not(.js) .kt-ch { transform: none; font-variation-settings: "wdth" 100, "wght" 800; }
+.kt-ch { display: inline-block; will-change: transform, font-variation-settings; transform: translateY(110%); font-variation-settings: "wght" 100; }
+html:not(.js) .kt-ch { transform: none; font-variation-settings: "wght" 800; }
 .kt-dot { display: inline-block; width: .17em; height: .17em; margin-left: .05em; background: var(--accent); transform: scale(0); transition: transform .7s var(--ease-snap) 1.35s; }
 .is-in .kt-dot { transform: scale(1); }
 html:not(.js) .kt-dot { transform: none; }
@@ -185,9 +185,9 @@ html:not(.js) .rise > span { transform: none; }
 .is-in .hero-role { opacity: 1; transform: none; }
 .rotator { position: relative; display: inline-flex; color: var(--ink); font-weight: 750; overflow: hidden; padding-bottom: .16em; margin-bottom: -.16em; transition: width .5s var(--ease-out); }
 .rotator .rc { display: inline-block; white-space: pre; }
-.rotator .rc > span { display: inline-block; white-space: pre; transition: transform .6s var(--ease-out), font-variation-settings .9s var(--ease-out); transition-delay: calc(var(--i) * 22ms); font-variation-settings: "wdth" 100, "wght" 750; }
-.rotator .rc.enter > span { transform: translateY(105%); font-variation-settings: "wdth" 125, "wght" 300; }
-.rotator .rc.leave > span { transform: translateY(-105%); font-variation-settings: "wdth" 62, "wght" 900; }
+.rotator .rc > span { display: inline-block; white-space: pre; transition: transform .6s var(--ease-out), font-variation-settings .9s var(--ease-out); transition-delay: calc(var(--i) * 22ms); font-variation-settings: "wght" 750; }
+.rotator .rc.enter > span { transform: translateY(105%); font-variation-settings: "wght" 300; }
+.rotator .rc.leave > span { transform: translateY(-105%); font-variation-settings: "wght" 900; }
 .rotator::after { content: ""; position: absolute; left: 0; right: 0; bottom: .02em; height: .07em; background: var(--accent); transform-origin: left; transform: scaleX(var(--u, 1)); transition: transform .7s var(--ease-out); }
 
 /* rotating badge */
@@ -210,8 +210,8 @@ html:not(.js) .rise > span { transform: none; }
 /* ticker: fades into the page at both edges */
 .ticker { overflow: hidden; padding: 18px 0 8px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
 .ticker-track { display: flex; width: max-content; animation: marquee 38s linear infinite; }
-.ticker span { font-family: var(--display); font-size: clamp(28px, 4.2vw, 60px); line-height: 1; letter-spacing: -0.03em; padding-right: .7em; color: transparent; -webkit-text-stroke: 1px rgba(0, 0, 0, .22); white-space: nowrap; font-variation-settings: "wdth" 100, "wght" 700; }
-.ticker span:nth-child(3n+2) { color: var(--ink); -webkit-text-stroke: 0; font-variation-settings: "wdth" 80, "wght" 300; }
+.ticker span { font-family: var(--display); font-size: clamp(28px, 4.2vw, 60px); line-height: 1; letter-spacing: -0.03em; padding-right: .7em; color: transparent; -webkit-text-stroke: 1px rgba(0, 0, 0, .22); white-space: nowrap; font-weight: 700; }
+.ticker span:nth-child(3n+2) { color: var(--ink); -webkit-text-stroke: 0; font-variation-settings: "wght" 300; }
 .ticker span::after { content: "✦"; display: inline-block; margin-left: .7em; color: var(--accent); -webkit-text-stroke: 0; font-size: .4em; vertical-align: middle; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
@@ -228,7 +228,7 @@ html:not(.js) .rise > span { transform: none; }
 .section { padding-top: clamp(80px, 11vw, 150px); }
 .section-head { margin-bottom: clamp(28px, 4vw, 48px); }
 .eyebrow { font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
-.section-head h2 { font-family: var(--display); font-size: clamp(40px, 6.4vw, 92px); font-weight: 800; line-height: .95; letter-spacing: -0.04em; font-variation-settings: "wdth" 88; }
+.section-head h2 { font-family: var(--display); font-size: clamp(40px, 6.4vw, 92px); font-weight: 800; line-height: .95; letter-spacing: -0.04em; }
 .section-sub { margin-top: 14px; color: var(--grey); font-size: 17px; }
 
 /* ---------- Statement (pinned) ---------- */
@@ -247,7 +247,7 @@ html:not(.js) .rise > span { transform: none; }
 .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: clamp(32px, 4vw, 48px); }
 .filter {
   appearance: none; cursor: pointer; font: 500 14px/1 var(--text); color: var(--ink);
-  display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px;
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 11px 18px; border-radius: 999px;
   background: #fff; border: 1px solid var(--line); transition: background-color .25s, color .25s, border-color .25s, transform .15s;
 }
 .filter:hover { border-color: rgba(0, 0, 0, .3); }
@@ -279,7 +279,7 @@ html:not(.js) .rise > span { transform: none; }
 .card-link:hover .card-media img, .card-link:hover .card-media video { --ps: 1.19; }
 .card.is-scroll { will-change: transform, opacity; transform-origin: 50% 100%; }
 /* big number shows behind the image, and stands in if an image is missing */
-.card-num { position: absolute; left: 20px; bottom: 6px; font-family: var(--display); font-size: clamp(90px, 12vw, 180px); line-height: .8; font-weight: 800; letter-spacing: -0.05em; color: var(--tint-ink); opacity: .16; font-variation-settings: "wdth" 70; }
+.card-num { position: absolute; left: 20px; bottom: 6px; font-family: var(--display); font-size: clamp(90px, 12vw, 180px); line-height: .8; font-weight: 800; letter-spacing: -0.05em; color: var(--tint-ink); opacity: .16; }
 .card-body { position: relative; display: flex; flex-direction: column; gap: 8px; padding: 22px 24px 26px; flex: 1; }
 .chip { align-self: flex-start; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: var(--tint); color: var(--tint-ink); }
 .card-title { font-family: var(--display); font-size: clamp(20px, 1.8vw, 26px); font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; padding-right: 44px; }
@@ -319,10 +319,91 @@ html:not(.js) .rise > span { transform: none; }
 .toolkit dd { display: flex; flex-wrap: wrap; gap: 6px; }
 .toolkit dd span { font-size: 13px; font-weight: 500; background: #fff; border: 1px solid var(--line); padding: 4px 10px; border-radius: 999px; }
 
+/* ---------- My Take on AI: blue gradient title (Apple HIG audit, Nov 22, 2026) ----------
+   Rest state is ink black; the blue gradient sweeps in on hover (desktop) or
+   once on scroll (phones, via the .ai-note-play class from main.js). */
+@property --ai-note-ink {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
 .ai-note { margin-top: clamp(16px, 2vw, 28px); display: grid; grid-template-columns: 1fr 2fr; gap: clamp(20px, 4vw, 56px); padding: clamp(28px, 4vw, 48px); border-radius: var(--r-xl); border: 1px solid var(--line); }
-.ai-note-title { font-family: var(--display); font-size: clamp(28px, 3.2vw, 44px); font-weight: 800; line-height: 1; letter-spacing: -0.03em; }
-.ai-note-body { display: grid; gap: 14px; color: var(--ink-2); font-size: 16px; max-width: 62ch; }
-.ai-note-body strong { color: var(--ink); font-weight: 600; box-shadow: inset 0 -0.45em 0 rgba(0, 122, 255, .14); }
+.ai-note-title { font-family: var(--display); font-size: clamp(28px, 3.2vw, 44px); font-weight: 800; line-height: 1; letter-spacing: -0.03em; width: fit-content; max-width: 100%; color: var(--ink); }
+.ai-note-body { display: grid; gap: 14px; color: var(--ink); font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.25rem); font-weight: 500; line-height: 1.45; letter-spacing: -0.01em; max-width: 62ch; }
+.ai-note-accent { font-weight: 700; color: #007AFF; }
+.ai-note-strong { font-weight: 700; color: var(--ink); }
+
+/* ---------- Title gradient (only where text clipping is supported) ---------- */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .ai-note-title {
+    --ai-note-ink: 0;
+    background-image:
+      linear-gradient(rgba(29, 29, 31, var(--ai-note-ink)), rgba(29, 29, 31, var(--ai-note-ink))),
+      linear-gradient(90deg,
+        #0090ff 0%,
+        #007AFF 25%,
+        #7AB8FF 40%,
+        #1d1d1f 55%,
+        #1d1d1f 100%);
+    background-size: 100% 100%, 240% 100%;
+    background-position: 0 0, 100% 0;
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: background-position 0.9s cubic-bezier(0.45, 0, 0.25, 1);
+  }
+
+  /* Desktop: sweeps in while the note is hovered, returns to black after */
+  @media (hover: hover) and (pointer: fine) {
+    .ai-note:hover .ai-note-title {
+      background-position: 0 0, 0 0;
+    }
+  }
+
+  /* Phone: plays once on scroll into view (class added by the JS snippet) */
+  .ai-note-title.ai-note-play {
+    animation: ai-note-sweep 2.6s 1;
+  }
+
+  @keyframes ai-note-sweep {
+    0%   { background-position: 0 0, 100% 0; --ai-note-ink: 0; animation-timing-function: cubic-bezier(0.45, 0, 0.25, 1); }
+    42%  { background-position: 0 0, 0 0;    --ai-note-ink: 0; }
+    62%  { background-position: 0 0, 0 0;    --ai-note-ink: 0; animation-timing-function: ease-in-out; }
+    100% { background-position: 0 0, 0 0;    --ai-note-ink: 1; }
+  }
+
+  /* Reduced motion: colour cross-fade instead of a sweep */
+  @media (prefers-reduced-motion: reduce) {
+    .ai-note-title {
+      --ai-note-ink: 1;
+      background-position: 0 0, 0 0;
+      transition: --ai-note-ink 0.4s ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .ai-note:hover .ai-note-title {
+        --ai-note-ink: 0;
+      }
+    }
+    .ai-note-title.ai-note-play {
+      animation: ai-note-fade 2s ease-in-out 1;
+    }
+    @keyframes ai-note-fade {
+      0%, 100% { --ai-note-ink: 1; }
+      25%, 60% { --ai-note-ink: 0; }
+    }
+  }
+
+  /* High contrast / forced colours: plain system text */
+  @media (forced-colors: active) {
+    .ai-note-title {
+      background: none;
+      -webkit-text-fill-color: CanvasText;
+      color: CanvasText;
+    }
+  }
+}
 
 /* ---------- 9. Contact ---------- */
 .contact-card {

@@ -76,7 +76,7 @@
   function fit() {
     var size = window.innerWidth <= 600 ? 15 : 17;
     var probe = document.createElement("span");
-    probe.style.cssText = "position:absolute;visibility:hidden;left:0;top:0;font-family:\"Archivo\",\"Helvetica Neue\",Arial,sans-serif;font-size:" + size + "px;font-weight:720;letter-spacing:-0.045em;white-space:pre;padding:0.12em;";
+    probe.style.cssText = "position:absolute;visibility:hidden;left:0;top:0;font-family:\"Inter Tight\",\"Helvetica Neue\",Arial,sans-serif;font-size:" + size + "px;font-weight:720;letter-spacing:-0.045em;white-space:pre;padding:0.12em;";
     probe.textContent = "Graphic Design";
     document.body.appendChild(probe);
     root.style.width = (probe.getBoundingClientRect().width + 2) + "px";

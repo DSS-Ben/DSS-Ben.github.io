@@ -48,3 +48,10 @@ The zip had code only, no images or videos. All media paths are unchanged, so dr
 - **Delight, not decoration:** the colour swatches are gone (HTML, CSS, JS). The hero keeps the kinetic name, the pen curve, the rotator and the badge.
 - **Craft, in performance:** the lens effect no longer measures every letter on every frame (13 forced layouts per frame). Each letter's resting centre is cached once in `fit()` (resize / font load / start) from transform-independent offsets, and the frame loop takes one stage measurement per frame. Same look, far less work.
 - **Fonts verified intact:** one Google Fonts request, Archivo variable (wght 100-900, wdth 62-125%) + Inter Tight 400/500/600, `display=swap`. Every weight and width the CSS and JS use sits inside those ranges, with Helvetica Neue / Arial fallbacks. Cache-buster bumped to `?v=20261127b`.
+
+## v5.3 — Fonts back to Inter Tight, blue style restored (Nov 27, 2026)
+Apple HIG audit (Nov 22) applied to v5.2:
+- **Fonts:** one typeface again. Archivo is gone; Inter Tight throughout (variable wght 100-900, one request, verified live). The kinetic hero now springs thin-to-heavy on weight only, no width axis; the rotator and ticker do the same. Every weight the CSS and JS use (100-900) sits inside the requested range.
+- **Blue style:** the "My take on AI" gradient title is back (ink black at rest, blue #0090ff / #007AFF / #7AB8FF sweep on hover desktop, once on scroll on phones via the restored JS snippet, with reduced-motion and forced-colours fallbacks). Body type is bigger again and "fundamentals" is blue once more.
+- **44pt touch targets (audit finding 2):** nav links, header CV button and filter buttons all reach 44px min-height.
+- **Copy (audit finding 4):** About line is now "Everything here is work I designed and shipped myself." Project 06 result line now leads with the craft (directed and cut solo in 60 seconds, Claude + Seedance 2.0 + Premiere) and drops the vape-shop framing. Project 02's weak result line was already gone.

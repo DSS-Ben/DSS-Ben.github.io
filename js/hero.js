@@ -1,6 +1,6 @@
 /* Hero — kinetic type on white.
    Sequence: grid + crop marks draw → pen-tool curve draws → name slices in
-   (condensed/thin → wide/heavy, on a spring) → selection box snaps around it
+   (thin → heavy, on a spring) → selection box snaps around it
    → role rotator + badge. Then the name stays alive: letters near
    the pointer go thin and condensed (a "lens"); without a pointer a slow
    weight wave runs through them. Scrolling compresses the name as it leaves.
@@ -32,7 +32,7 @@
       var ch = document.createElement('span'); ch.className = 'kt-ch'; ch.textContent = c;
       clip.appendChild(ch);
       line.insertBefore(clip, dot || null);
-      chars.push({ el: ch, line: li, idx: ci, start: 0.45 + li * 0.2 + ci * 0.055, wd: 62, wg: 100, sw: 100, sg: 800 });
+      chars.push({ el: ch, line: li, idx: ci, start: 0.45 + li * 0.2 + ci * 0.055, wg: 100 });
     });
   });
 
@@ -52,14 +52,14 @@
 
   /* ---------- fit the name to the stage width ---------- */
   function fit() {
-    chars.forEach(function (c) { c.el.style.fontVariationSettings = '"wdth" 100, "wght" 800'; });
+    chars.forEach(function (c) { c.el.style.fontVariationSettings = '"wght" 800'; });
     h1.style.setProperty('--name-size', '100px');
     var widest = 0;
     lines.forEach(function (l) { widest = Math.max(widest, l.scrollWidth); });
     var avail = stage.clientWidth - parseFloat(getComputedStyle(stage).paddingLeft) * 2;
     var size = Math.min(100 * (avail * 0.97) / widest, innerHeight * 0.27, 300);
     h1.style.setProperty('--name-size', size.toFixed(1) + 'px');
-    if (!reduce) chars.forEach(function (c) { c.el.style.fontVariationSettings = '"wdth" ' + c.wd.toFixed(1) + ', "wght" ' + c.wg.toFixed(0); });
+    if (!reduce) chars.forEach(function (c) { c.el.style.fontVariationSettings = '"wght" ' + c.wg.toFixed(0); });
     placeBox();
     measureLetters();
   }
@@ -178,11 +178,11 @@
       var c = chars[i];
       var local = t - c.start;
 
-      // intro: slide up through the mask, width + weight spring into place
+      // intro: slide up through the mask, weight springs into place
       var y = (1 - outExpo(clamp(local / 0.75, 0, 1))) * 110;
       var v = spring(local);
-      var baseWd = 100 + (62 - 100) * v, baseWg = 800 + (100 - 800) * v;
-      if (local < 0) { baseWd = 62; baseWg = 100; }
+      var baseWg = 800 + (100 - 800) * v;
+      if (local < 0) { baseWg = 100; }
 
       // alive state after the intro
       var settle = clamp((t - INTRO_END) / 1.2, 0, 1);
@@ -195,14 +195,12 @@
         lens = Math.exp(-(dx * dx + dy * dy) / (R * R)) * lensAmt;
       }
       var k = Math.max(waveAmt, lens);
-      var tWd = Math.min(baseWd, 104) - 34 * k - 26 * scrollP;
       var tWg = baseWg - 640 * k;
 
       // light smoothing so the lens feels weighted, not twitchy
-      c.wd += (tWd - c.wd) * (t < INTRO_END ? 1 : 0.18);
       c.wg += (tWg - c.wg) * (t < INTRO_END ? 1 : 0.18);
       c.el.style.transform = 'translate3d(0,' + y.toFixed(2) + '%,0)';
-      c.el.style.fontVariationSettings = '"wdth" ' + clamp(c.wd, 62, 125).toFixed(1) + ', "wght" ' + clamp(c.wg, 100, 900).toFixed(0);
+      c.el.style.fontVariationSettings = '"wght" ' + clamp(c.wg, 100, 900).toFixed(0);
     }
     h1.style.transform = scrollP > 0 ? 'translate3d(0,' + (-scrollP * 60).toFixed(1) + 'px,0)' : '';
     if (visible) requestAnimationFrame(frame); else running = false;
@@ -214,9 +212,9 @@
   function start() {
     initRotator();
     if (reduce) {
-      chars.forEach(function (c) { c.el.style.transform = 'none'; c.el.style.fontVariationSettings = '"wdth" 100, "wght" 800'; });
+      chars.forEach(function (c) { c.el.style.transform = 'none'; c.el.style.fontVariationSettings = '"wght" 800'; });
       fit();
-      chars.forEach(function (c) { c.el.style.fontVariationSettings = '"wdth" 100, "wght" 800'; });
+      chars.forEach(function (c) { c.el.style.fontVariationSettings = '"wght" 800'; });
       stage.classList.add('is-in', 'is-settled');
       setInterval(nextWord, 3000);
       return;
@@ -245,7 +243,7 @@
   if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', function () { fit(); });
 
   var ready = document.fonts && document.fonts.load
-    ? Promise.all([document.fonts.load('800 100px Archivo'), document.fonts.ready]).catch(function () {})
+    ? Promise.all([document.fonts.load('800 100px "Inter Tight"'), document.fonts.ready]).catch(function () {})
     : Promise.resolve();
   // never hold the hero hostage to a slow font
   Promise.race([ready, new Promise(function (r) { setTimeout(r, 1500); })]).then(start);

@@ -136,3 +136,28 @@
     contact.addEventListener('pointerleave', function () { tx = 80; ty = 10; if (!raf) raf = requestAnimationFrame(step); });
   }
 })();
+
+/* ---------- AI note title: gradient plays once on scroll (touch only) ----------
+   CSS alone can't play an animation exactly once on scroll, so this small
+   script adds a class. Without it, phones simply show the black title.
+   Desktop hover is CSS only. (Apple HIG audit, Nov 22, 2026.) */
+(function () {
+  var note = document.querySelector('.ai-note');
+  var title = note && note.querySelector('.ai-note-title');
+  if (!title) return;
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  if (!('IntersectionObserver' in window)) return;
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      io.disconnect();
+      title.classList.add('ai-note-play');
+      title.addEventListener('animationend', function () {
+        title.classList.remove('ai-note-play');
+      }, { once: true });
+    });
+  }, { threshold: 0.5 });
+
+  io.observe(note);
+})();
