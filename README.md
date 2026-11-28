@@ -53,4 +53,7 @@ Interactive CMYK colour wheel replaces the rotating badge; drag to mix process i
 The blue statement background is now a full-bleed opacity fade, no growing oval, no visible edge mid-transition. See AUDIT.md.
 
 ## v5.9 (Nov 27, 2026) — Wheel knob removed, pen curve draws after the name
-The little triangle pointer on the wheel rim is gone, and the hero opens white: the name slices in first, the blue pen curve draws behind it after. See AUDIT.md.
+The little triangle pointer on the wheel rim is gone, and the hero opens white: the name slices in first, the blue pen curve draws behind it after. See AUDIT.md. (Note: the v5.9 curve timing did not hold in a browser check, fixed properly in v5.10.)
+
+## v5.10 (Nov 27, 2026) — Pen curve gated on the name actually finishing
+The curve is invisible until the name has fully risen, driven by the same animation clock as the letters, so it can never beat the name to the screen. See AUDIT.md.

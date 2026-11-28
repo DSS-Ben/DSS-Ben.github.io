@@ -1,6 +1,7 @@
 /* Hero — kinetic type on white.
    Sequence: grid + crop marks draw → name slices in
-   (thin → heavy, on a spring) → pen-tool curve draws behind it
+   (thin → heavy, on a spring) → pen-tool curve draws behind it, gated on
+   the name actually being in (the rAF clock adds .is-pen at t > 1.9s)
    → selection box snaps around it
    → role rotator + badge. Then the name stays alive: letters near
    the pointer go thin and condensed (a "lens"); without a pointer a slow
@@ -203,6 +204,11 @@
       c.el.style.transform = 'translate3d(0,' + y.toFixed(2) + '%,0)';
       c.el.style.fontVariationSettings = '"wght" ' + clamp(c.wg, 100, 900).toFixed(0);
     }
+    // the pen curve only draws once the name has fully risen: the curve is
+    // gated on the same clock as the letters (t > 1.9), never on a wall-clock
+    // delay, so it can never beat the name to the screen.
+    if (t > 1.9 && !stage.classList.contains('is-pen')) stage.classList.add('is-pen');
+
     h1.style.transform = scrollP > 0 ? 'translate3d(0,' + (-scrollP * 60).toFixed(1) + 'px,0)' : '';
     if (visible) requestAnimationFrame(frame); else running = false;
   }
@@ -216,7 +222,7 @@
       chars.forEach(function (c) { c.el.style.transform = 'none'; c.el.style.fontVariationSettings = '"wght" 800'; });
       fit();
       chars.forEach(function (c) { c.el.style.fontVariationSettings = '"wght" 800'; });
-      stage.classList.add('is-in', 'is-settled');
+      stage.classList.add('is-in', 'is-settled', 'is-pen');
       setInterval(nextWord, 3000);
       return;
     }
