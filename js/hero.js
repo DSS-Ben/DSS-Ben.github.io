@@ -1,6 +1,7 @@
 /* Hero — kinetic type on white.
-   Sequence: grid + crop marks draw → pen-tool curve draws → name slices in
-   (thin → heavy, on a spring) → selection box snaps around it
+   Sequence: grid + crop marks draw → name slices in
+   (thin → heavy, on a spring) → pen-tool curve draws behind it
+   → selection box snaps around it
    → role rotator + badge. Then the name stays alive: letters near
    the pointer go thin and condensed (a "lens"); without a pointer a slow
    weight wave runs through them. Scrolling compresses the name as it leaves.

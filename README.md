@@ -51,3 +51,6 @@ Interactive CMYK colour wheel replaces the rotating badge; drag to mix process i
 
 ## v5.8 (Nov 27, 2026) — Seamless blue statement, no oval
 The blue statement background is now a full-bleed opacity fade, no growing oval, no visible edge mid-transition. See AUDIT.md.
+
+## v5.9 (Nov 27, 2026) — Wheel knob removed, pen curve draws after the name
+The little triangle pointer on the wheel rim is gone, and the hero opens white: the name slices in first, the blue pen curve draws behind it after. See AUDIT.md.

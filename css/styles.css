@@ -134,12 +134,12 @@ img, video { display: block; max-width: 100%; }
 
 /* pen-tool bezier */
 .pen { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; overflow: visible; }
-.pen-path { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: var(--len, 2400); stroke-dashoffset: var(--len, 2400); transition: stroke-dashoffset 2.2s cubic-bezier(.65, 0, .35, 1) .35s; }
+.pen-path { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: var(--len, 2400); stroke-dashoffset: var(--len, 2400); transition: stroke-dashoffset 2.2s cubic-bezier(.65, 0, .35, 1) 1.5s; }
 .is-in .pen-path { stroke-dashoffset: 0; }
 .pen-handles line { stroke: var(--accent); stroke-width: 1; opacity: .5; vector-effect: non-scaling-stroke; }
 .pen-hnd { fill: #fff; stroke: var(--accent); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
 .pen-anchor { fill: #fff; stroke: var(--accent); stroke-width: 1.6; vector-effect: non-scaling-stroke; }
-.pen-handles, .pen-anchor { opacity: 0; transition: opacity .5s var(--ease-out) 1.6s; }
+.pen-handles, .pen-anchor { opacity: 0; transition: opacity .5s var(--ease-out) 2.7s; }
 .is-in .pen-handles { opacity: 1; }
 .is-in .pen-anchor { opacity: 1; }
 .hero-stage.is-settled .pen-handles { opacity: 0; transition-delay: 0s; transition-duration: 1.2s; }
@@ -507,10 +507,6 @@ html:not(.js) .rise > span { transform: none; }
 .cell:hover { filter: brightness(1.06) saturate(1.1); }
 .cell.is-sel { transform: translate(var(--dx), var(--dy)); stroke-width: 3.5; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .22)); }
 
-.wheel-knob { transform-box: view-box; transform-origin: 50% 50%; transition: transform .3s var(--ease-out); opacity: 0; }
-.wheel-knob path { fill: var(--ink); }
-.press.is-printed .wheel-knob { opacity: 1; }
-
 /* the centre is a registration mark built from the plates */
 .plate { mix-blend-mode: multiply; transform-box: view-box; transform-origin: 50% 50%; transition: transform .7s var(--ease-snap), opacity .5s ease; opacity: 0; }
 .plate--c { fill: #00AEEF; transform: translate(-46px, -60px); }
@@ -569,6 +565,6 @@ html:not(.js) .rise > span { transform: none; }
   .reg { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .wheel-segs, .cell, .plate, .plate--k, .press-chip, .wheel-knob { opacity: 1 !important; transform: none; animation: none !important; }
+  .wheel-segs, .cell, .plate, .plate--k, .press-chip { opacity: 1 !important; transform: none; animation: none !important; }
   .press-chip { transform: rotate(-2deg); }
 }

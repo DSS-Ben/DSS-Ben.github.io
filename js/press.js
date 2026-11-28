@@ -11,7 +11,6 @@
   if (!root) return;
   var svg = root.querySelector('.wheel');
   var segG = svg.querySelector('.wheel-segs');
-  var knob = svg.querySelector('.wheel-knob');
   var stage = document.querySelector('[data-hero]');
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var NS = 'http://www.w3.org/2000/svg';
@@ -90,16 +89,12 @@
 
   /* ---------- selection ---------- */
   var sel = { i: 14, ring: 0 }; // C100 M50 — the blue family the site lives in
-  var touched = false, knobDeg = 0;
+  var touched = false;
   function select(i, ring, fromUser) {
     i = (i % N + N) % N; ring = Math.max(0, Math.min(2, ring));
     sel.i = i; sel.ring = ring;
     var v = cmyk(i, ring), rgb = mix(v[0], v[1], v[2], v[3]), h = hex(rgb);
     cells.forEach(function (c) { c.el.classList.toggle('is-sel', c.i === i && c.ring === ring); c.el.classList.toggle('is-col', c.i === i); });
-    var want = i * STEP, cur = ((knobDeg % 360) + 360) % 360, d = want - cur;
-    if (d > 180) d -= 360; if (d < -180) d += 360;
-    knobDeg += d;
-    knob.style.transform = 'rotate(' + knobDeg + 'deg)';
     chipSw.style.background = h;
     chipHex.textContent = h;
     chipName.textContent = 'BA ' + ('0' + (i + 1)).slice(-2) + '·' + Math.round(TINTS[ring] * 100);

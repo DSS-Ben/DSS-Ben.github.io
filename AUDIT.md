@@ -73,6 +73,11 @@ Ben: "Remove that currently In Dss looks bad, the intro should be about me. Also
 Ben sent a phone screenshot of the statement mid-transition: a pale blue oval with a hard edge on white. He said "this oval transition i don't like it should be seamless."
 - **The oval is gone.** The blue layer is now a full-bleed rectangle (inset 0, no border-radius, no scale) and only its opacity moves with scroll, so the background crossfades white to blue edge to edge with no visible shape or boundary at any point. The full-blue end state is unchanged (same radial: bright centre, deeper edges). The v5.6 scale fix is moot now, the layer covers the viewport by construction.
 
+## v5.9 — Wheel knob removed, pen curve draws after the name (Nov 27, 2026)
+Ben: "there's a little cursor around the wheel I want to remove it looks like an error also when you first refresh the screen there's a blue curve randomly floating before anything I want to make it more clean like everything is white at the beginning."
+- **The knob is gone.** The little triangle pointer on the wheel rim (`.wheel-knob`, rotated to the selected hue) read as a stray cursor. Removed from the markup, the JS rotation and the CSS; the selection is still shown by the popped segment and the chip, so nothing is lost.
+- **The pen curve no longer leads the intro.** It used to draw at 0.35s, before the name had risen, so on every refresh the first thing on screen was a lone blue curve on white. Now the name slices in first and the curve draws behind it from 1.5s (handles/anchors at 2.7s, once the curve has shape). The opening is white, then the name, then the curve. Measured the true path length (~1614 units) against the CSS dash fallback (2400) to rule out a pre-JS flash: the curve was never leaking before the intro, it was purely the sequence.
+
 ## v5.7 — CMYK press wheel in the hero (Nov 27, 2026)
 Ben: "a cool colour wheel, interactive, at the beginning, CMYK, that calls print… keep the fonts clean."
 - **The wheel (js/press.js):** 24 hues on the subtractive circle (Y → R → M → B → C → G) in three tint rings (100 / 60 / 30%). Every swatch is mixed from simulated process inks (paper × ink coverage) rather than a screen hue wheel. So the C/M/Y/K numbers on the chip are exactly the mix that made the swatch.
