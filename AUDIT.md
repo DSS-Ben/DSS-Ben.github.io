@@ -69,6 +69,10 @@ Ben: "Remove that currently In Dss looks bad, the intro should be about me. Also
 - **The blue circle was Claude's version, and Ben liked it, so it is now in the site.** The pinned statement gets a blue radial background that grows from a circle to fill the viewport as you scroll (driven by --sb from motion.js, ramps in mid-scroll, scrubs back on reverse scroll). The words flip ink to white as the blue covers them, and "Designed end to end." flips solid blue to white. Blue only (#5cb3ff / #1f8fff / #007AFF / #005fd0), no purple or pink. Reduced-motion and no-JS keep the plain white statement.
 - **v5.6 corner fix (same evening):** a clean-browser check of v5.5 showed tiny white slivers in the extreme corners at full blue, because the growing circle did not quite reach the viewport corners. The end scale went from 1.10 to 1.35 so the circle covers the corners on desktop, wide and phone viewports.
 
+## v5.8 — Seamless blue statement, no oval (Nov 27, 2026)
+Ben sent a phone screenshot of the statement mid-transition: a pale blue oval with a hard edge on white. He said "this oval transition i don't like it should be seamless."
+- **The oval is gone.** The blue layer is now a full-bleed rectangle (inset 0, no border-radius, no scale) and only its opacity moves with scroll, so the background crossfades white to blue edge to edge with no visible shape or boundary at any point. The full-blue end state is unchanged (same radial: bright centre, deeper edges). The v5.6 scale fix is moot now, the layer covers the viewport by construction.
+
 ## v5.7 — CMYK press wheel in the hero (Nov 27, 2026)
 Ben: "a cool colour wheel, interactive, at the beginning, CMYK, that calls print… keep the fonts clean."
 - **The wheel (js/press.js):** 24 hues on the subtractive circle (Y → R → M → B → C → G) in three tint rings (100 / 60 / 30%). Every swatch is mixed from simulated process inks (paper × ink coverage) rather than a screen hue wheel. So the C/M/Y/K numbers on the chip are exactly the mix that made the swatch.

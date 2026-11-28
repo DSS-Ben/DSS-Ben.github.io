@@ -227,10 +227,12 @@ html:not(.js) .rise > span { transform: none; }
 /* ---------- Statement (pinned) ---------- */
 .statement { position: relative; height: 280vh; margin-top: clamp(40px, 6vw, 80px); }
 .statement-sticky { position: sticky; top: var(--header-h); height: calc(100svh - var(--header-h)); display: grid; place-items: center; padding-inline: var(--pad); overflow: hidden; }
-/* Blue full-page background (Nov 27, 2026): a blue radial circle grows to fill the
-   viewport as you scroll the pinned statement, and the words flip ink to white.
-   Driven by --sb (0..1) from motion.js; blue only, one accent, no pink/purple. */
-.statement-sticky::before { content: ""; position: absolute; inset: -12%; border-radius: 50%; background: radial-gradient(circle at 50% 42%, #5cb3ff 0%, #1f8fff 38%, #007AFF 62%, #005fd0 100%); opacity: var(--sb, 0); transform: scale(calc(.35 + var(--sb, 0) * 1)); will-change: transform, opacity; }
+/* Blue full-page background (Nov 27, 2026): the statement fades seamlessly from white
+   to a full-bleed blue radial as you scroll the pinned section, and the words flip
+   ink to white. Driven by --sb (0..1) from motion.js; blue only, one accent, no
+   pink/purple. No shape, no edge: the layer covers the whole sticky area and only
+   its opacity moves, so there is never a visible oval. */
+.statement-sticky::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 50% 42%, #5cb3ff 0%, #1f8fff 38%, #007AFF 62%, #005fd0 100%); opacity: var(--sb, 0); will-change: opacity; }
 .statement-text { position: relative; z-index: 1; font-family: var(--display); font-size: clamp(48px, 9vw, 150px); font-weight: 800; line-height: .96; letter-spacing: -0.05em; text-align: center; max-width: 11ch; will-change: transform; color: color-mix(in srgb, var(--ink) calc((1 - var(--sb, 0)) * 100%), #fff calc(var(--sb, 0) * 100%)); }
 .statement-text > span { display: inline-block; opacity: var(--o, .1); transform: translateY(var(--y, 0)); }
 .statement-end { display: block !important; margin-top: .35em; font-size: .42em; letter-spacing: -0.03em; color: color-mix(in srgb, var(--accent) calc((1 - var(--sb, 0)) * 100%), #fff calc(var(--sb, 0) * 100%)); }

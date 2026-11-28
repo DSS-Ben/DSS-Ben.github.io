@@ -48,3 +48,6 @@ The growing blue circle's end scale went from 1.10 to 1.35 so it covers the view
 
 ## v5.7 (Nov 27, 2026) — CMYK press wheel in the hero
 Interactive CMYK colour wheel replaces the rotating badge; drag to mix process inks, chip shows the live C/M/Y/K mix. See AUDIT.md.
+
+## v5.8 (Nov 27, 2026) — Seamless blue statement, no oval
+The blue statement background is now a full-bleed opacity fade, no growing oval, no visible edge mid-transition. See AUDIT.md.
