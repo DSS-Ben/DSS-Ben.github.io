@@ -36,3 +36,6 @@ Swatches removed, hero lens now caches letter positions (one layout read per fra
 
 ## v5.3 (Nov 27, 2026) — Apple HIG audit applied
 Inter Tight throughout (Archivo gone), AI gradient title restored, 44pt touch targets, audit copy fixes. See AUDIT.md.
+
+## v5.4 (Nov 27, 2026) — No weird gradients
+"Designed end to end." is now solid blue instead of a blue-purple-pink gradient. The big blue circle in Ben's recording is not in the site's code; see AUDIT.md.
