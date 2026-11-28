@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20261127f">
+<link rel="stylesheet" href="css/styles.css?v=20261127g">
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -93,10 +93,46 @@
         <span class="rotator" data-words="brand systems|packaging|motion|e-commerce|print|AI video">brand systems</span>
       </p>
 
-      <div class="badge" aria-hidden="true">
-        <svg viewBox="0 0 100 100"><defs><path id="badge-circle" d="M50 50 m-38 0 a38 38 0 1 1 76 0 a38 38 0 1 1 -76 0"/></defs>
-          <text><textPath href="#badge-circle" textLength="236" lengthAdjust="spacing">OPEN TO WORK • MONTREAL • SINCE 2016 •</textPath></text></svg>
-        <span class="badge-core"></span>
+      <!-- CMYK press wheel: every swatch is mixed from process inks -->
+      <div class="press" data-press>
+        <div class="press-wheel">
+          <svg class="wheel" viewBox="-210 -210 420 420" role="slider" tabindex="0" aria-label="CMYK ink wheel. Drag, or use the arrow keys, to mix a colour." aria-valuemin="0" aria-valuemax="23">
+            <g class="wheel-ticks" aria-hidden="true"></g>
+            <g class="wheel-segs"></g>
+            <g class="wheel-knob" aria-hidden="true"><path d="M0 -207 L7 -198 L-7 -198 Z"/></g>
+            <g class="wheel-plates" aria-hidden="true">
+              <circle class="plate plate--c" cx="0" cy="-15" r="34"/>
+              <circle class="plate plate--m" cx="13" cy="7.5" r="34"/>
+              <circle class="plate plate--y" cx="-13" cy="7.5" r="34"/>
+              <g class="plate--k"><circle cx="0" cy="0" r="24"/><path d="M0 -44V44M-44 0H44"/></g>
+              <text class="plate-label" x="-4.5" y="-60">C</text><text class="plate-label" x="52" y="44">M</text><text class="plate-label" x="-60" y="44">Y</text>
+              <circle class="plates-hit" r="66"/>
+            </g>
+          </svg>
+        </div>
+        <div class="press-chip" aria-live="polite">
+          <span class="chip-swatch"></span>
+          <div class="chip-body">
+            <p class="chip-name">BA 15·100</p>
+            <ul class="inks">
+              <li data-ink="c"><span>C</span><i></i><b>00</b></li>
+              <li data-ink="m"><span>M</span><i></i><b>00</b></li>
+              <li data-ink="y"><span>Y</span><i></i><b>00</b></li>
+              <li data-ink="k"><span>K</span><i></i><b>00</b></li>
+            </ul>
+            <p class="chip-hex">#000000</p>
+          </div>
+        </div>
+        <p class="press-hint" aria-hidden="true">Drag to mix · hover the centre to split plates</p>
+      </div>
+
+      <!-- print furniture: registration marks + colour control bar -->
+      <svg class="reg reg--l" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="6"/><path d="M12 0v24M0 12h24"/></svg>
+      <svg class="reg reg--r" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="6"/><path d="M12 0v24M0 12h24"/></svg>
+      <div class="colour-bar" aria-hidden="true">
+        <i style="--k:#00AEEF"></i><i style="--k:#EC008C"></i><i style="--k:#FFF200"></i><i style="--k:#231F20"></i>
+        <i style="--k:#5B5859"></i><i style="--k:#8F8D8D"></i><i style="--k:#C4C3C3"></i><i style="--k:#E8E8E8"></i>
+        <span>Ben Alvis · Portfolio 2026 · 4/C process · 175 lpi · Proof 01</span>
       </div>
 
       <a class="hero-cue" href="#work"><span>Selected work</span><svg class="ico" aria-hidden="true"><use href="#i-down"/></svg></a>
@@ -364,9 +400,10 @@
   <a href="#top">Back to top ↑</a>
 </footer>
 
-<script src="js/hero.js?v=20261127f"></script>
-<script src="js/main.js?v=20261127f"></script>
-<script src="js/motion.js?v=20261127f"></script>
-<script src="js/logo.js?v=20261127f"></script>
+<script src="js/hero.js?v=20261127g"></script>
+<script src="js/main.js?v=20261127g"></script>
+<script src="js/motion.js?v=20261127g"></script>
+<script src="js/press.js?v=20261127g"></script>
+<script src="js/logo.js?v=20261127g"></script>
 </body>
 </html>

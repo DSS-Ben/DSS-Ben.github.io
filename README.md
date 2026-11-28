@@ -45,3 +45,6 @@ Inter Tight throughout (Archivo gone), AI gradient title restored, 44pt touch ta
 
 ## v5.6 (Nov 27, 2026) — Blue corners covered
 The growing blue circle's end scale went from 1.10 to 1.35 so it covers the viewport corners at full blue (v5.5 left tiny white slivers in the extreme corners).
+
+## v5.7 (Nov 27, 2026) — CMYK press wheel in the hero
+Interactive CMYK colour wheel replaces the rotating badge; drag to mix process inks, chip shows the live C/M/Y/K mix. See AUDIT.md.
