@@ -57,6 +57,8 @@
         w.style.setProperty('--y', ((1 - ease(o)) * 0.12).toFixed(3) + 'em');
       });
       if (stText) stText.style.transform = 'scale(' + (0.94 + 0.06 * ease(clamp(sp * 2.5, 0, 1))).toFixed(4) + ')';
+      /* blue full-page background: ramps in mid-scroll (sp .4 -> .75), words flip ink to white */
+      statement.style.setProperty('--sb', clamp((sp - 0.4) / 0.35, 0, 1).toFixed(3));
     }
 
     /* 3. cards rise + scale, images drift */

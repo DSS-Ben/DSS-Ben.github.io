@@ -39,3 +39,6 @@ Inter Tight throughout (Archivo gone), AI gradient title restored, 44pt touch ta
 
 ## v5.4 (Nov 27, 2026) — No weird gradients
 "Designed end to end." is now solid blue instead of a blue-purple-pink gradient. The big blue circle in Ben's recording is not in the site's code; see AUDIT.md.
+
+## v5.5 (Nov 27, 2026) — DSS out of the intro, blue statement background
+"Currently / DSS Distribution" removed from the intro facts. The pinned statement now gets Claude's blue radial background that grows to fill the viewport on scroll, words flipping ink to white. See AUDIT.md.
