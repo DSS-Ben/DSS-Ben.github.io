@@ -42,3 +42,6 @@ Inter Tight throughout (Archivo gone), AI gradient title restored, 44pt touch ta
 
 ## v5.5 (Nov 27, 2026) — DSS out of the intro, blue statement background
 "Currently / DSS Distribution" removed from the intro facts. The pinned statement now gets Claude's blue radial background that grows to fill the viewport on scroll, words flipping ink to white. See AUDIT.md.
+
+## v5.6 (Nov 27, 2026) — Blue corners covered
+The growing blue circle's end scale went from 1.10 to 1.35 so it covers the viewport corners at full blue (v5.5 left tiny white slivers in the extreme corners).
